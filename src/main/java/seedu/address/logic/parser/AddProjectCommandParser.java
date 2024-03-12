@@ -8,6 +8,8 @@ import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
+
 
 
 /**
@@ -26,7 +28,8 @@ public class AddProjectCommandParser implements Parser<AddProjectCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddProjectCommand.MESSAGE_USAGE));
         }
         Name name = ParserUtil.parseName(projectName);
-        Person person = new Person(name);
+        Remark remark = new Remark("");
+        Person person = new Person(name, remark);
         return new AddProjectCommand(person);
     }
 

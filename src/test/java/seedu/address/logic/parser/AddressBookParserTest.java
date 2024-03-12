@@ -15,6 +15,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -72,6 +73,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         //list function not yet implemented
+        assertEquals(0, 0);
+    }
+
+    @Test
+    public void parseCommand_remark() throws Exception {
+        final Remark remark = new Remark("Some remark.");
         assertEquals(0, 0);
     }
 

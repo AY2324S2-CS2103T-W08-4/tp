@@ -15,19 +15,24 @@ public class Person {
     // Identity fields
     private final Name name;
 
+    private final Remark remark;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name) {
+    public Person(Name name, Remark remark) {
         requireAllNonNull(name);
         this.name = name;
+        this.remark = remark;
     }
 
     public Name getName() {
         return name;
     }
 
-
+    public Remark getRemark() {
+        return remark;
+    }
 
     /**
      * Returns true if both persons have the same name.
@@ -70,7 +75,8 @@ public class Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name).toString();
+                .add("name", name)
+                .add(" Remark: ", remark).toString();
     }
 
 }
