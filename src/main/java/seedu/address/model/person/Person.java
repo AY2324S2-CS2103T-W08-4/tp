@@ -31,27 +31,6 @@ public class Person {
     }
 
     /**
-     * Adds task to the Person object
-     */
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
-    /**
-     * Removes task from the Person object
-     */
-    public void removeTask(Task task) {
-        int i = 0;
-        for (Task t : taskList) {
-            if (t.equals(task)) {
-                taskList.remove(i);
-                break;
-            }
-            i += 1;
-        }
-    }
-
-    /**
      * Returns the name of the Person
      */
     public Name getName() {
@@ -100,19 +79,6 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name).toString();
-    }
-
-    /**
-     * Returns true if the Person has a task that is equal to the specified task
-     */
-    public boolean hasTask(Task task) {
-        for (Task t : taskList) {
-            System.out.println(task.getName().fullName);
-            if (t.equals(task)) {
-                return true;
-            }
-        }
-        return false;
     }
 
 }

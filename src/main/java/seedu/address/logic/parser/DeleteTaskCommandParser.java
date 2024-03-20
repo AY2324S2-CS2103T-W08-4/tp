@@ -7,6 +7,7 @@ import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -31,8 +32,8 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
                     DeleteTaskCommand.MESSAGE_USAGE));
             }
             Name name = ParserUtil.parseName(projectName);
-            Person person = new Person(name);
-            return new DeleteTaskCommand(task, person);
+            Project project = new Project(name);
+            return new DeleteTaskCommand(task, project);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,

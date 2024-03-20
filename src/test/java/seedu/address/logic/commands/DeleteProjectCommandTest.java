@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProjects.getTypicalPlanner;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -22,18 +23,18 @@ import seedu.address.model.person.Person;
  */
 public class DeleteProjectCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPlanner(), new UserPrefs());
 
     @Test
     public void execute_validProject_success() {
-        Person projectToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Project projectToDelete = model.getFilteredProjectList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteProjectCommand deleteCommand = new DeleteProjectCommand(projectToDelete.getName().fullName);
 
         String expectedMessage = String.format(DeleteProjectCommand.MESSAGE_DELETE_PROJECT_SUCCESS,
                 Messages.format(projectToDelete));
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(projectToDelete);
+        ModelManager expectedModel = new ModelManager(model.getPlanner(), new UserPrefs());
+        expectedModel.deleteProject(projectToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
