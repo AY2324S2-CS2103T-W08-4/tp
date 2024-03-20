@@ -6,7 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a person to the address book.
@@ -15,32 +15,32 @@ public class AddProjectCommand extends Command {
 
     public static final String COMMAND_WORD = "add project";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a project to the planner. "
             + "Parameters: "
             + "PROJECT_NAME ";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been added to the project list.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "Project %1$s already exists";
+    public static final String MESSAGE_DUPLICATE_PROJECT = "Project %1$s already exists";
 
-    private final Person toAdd;
+    private final Project toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddProjectCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddProjectCommand(Project project) {
+        requireNonNull(project);
+        toAdd = project;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(String.format(MESSAGE_DUPLICATE_PERSON, Messages.format(toAdd)));
+        if (model.hasProject(toAdd)) {
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_PROJECT, Messages.format(toAdd)));
         }
 
-        model.addPerson(toAdd);
+        model.addProject(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

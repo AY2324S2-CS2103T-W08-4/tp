@@ -21,14 +21,8 @@ public class Person {
     private final List<Task> taskList;
 
     /**
-     * Every field must be present and not null.
+     * Constructs a Person object with empty taskList
      */
-    public Person(Name name, List<Task> taskList) {
-        requireAllNonNull(name);
-        this.name = name;
-        this.taskList = taskList;
-    }
-
     public Person(Name name) {
         requireAllNonNull(name);
         this.name = name;
@@ -36,15 +30,12 @@ public class Person {
         this.taskList = taskList;
     }
 
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
+    /**
+     * Returns the name of the Person
+     */
     public Name getName() {
         return name;
     }
-
-
 
     /**
      * Returns true if both projects have the same name.
