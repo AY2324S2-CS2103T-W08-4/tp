@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.project.Member;
 import seedu.address.model.project.Task;
 
 /**
@@ -20,6 +21,8 @@ public class Person {
     private final Name name;
 
     private final List<Task> taskList;
+
+    private List<Member> team;
 
     /**
      * Constructs a Person object with empty taskList
@@ -36,6 +39,10 @@ public class Person {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    public void assignTeam(List<Member> team) {
+        this.team = team;
     }
 
     /**
