@@ -27,11 +27,10 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
                 throw new ParseException("Whoops! When referring to another field like a project,"
                         + " always remember to put /to instead of just to.");
             }
-            String members = args.split(" /in")[0].trim();
+            String members = args.split(" /to")[0].trim();
             String projectName = args.split(" /to")[1].trim();
             List<String> team = Arrays.stream(members.split(","))
                     .map(String::trim)
-                    .map(name -> "\"" + name + "\"")
                     .collect(Collectors.toList());
             if ((team.size() == 0) || (projectName.length() == 0)) {
                 throw new ParseException("Please enter the project and team fields");
