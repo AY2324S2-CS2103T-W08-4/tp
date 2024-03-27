@@ -19,14 +19,14 @@ class SetDeadlineTaskCommandTest {
         Person project = new Person(new Name("project"));
         Task task = new Task("task");
 
-        AddDeadlineTaskCommand setDeadlineA = new AddDeadlineTaskCommand("Mar 22 2024", task, project);
-        AddDeadlineTaskCommand setDeadlineB = new AddDeadlineTaskCommand("Mar 20 2023", task, project);
+        SetDeadlineTaskCommand setDeadlineA = new SetDeadlineTaskCommand("Mar 22 2024", task, project);
+        SetDeadlineTaskCommand setDeadlineB = new SetDeadlineTaskCommand("Mar 20 2023", task, project);
 
         // same object -> returns true
         assertTrue(setDeadlineA.equals(setDeadlineA));
 
         // same values -> returns true
-        AddDeadlineTaskCommand setDeadlineACopy = new AddDeadlineTaskCommand("Mar 22 2024", task, project);
+        SetDeadlineTaskCommand setDeadlineACopy = new SetDeadlineTaskCommand("Mar 22 2024", task, project);
         assertTrue(setDeadlineA.equals(setDeadlineACopy));
 
         // different types -> returns false
@@ -43,8 +43,8 @@ class SetDeadlineTaskCommandTest {
     public void toStringMethod() {
         Task code = new Task("Code");
         String deadline = "Mar 23 2024";
-        AddDeadlineTaskCommand setDeadlineTaskCommand = new AddDeadlineTaskCommand(deadline, code, taskProject);
-        String expected = AddDeadlineTaskCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
+        SetDeadlineTaskCommand setDeadlineTaskCommand = new SetDeadlineTaskCommand(deadline, code, taskProject);
+        String expected = SetDeadlineTaskCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
         assertEquals(expected, setDeadlineTaskCommand.toString());
     }
 }

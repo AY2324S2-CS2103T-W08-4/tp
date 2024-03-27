@@ -18,14 +18,14 @@ class SetDeadlineProjectCommandTest {
         Person project = new Person(new Name("project"));
 
 
-        AddDeadlineProjectCommand setDeadlineA = new AddDeadlineProjectCommand("Mar 22 2024", project);
-        AddDeadlineProjectCommand setDeadlineB = new AddDeadlineProjectCommand("Mar 20 2023", project);
+        SetDeadlineProjectCommand setDeadlineA = new SetDeadlineProjectCommand("Mar 22 2024", project);
+        SetDeadlineProjectCommand setDeadlineB = new SetDeadlineProjectCommand("Mar 20 2023", project);
 
         // same object -> returns true
         assertTrue(setDeadlineA.equals(setDeadlineA));
 
         // same values -> returns true
-        AddDeadlineProjectCommand setDeadlineACopy = new AddDeadlineProjectCommand("Mar 22 2024", project);
+        SetDeadlineProjectCommand setDeadlineACopy = new SetDeadlineProjectCommand("Mar 22 2024", project);
         assertTrue(setDeadlineA.equals(setDeadlineACopy));
 
         // different types -> returns false
@@ -41,8 +41,8 @@ class SetDeadlineProjectCommandTest {
     @Test
     public void toStringMethod() {
         String deadline = "Mar 23 2024";
-        AddDeadlineProjectCommand setDeadlineProjectCommand = new AddDeadlineProjectCommand(deadline, taskProject);
-        String expected = AddDeadlineProjectCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
+        SetDeadlineProjectCommand setDeadlineProjectCommand = new SetDeadlineProjectCommand(deadline, taskProject);
+        String expected = SetDeadlineProjectCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
         assertEquals(expected, setDeadlineProjectCommand.toString());
     }
 }
