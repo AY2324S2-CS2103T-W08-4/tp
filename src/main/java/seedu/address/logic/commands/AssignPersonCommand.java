@@ -11,7 +11,7 @@ import seedu.address.model.project.Member;
 import seedu.address.model.project.Task;
 
 /**
- * Adds a task to a project.
+ * Assign a person to a task.
  */
 public class AssignPersonCommand extends Command {
 

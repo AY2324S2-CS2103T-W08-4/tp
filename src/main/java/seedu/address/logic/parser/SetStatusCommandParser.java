@@ -9,7 +9,7 @@ import seedu.address.model.project.Task;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new SetStatusCommand object
  */
 public class SetStatusCommandParser implements Parser<SetStatusCommand> {
 
