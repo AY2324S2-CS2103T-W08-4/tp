@@ -32,6 +32,14 @@ public class Person {
     }
 
     /**
+     * Constructs a Person object with specified taskList
+     */
+    public Person(Name name, List<Task> tasks) {
+        this.taskList = tasks;
+        this.name = name;
+    }
+
+    /**
      * Adds task to the Person object
      */
     public void addTask(Task task) {
@@ -136,12 +144,20 @@ public class Person {
      */
     public boolean hasTask(Task task) {
         for (Task t : taskList) {
-            System.out.println(task.getName().fullName);
             if (t.equals(task)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns a new person with new name but the same task (for edit person command)
+     */
+    public Person createEditedPerson(Name newName) {
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+        Person newPerson = new Person(newName, newTaskList);
+        return newPerson;
     }
 
 }
