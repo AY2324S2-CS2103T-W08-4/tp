@@ -32,9 +32,9 @@ public class Person {
     }
 
     /**
-     * Constructs a Person object with specified taskList
+     * Constructs a Person object with specified taskList for creating edited Person
      */
-    public Person(Name name, List<Task> tasks) {
+    private Person(Name name, List<Task> tasks) {
         this.taskList = tasks;
         this.name = name;
     }
