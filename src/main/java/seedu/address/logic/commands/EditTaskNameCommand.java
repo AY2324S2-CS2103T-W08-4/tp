@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -9,32 +8,36 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-
+import seedu.address.model.project.Task;
 
 
 /**
- * Edits the name of an existing project in the address book.
+ * Rename a task inside a project.
  */
-public class EditProjectNameCommand extends RenameCommand {
-
+public class EditTaskNameCommand extends RenameCommand {
     public static final String MESSAGE_USAGE = RenameCommand.COMMAND_WORD + "NEW_PROJECT_NAME /of TARGET_PROJECT_NAME";
 
-    public static final String MESSAGE_SUCCESS = "Project %1$s has been renamed to %2$s";
+    public static final String MESSAGE_SUCCESS = "Task %1$s of project %2$s has been renamed to %3$s";
 
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
+    public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s not found: "
+            + "Please make sure the task exists in project %2$s";
     private final Name changeTo;
     private final Person targetProject;
+    private final Task targetTask;
+
     /**
-     * @param newName name to be changed to
-     * @param currentProject the current project, name of which to be changed to newName
+     * Creates an AddCommand to add the specified {@code Person}
      */
-    public EditProjectNameCommand(Name newName, Person currentProject) {
+    public EditTaskNameCommand(Name newName, Person currentProject, Task currentTask) {
         requireNonNull(newName);
         requireNonNull(currentProject);
         this.changeTo = newName;
         this.targetProject = currentProject;
+        this.targetTask = currentTask;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -44,12 +47,18 @@ public class EditProjectNameCommand extends RenameCommand {
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(targetProject)));
         }
-        Person personToEdit = model.findPerson(targetProject.getName());
-        Person newPerson = personToEdit.createEditedPerson(changeTo);
-        model.setPerson(personToEdit, newPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        Person targetPerson = model.findPerson(targetProject.getName());
+        if (!targetPerson.hasTask(targetTask)) {
+            throw new CommandException(String.format(
+                    MESSAGE_TASK_NOT_FOUND,
+                    Messages.format(targetTask),
+                    Messages.format(targetPerson)));
+        }
+        Task toBeChanged = targetPerson.findTask(targetTask.getName());
+        toBeChanged.setName(changeTo);
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
+                Messages.format(targetTask),
                 Messages.format(targetProject),
                 changeTo));
     }
@@ -61,22 +70,22 @@ public class EditProjectNameCommand extends RenameCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditProjectNameCommand)) {
+        if (!(other instanceof EditTaskNameCommand)) {
             return false;
         }
 
-        EditProjectNameCommand otherEditProjectNameCommand = (EditProjectNameCommand) other;
-        return changeTo.equals(otherEditProjectNameCommand.changeTo)
-                && targetProject.equals(otherEditProjectNameCommand.targetProject);
+        EditTaskNameCommand otherEditTaskNameCommand = (EditTaskNameCommand) other;
+        return changeTo.equals(otherEditTaskNameCommand.changeTo)
+                && targetProject.equals(otherEditTaskNameCommand.targetProject)
+                && targetTask.equals(otherEditTaskNameCommand.targetTask);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("targetTask", targetTask)
                 .add("changeTo", changeTo)
                 .add("targetProject", targetProject)
                 .toString();
     }
-
-
 }

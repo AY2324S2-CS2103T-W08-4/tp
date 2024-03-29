@@ -16,11 +16,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditProjectNameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListProjectCommand;
+import seedu.address.logic.commands.RenameCommand;
 import seedu.address.logic.commands.SetDeadlineCommand;
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.logic.commands.ShowProjectCommand;
@@ -109,8 +109,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case EditProjectNameCommand.COMMAND_WORD:
-            return new EditProjectNameCommandParser().parse(arguments);
+        case RenameCommand.COMMAND_WORD:
+            return new RenameCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

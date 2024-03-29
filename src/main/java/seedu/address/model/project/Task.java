@@ -14,7 +14,7 @@ import seedu.address.model.person.Name;
 public class Task {
 
     // Identity fields
-    private final Name taskName;
+    private Name taskName;
 
     private Member member;
 
@@ -118,6 +118,10 @@ public class Task {
     @Override
     public String toString() {
         return taskName.toString();
+    }
+
+    public void setName(Name newName) {
+        this.taskName = newName;
     }
 
 }
