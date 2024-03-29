@@ -15,7 +15,6 @@ import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.EditCommand.EditProjectDescriptor;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.testutil.EditProjectDescriptorBuilder;
 import seedu.address.testutil.ProjectBuilder;
@@ -23,7 +22,7 @@ import seedu.address.testutil.ProjectUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PlannerParser parser = new PlannerParser();
 
     @Test
     public void parseCommand_addProject() throws Exception {
