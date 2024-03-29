@@ -7,6 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -31,14 +32,14 @@ public class SetDeadlineCommand extends Command {
 
     private final Task task;
     private final String deadline;
-    private final Person project;
+    private final Project project;
 
     private final String datePattern = "\\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\b \\d{1,2} \\d{4}\\b";
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SetDeadlineCommand(String deadline, Task task, Person project) {
+    public SetDeadlineCommand(String deadline, Task task, Project project) {
         requireNonNull(task);
         this.task = task;
         this.deadline = deadline;
@@ -53,13 +54,13 @@ public class SetDeadlineCommand extends Command {
             throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_DEADLINE, deadline));
         }
 
-        if (!model.hasPerson(project)) {
+        if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
 
-        Person deadlineProject = model.findPerson(project.getName());
+        Project deadlineProject = model.findProject(project.getName());
         if (!deadlineProject.hasTask(task)) {
             throw new CommandException(String.format(
                     MESSAGE_TASK_NOT_FOUND,

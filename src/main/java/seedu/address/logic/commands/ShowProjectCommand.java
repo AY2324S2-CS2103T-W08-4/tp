@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameEqualsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Deletes a project identified using it's name from the project list.
@@ -35,13 +35,13 @@ public class ShowProjectCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Project> lastShownList = model.getFilteredProjectList();
 
-        Person targetProject = new Person(new Name(targetName));
-        Person projectToDelete = null;
-        for (Person person : lastShownList) {
-            if (person.isSamePerson(targetProject)) {
-                projectToDelete = person;
+        Project targetProject = new Project(new Name(targetName));
+        Project projectToDelete = null;
+        for (Project project : lastShownList) {
+            if (project.isSameProject(targetProject)) {
+                projectToDelete = project;
                 break;
             }
         }

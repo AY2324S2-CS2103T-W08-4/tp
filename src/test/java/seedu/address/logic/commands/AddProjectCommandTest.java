@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalProjects.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -18,13 +18,14 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.Planner;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPlanner;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 public class AddProjectCommandTest {
 
@@ -36,30 +37,30 @@ public class AddProjectCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+        Project validProject = new ProjectBuilder().build();
 
-        CommandResult commandResult = new AddProjectCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddProjectCommand(validProject).execute(modelStub);
 
-        assertEquals(String.format(AddProjectCommand.MESSAGE_SUCCESS, Messages.format(validPerson)),
+        assertEquals(String.format(AddProjectCommand.MESSAGE_SUCCESS, Messages.format(validProject)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validProject), modelStub.projectsAdded);
     }
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        AddProjectCommand addProjectCommand = new AddProjectCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+        Project validProject = new ProjectBuilder().build();
+        AddProjectCommand addProjectCommand = new AddProjectCommand(validProject);
+        ModelStub modelStub = new ModelStubWithPerson(validProject);
 
-        assertThrows(CommandException.class, String.format(AddProjectCommand.MESSAGE_DUPLICATE_PERSON,
-                Messages.format(validPerson)), () ->
+        assertThrows(CommandException.class, String.format(AddProjectCommand.MESSAGE_DUPLICATE_PROJECT,
+                Messages.format(validProject)), () ->
                 addProjectCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Project alice = new ProjectBuilder().withName("Alice").build();
+        Project bob = new ProjectBuilder().withName("Bob").build();
         AddProjectCommand addAliceCommand = new AddProjectCommand(alice);
         AddProjectCommand addBobCommand = new AddProjectCommand(bob);
 
@@ -112,67 +113,67 @@ public class AddProjectCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getPlannerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setPlannerFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addProject(Project project) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Person findPerson(Name name) {
+        public Project findProject(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setPlanner(ReadOnlyPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPlanner getPlanner() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasProject(Project person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteProject(Project target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setProject(Project target, Project editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Project> getFilteredProjectList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredProjectList(Predicate<Project> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getCurrentProject() {
+        public ObservableList<Project> getCurrentProject() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateCurrentProject(Predicate<Person> predicate) {
+        public void updateCurrentProject(Predicate<Project> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -181,17 +182,17 @@ public class AddProjectCommandTest {
      * A Model stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+        private final Project project;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithPerson(Project project) {
+            requireNonNull(project);
+            this.project = project;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasProject(Project project) {
+            requireNonNull(project);
+            return this.project.isSameProject(project);
         }
     }
 
@@ -199,23 +200,23 @@ public class AddProjectCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Project> projectsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasProject(Project project) {
+            requireNonNull(project);
+            return projectsAdded.stream().anyMatch(project::isSameProject);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addProject(Project project) {
+            requireNonNull(project);
+            projectsAdded.add(project);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPlanner getPlanner() {
+            return new Planner();
         }
     }
 

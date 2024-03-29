@@ -31,60 +31,8 @@ public class Person {
         this.taskList = taskList;
     }
 
-    /**
-     * Adds task to the Person object
-     */
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
-    /**
-     * Removes task from the Person object
-     */
-    public void removeTask(Task task) {
-        int i = 0;
-        for (Task t : taskList) {
-            if (t.equals(task)) {
-                taskList.remove(i);
-                break;
-            }
-            i += 1;
-        }
-    }
-
-    /**
-     * @param taskName name to be matched with the tasks listed in my project
-     * @return task in the project with the matching taskName
-     */
-    public Task findTask(Name taskName) {
-        Optional<Task> foundTask = taskList.stream()
-                .filter(task -> task.getName().toString().equals(taskName.toString()))
-                .findFirst();
-        return foundTask.get();
-    }
-
     public Name getName() {
         return name;
-    }
-
-    public List<Task> getDoneTasks() {
-        ArrayList<Task> tmp = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getStatus() == "Complete") {
-                tmp.add(task);
-            }
-        }
-        return tmp;
-    }
-
-    public List<Task> getUndoneTasks() {
-        ArrayList<Task> tmp = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.getStatus() == "Incomplete") {
-                tmp.add(task);
-            }
-        }
-        return tmp;
     }
 
     /**
@@ -130,17 +78,4 @@ public class Person {
         return new ToStringBuilder(this)
                 .add("name", name).toString();
     }
-
-    /**
-     * Returns true if the Person has a task that is equal to the specified task
-     */
-    public boolean hasTask(Task task) {
-        for (Task t : taskList) {
-            if (t.equals(task)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }

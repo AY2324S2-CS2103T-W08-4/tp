@@ -6,8 +6,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
+
+import java.util.List;
 
 /**
  * Deletes a project identified using it's name from the project list.
@@ -34,16 +35,20 @@ public class DeleteProjectCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(new Person(new Name(targetName)))) {
-            throw new CommandException(String.format(
-                    MESSAGE_PROJECT_NOT_FOUND,
-                    targetName));
+        List<Project> lastShownList = model.getFilteredProjectList();
+
+        Project targetProject = new Project(targetName);
+        Project projectToDelete = null;
+        for (Project project : lastShownList) {
+            if (project.isSameProject(targetProject)) {
+                projectToDelete = project;
+                break;
+            }
         }
 
-        Person targetProject = model.findPerson(new Name(targetName));
 
-        model.deletePerson(targetProject);
-        return new CommandResult(String.format(MESSAGE_DELETE_PROJECT_SUCCESS, Messages.format(targetProject)));
+        model.deleteProject(projectToDelete);
+        return new CommandResult(String.format(MESSAGE_DELETE_PROJECT_SUCCESS, Messages.format(projectToDelete)));
     }
 
     @Override

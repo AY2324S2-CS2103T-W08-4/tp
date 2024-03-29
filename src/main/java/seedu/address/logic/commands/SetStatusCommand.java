@@ -7,6 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -30,12 +31,12 @@ public class SetStatusCommand extends Command {
 
     private final Task task;
     private final String status;
-    private final Person project;
+    private final Project project;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SetStatusCommand(String status, Task task, Person project) {
+    public SetStatusCommand(String status, Task task, Project project) {
         requireNonNull(task);
         requireNonNull(project);
         requireNonNull(status);
@@ -48,13 +49,13 @@ public class SetStatusCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(project)) {
+        if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
 
-        Person statusProject = model.findPerson(project.getName());
+        Project statusProject = model.findProject(project.getName());
 
         if (!statusProject.hasTask(task)) {
             throw new CommandException(String.format(
