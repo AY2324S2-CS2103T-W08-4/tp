@@ -35,6 +35,14 @@ public class Person {
     }
 
     /**
+     * Constructs a Person object with specified taskList for creating edited Person
+     */
+    private Person(Name name, List<Task> tasks) {
+        this.taskList = tasks;
+        this.name = name;
+    }
+
+    /**
      * Adds task to the Person object
      */
     public void addTask(Task task) {
@@ -165,6 +173,15 @@ public class Person {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns a new person with new name but the same task (for edit person command)
+     */
+    public Person createEditedPerson(Name newName) {
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+        Person newPerson = new Person(newName, newTaskList);
+        return newPerson;
     }
 
 }

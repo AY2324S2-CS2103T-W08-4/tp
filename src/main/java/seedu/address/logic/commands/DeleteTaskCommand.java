@@ -29,7 +29,7 @@ public class DeleteTaskCommand extends Command {
     private final Person taskProject;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a DeleteTaskCommand to delete the specified task in a project
      */
     public DeleteTaskCommand(Task task, Person taskProject) {
         requireNonNull(task);
