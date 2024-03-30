@@ -35,6 +35,7 @@ public class AddProjectCommand extends Command {
         requireNonNull(model);
 
         if (model.hasProject(toAdd)) {
+
             throw new CommandException(String.format(MESSAGE_DUPLICATE_PROJECT, Messages.format(toAdd)));
         }
 

@@ -19,7 +19,6 @@ import seedu.address.model.Planner;
 import seedu.address.model.ReadOnlyPlanner;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 import seedu.address.testutil.ProjectBuilder;
@@ -109,7 +108,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void setPlanner (ReadOnlyPlanner newData) {
+        public void setPlanner(ReadOnlyPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 

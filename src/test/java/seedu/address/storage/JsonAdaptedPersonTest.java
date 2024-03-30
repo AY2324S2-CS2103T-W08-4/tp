@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.TypicalProjects.BENSON;
+import static seedu.address.testutil.TypicalProjects.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,8 +18,8 @@ public class JsonAdaptedPersonTest {
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        JsonAdaptedProject project = new JsonAdaptedProject(BENSON);
-        assertEquals(BENSON, project.toModelType());
+        JsonAdaptedProject project = new JsonAdaptedProject(ALICE);
+        assertEquals(ALICE, project.toModelType());
     }
 
 

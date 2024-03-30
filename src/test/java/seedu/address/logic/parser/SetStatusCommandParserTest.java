@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 class SetStatusCommandParserTest {
@@ -16,7 +16,7 @@ class SetStatusCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task task = new Task("task");
 
         assertParseSuccess(parser, "complete /to task /in project", new SetStatusCommand("complete", task, project));

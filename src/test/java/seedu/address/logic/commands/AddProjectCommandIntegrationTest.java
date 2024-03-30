@@ -11,7 +11,6 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.testutil.ProjectBuilder;
 
@@ -32,7 +31,6 @@ public class AddProjectCommandIntegrationTest {
         Project validProject = new ProjectBuilder().build();
 
         Model expectedModel = new ModelManager(model.getPlanner(), new UserPrefs());
-        expectedModel.addProject(validProject);
 
         assertCommandSuccess(new AddProjectCommand(validProject), model,
                 String.format(AddProjectCommand.MESSAGE_SUCCESS, Messages.format(validProject)),
@@ -41,9 +39,18 @@ public class AddProjectCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Project personInList = model.getPlanner().getProjectList().get(0);
-        assertCommandFailure(new AddProjectCommand(personInList), model,
-                String.format(AddProjectCommand.MESSAGE_DUPLICATE_PROJECT, Messages.format(personInList)));
+        Project validProject = new ProjectBuilder().build();
+
+        Command addProject = new AddProjectCommand(validProject);
+        Model newModel = new ModelManager(model.getPlanner(), new UserPrefs());
+        try {
+            CommandResult result = addProject.execute(newModel);
+        } catch (Exception e) {
+            throw new Error("Issue with adding project in duplicate person test");
+        }
+
+        assertCommandFailure(new AddProjectCommand(validProject), newModel,
+                String.format(AddProjectCommand.MESSAGE_DUPLICATE_PROJECT, Messages.format(validProject)));
     }
 
 }

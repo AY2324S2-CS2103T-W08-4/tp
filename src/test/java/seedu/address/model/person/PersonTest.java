@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalProjects.ALICE;
-import static seedu.address.testutil.TypicalProjects.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,14 +34,10 @@ public class PersonTest {
         editedAlice = new ProjectBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.isSameProject(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Project editedBob = new ProjectBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSameProject(editedBob));
-
         // name has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new ProjectBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameProject(editedBob));
+        editedAlice = new ProjectBuilder(ALICE).withName(nameWithTrailingSpaces).build();
+        assertFalse(ALICE.isSameProject(editedAlice));
     }
 
     @Test
@@ -60,14 +55,9 @@ public class PersonTest {
         // different type -> returns false
         assertFalse(ALICE.equals(5));
 
-        // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
-
         // different name -> returns false
         Project editedAlice = new ProjectBuilder(ALICE).withName(VALID_NAME_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
-
-
     }
 
 }

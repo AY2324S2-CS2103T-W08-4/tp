@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalProjects.ALICE;
-import static seedu.address.testutil.TypicalProjects.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,7 +94,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        Planner addressBook = new PlannerBuilder().withProject(ALICE).withProject(BENSON).build();
+        Planner addressBook = new PlannerBuilder().withProject(ALICE).build();
         Planner differentAddressBook = new Planner();
         UserPrefs userPrefs = new UserPrefs();
 

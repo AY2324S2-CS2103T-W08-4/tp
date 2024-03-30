@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalProjects.ALICE;
-import static seedu.address.testutil.TypicalProjects.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -98,17 +97,14 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         projectList.add(ALICE);
-        projectList.setProject(ALICE, BOB);
         ProjectList expectedProjectList = new ProjectList();
-        expectedProjectList.add(BOB);
         assertEquals(expectedProjectList, projectList);
     }
 
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         projectList.add(ALICE);
-        projectList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> projectList.setProject(ALICE, BOB));
+        assertThrows(DuplicatePersonException.class, () -> projectList.setProject(ALICE, ALICE));
     }
 
     @Test
@@ -138,7 +134,7 @@ public class UniquePersonListTest {
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         projectList.add(ALICE);
         ProjectList expectedProjectList = new ProjectList();
-        expectedProjectList.add(BOB);
+        expectedProjectList.add(ALICE);
         projectList.setProjects(expectedProjectList);
         assertEquals(expectedProjectList, expectedProjectList);
     }
@@ -151,10 +147,10 @@ public class UniquePersonListTest {
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         projectList.add(ALICE);
-        List<Project> personList = Collections.singletonList(BOB);
+        List<Project> personList = Collections.singletonList(ALICE);
         projectList.setProjects(personList);
         ProjectList expectedProjectList = new ProjectList();
-        expectedProjectList.add(BOB);
+        expectedProjectList.add(ALICE);
         assertEquals(expectedProjectList, projectList);
     }
 

@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddProjectCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditProjectDescriptor;
 import seedu.address.model.project.Project;
 import seedu.address.model.tag.Tag;

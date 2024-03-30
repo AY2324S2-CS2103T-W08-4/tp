@@ -2,7 +2,6 @@ package seedu.address.model.project;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -19,9 +18,9 @@ public class Project {
     // Identity fields
     private final Name projectName;
 
-    private LocalDate deadlineDate;
-
     private boolean status;
+
+    private String deadline;
 
     private List<Person> people;
     private List<Task> tasks;
@@ -36,12 +35,20 @@ public class Project {
         this.status = true;
     }
 
+    /**
+     * @param name project constructor with name
+     */
     public Project(Name name) {
         requireAllNonNull(name);
         this.projectName = name;
         this.status = true;
     }
 
+    /**
+     * checks for another project in the project list
+     * @param otherProject project to be compared to
+     * @return whether the two projects are equal
+     */
     public boolean isSameProject(Project otherProject) {
         if (otherProject == this) {
             return true;
@@ -51,10 +58,18 @@ public class Project {
                 && otherProject.getName().equals(getName());
     }
 
+    /**
+     * adds tasks to a project
+     * @param task task to be added in the project
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * removes a specified task from the project
+     * @param task task to be removed
+     */
     public void removeTask(Task task) {
         int i = 0;
         for (Task t : tasks) {
@@ -118,7 +133,7 @@ public class Project {
      * @param deadline the datetime string to be parsed and set as deadline
      */
     public void setDeadline(String deadline) {
-        this.deadlineDate = LocalDate.parse(deadline);
+        this.deadline = deadline;
     }
 
     /**
@@ -129,6 +144,10 @@ public class Project {
         return projectName;
     }
 
+    /**
+     * @param taskName name of task which needs to be identified
+     * @return the task in the project list with the same name
+     */
     public Task findTask(Name taskName) {
         Optional<Task> foundTask = tasks.stream()
                 .filter(task -> task.getName().toString().equals(taskName.toString()))
@@ -136,6 +155,9 @@ public class Project {
         return foundTask.get();
     }
 
+    /**
+     * @return finished tasks
+     */
     public List<Task> getDoneTasks() {
         ArrayList<Task> tmp = new ArrayList<>();
         for (Task task : tasks) {
@@ -146,6 +168,9 @@ public class Project {
         return tmp;
     }
 
+    /**
+     * @return unfinished tasks
+     */
     public List<Task> getUndoneTasks() {
         ArrayList<Task> tmp = new ArrayList<>();
         for (Task task : tasks) {

@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 

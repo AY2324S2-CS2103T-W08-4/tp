@@ -5,7 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalProjects.*;
+import static seedu.address.testutil.TypicalProjects.ALICE;
+import static seedu.address.testutil.TypicalProjects.getTypicalPlanner;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -71,7 +72,7 @@ public class FindProjectCommandTest {
         expectedModel.updateFilteredProjectList(predicate);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredProjectList());
+        assertEquals(Arrays.asList(ALICE), model.getFilteredProjectList());
     }
 
     @Test

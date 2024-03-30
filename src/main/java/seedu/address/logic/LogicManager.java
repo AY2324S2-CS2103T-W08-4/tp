@@ -15,7 +15,6 @@ import seedu.address.logic.parser.PlannerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyPlanner;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.storage.Storage;
 
