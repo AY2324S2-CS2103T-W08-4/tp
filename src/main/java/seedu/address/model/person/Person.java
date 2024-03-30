@@ -21,6 +21,8 @@ public class Person {
 
     private final List<Task> taskList;
 
+    private String status;
+
     /**
      * Constructs a Person object with empty taskList
      */
@@ -29,6 +31,7 @@ public class Person {
         this.name = name;
         List<Task> taskList = new ArrayList<>();
         this.taskList = taskList;
+        status = "incomplete";
     }
 
     /**
@@ -50,6 +53,27 @@ public class Person {
             }
             i += 1;
         }
+    }
+
+    /**
+     * Sets status of project as complete
+     */
+    public void setComplete() {
+        this.status = "complete";
+    }
+
+    /**
+     * Sets status of project as incomplete
+     */
+    public void setIncomplete() {
+        this.status = "incomplete";
+    }
+
+    /**
+     * Returns true if ptoject is complete
+     */
+    public boolean isCompleted() {
+        return status.equals("complete");
     }
 
     /**
