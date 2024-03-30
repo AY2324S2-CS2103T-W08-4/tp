@@ -11,7 +11,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.project.Task;
 import seedu.address.testutil.PersonBuilder;
 
-class SetStatusCommandTest {
+class SetTaskStatusCommandTest {
     private Person taskProject = new PersonBuilder().build();
 
     @Test
@@ -19,14 +19,14 @@ class SetStatusCommandTest {
         Person project = new Person(new Name("project"));
         Task task = new Task("task");
 
-        SetStatusCommand setStatusComplete = new SetStatusCommand("complete", task, project);
-        SetStatusCommand setStatusIncomplete = new SetStatusCommand("incomplete", task, project);
+        SetTaskStatusCommand setStatusComplete = new SetTaskStatusCommand("complete", task, project);
+        SetTaskStatusCommand setStatusIncomplete = new SetTaskStatusCommand("incomplete", task, project);
 
         // same object -> returns true
         assertTrue(setStatusComplete.equals(setStatusComplete));
 
         // same values -> returns true
-        SetStatusCommand setStatusCompleteCopy = new SetStatusCommand("complete", task, project);
+        SetTaskStatusCommand setStatusCompleteCopy = new SetTaskStatusCommand("complete", task, project);
         assertTrue(setStatusComplete.equals(setStatusCompleteCopy));
 
         // different types -> returns false
@@ -43,13 +43,15 @@ class SetStatusCommandTest {
     public void toStringMethod() {
         Task code = new Task("Code");
         String statusComplete = "complete";
-        SetStatusCommand setStatusCommandComplete = new SetStatusCommand("complete", code, taskProject);
-        String expectedComplete = SetStatusCommand.class.getCanonicalName() + "{set status=" + statusComplete + "}";
+        SetTaskStatusCommand setStatusCommandComplete = new SetTaskStatusCommand("complete", code, taskProject);
+        String expectedComplete = SetTaskStatusCommand.class.getCanonicalName()
+                + "{set status=" + statusComplete + "}";
         assertEquals(expectedComplete, setStatusCommandComplete.toString());
 
         String statusIncomplete = "incomplete";
-        SetStatusCommand setStatusCommandIncomplete = new SetStatusCommand("incomplete", code, taskProject);
-        String expectedIncomplete = SetStatusCommand.class.getCanonicalName() + "{set status=" + statusIncomplete + "}";
+        SetTaskStatusCommand setStatusCommandIncomplete = new SetTaskStatusCommand("incomplete", code, taskProject);
+        String expectedIncomplete = SetTaskStatusCommand.class.getCanonicalName()
+                + "{set status=" + statusIncomplete + "}";
         assertEquals(expectedIncomplete, setStatusCommandIncomplete.toString());
 
     }

@@ -23,6 +23,7 @@ public class Person {
     private final List<Task> taskList;
 
     private List<Member> team;
+    private String status;
 
     /**
      * Constructs a Person object with empty taskList
@@ -32,6 +33,15 @@ public class Person {
         this.name = name;
         List<Task> taskList = new ArrayList<>();
         this.taskList = taskList;
+        status = "incomplete";
+    }
+
+    /**
+     * Constructs a Person object with specified taskList for creating edited Person
+     */
+    private Person(Name name, List<Task> tasks) {
+        this.taskList = tasks;
+        this.name = name;
     }
 
     /**
@@ -57,6 +67,27 @@ public class Person {
             }
             i += 1;
         }
+    }
+
+    /**
+     * Sets status of project as complete
+     */
+    public void setComplete() {
+        this.status = "complete";
+    }
+
+    /**
+     * Sets status of project as incomplete
+     */
+    public void setIncomplete() {
+        this.status = "incomplete";
+    }
+
+    /**
+     * Returns true if ptoject is complete
+     */
+    public boolean isCompleted() {
+        return status.equals("complete");
     }
 
     /**
@@ -143,12 +174,20 @@ public class Person {
      */
     public boolean hasTask(Task task) {
         for (Task t : taskList) {
-            System.out.println(task.getName().fullName);
             if (t.equals(task)) {
                 return true;
             }
         }
         return false;
+    }
+
+    /**
+     * Returns a new person with new name but the same task (for edit person command)
+     */
+    public Person createEditedPerson(Name newName) {
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+        Person newPerson = new Person(newName, newTaskList);
+        return newPerson;
     }
 
 }
