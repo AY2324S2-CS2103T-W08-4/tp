@@ -23,6 +23,15 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
     public SetStatusCommand parse(String args) throws ParseException {
         try {
             if (!args.contains(" /of ")) {
+                if (args.contains(" /to")) {
+                    String status = args.split(" /to")[0].trim();
+                    String projectString = args.split(" /to")[1].trim();
+                    Person project = new Person(ParserUtil.parseName(projectString));
+                    if ((projectString.length() == 0) || (status.length() == 0)) {
+                        throw new ParseException("Please enter the status and project fields");
+                    }
+                    return new SetProjectStatusCommand(status, project);
+                }
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         SetTaskStatusCommand.MESSAGE_USAGE));
@@ -32,11 +41,9 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             String taskAndProject = args.split(" /of")[1].trim();
 
             if (!args.contains(" /in ")) {
-                if ((taskAndProject.length() == 0) || (status.length() == 0)) {
-                    throw new ParseException("Please enter the status and project fields");
-                }
-                Person project = new Person(ParserUtil.parseName(taskAndProject));
-                return new SetProjectStatusCommand(status, project);
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        SetTaskStatusCommand.MESSAGE_USAGE));
             }
 
             String taskName = taskAndProject.split("/in ")[0].trim();
