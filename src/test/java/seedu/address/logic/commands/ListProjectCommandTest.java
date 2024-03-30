@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+/*
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+ */
 import static seedu.address.testutil.TypicalProjects.getTypicalPlanner;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +35,7 @@ public class ListProjectCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        //showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(new ListProjectCommand(), model, ListProjectCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }

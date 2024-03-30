@@ -24,7 +24,6 @@ public class ModelManager implements Model {
     private final Planner planner;
     private final UserPrefs userPrefs;
     private final FilteredList<Project> filteredProjects;
-
     private final FilteredList<Project> currentProject;
 
     /**
@@ -33,16 +32,15 @@ public class ModelManager implements Model {
     public ModelManager(ReadOnlyPlanner planner, ReadOnlyUserPrefs userPrefs) {
         requireAllNonNull(planner, userPrefs);
 
-        logger.fine("Initializing with planner: " + planner + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + planner + " and user prefs " + userPrefs);
 
         this.planner = new Planner(planner);
         this.userPrefs = new UserPrefs(userPrefs);
-
         filteredProjects = new FilteredList<>(this.planner.getProjectList());
         if (filteredProjects.size() > 0) {
             currentProject = new FilteredList<>(
-                this.planner.getProjectList(),
-                new NameEqualsPredicate(filteredProjects.get(0).getName().fullName));
+                    this.planner.getProjectList(),
+                    new NameEqualsPredicate(filteredProjects.get(0).getName().fullName));
         } else {
             currentProject = new FilteredList<>(this.planner.getProjectList());
         }
@@ -77,7 +75,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-        public Path getPlannerFilePath() {
+    public Path getPlannerFilePath() {
         return userPrefs.getPlannerFilePath();
     }
 
@@ -123,10 +121,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setProject(Project target, Project editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setProject(Project target, Project editedProject) {
+        requireAllNonNull(target, editedProject);
 
-        planner.setProject(target, editedPerson);
+        planner.setProject(target, editedProject);
     }
 
     //=========== Filtered Person List Accessors =============================================================

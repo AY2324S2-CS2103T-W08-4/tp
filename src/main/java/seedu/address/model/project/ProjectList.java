@@ -25,14 +25,14 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  */
 public class ProjectList implements Iterable<Project> {
 
-    private static final ObservableList<Project> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Project> internalList = FXCollections.observableArrayList();
     private final ObservableList<Project> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
-    public static boolean contains(Project toCheck) {
+    public boolean contains(Project toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameProject);
     }
@@ -52,7 +52,7 @@ public class ProjectList implements Iterable<Project> {
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
-    public static void add(Project toAdd) {
+    public void add(Project toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();

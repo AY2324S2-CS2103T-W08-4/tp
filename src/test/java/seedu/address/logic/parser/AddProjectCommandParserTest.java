@@ -21,7 +21,7 @@ public class AddProjectCommandParserTest {
         Project expectedPerson = new ProjectBuilder(ALICE).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + "Bob Choo", new AddProjectCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + "Alice Pauline", new AddProjectCommand(expectedPerson));
 
     }
 
@@ -31,7 +31,7 @@ public class AddProjectCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Project expectedPerson = new ProjectBuilder(ALICE).withTags().build();
-        assertParseSuccess(parser, "Alice",
+        assertParseSuccess(parser, "Alice Pauline",
                 new AddProjectCommand(expectedPerson));
     }
 

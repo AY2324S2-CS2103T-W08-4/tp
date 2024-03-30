@@ -75,15 +75,15 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         logger.info("Using data file : " + storage.getPlannerFilePath());
 
-        Optional<ReadOnlyPlanner> addressBookOptional;
+        Optional<ReadOnlyPlanner> plannerOptional;
         ReadOnlyPlanner initialData;
         try {
-            addressBookOptional = storage.readPlanner();
-            if (!addressBookOptional.isPresent()) {
+            plannerOptional = storage.readPlanner();
+            if (!plannerOptional.isPresent()) {
                 logger.info("Creating a new data file " + storage.getPlannerFilePath()
                         + " populated with a sample AddressBook.");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSamplePlanner);
+            initialData = plannerOptional.orElseGet(SampleDataUtil::getSamplePlanner);
         } catch (DataLoadingException e) {
             logger.warning("Data file at " + storage.getPlannerFilePath() + " could not be loaded."
                     + " Will be starting with an empty AddressBook.");

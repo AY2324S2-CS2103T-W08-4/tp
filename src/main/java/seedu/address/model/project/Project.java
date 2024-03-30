@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Task of Project
@@ -22,8 +21,8 @@ public class Project {
 
     private String deadline;
 
-    private List<Person> people;
-    private List<Task> tasks;
+    private List<Member> people = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     /**
      * Constructs a new task object
@@ -85,6 +84,9 @@ public class Project {
      * Returns true if the Project has a task that is equal to the specified task
      */
     public boolean hasTask(Task task) {
+        if (tasks.isEmpty()) {
+            return false;
+        }
         for (Task t : tasks) {
             System.out.println(task.getName().fullName);
             if (t.equals(task)) {
@@ -96,10 +98,10 @@ public class Project {
 
     /**
      * Assigns a Person to the task
-     * @param person the person assigned to the task
+     * @param member the person assigned to the task
      */
-    public void addPerson(Person person) {
-        this.people.add(person);
+    public void addPerson(Member member) {
+        this.people.add(member);
     }
 
     /**

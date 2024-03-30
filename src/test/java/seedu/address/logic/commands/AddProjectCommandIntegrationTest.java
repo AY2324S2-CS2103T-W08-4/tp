@@ -29,8 +29,14 @@ public class AddProjectCommandIntegrationTest {
     @Test
     public void execute_newPerson_success() {
         Project validProject = new ProjectBuilder().build();
-
+        Command addProject = new AddProjectCommand(validProject);
         Model expectedModel = new ModelManager(model.getPlanner(), new UserPrefs());
+
+        try {
+            CommandResult result = addProject.execute(expectedModel);
+        } catch (Exception e) {
+            throw new Error("Issue with adding project in duplicate project test");
+        }
 
         assertCommandSuccess(new AddProjectCommand(validProject), model,
                 String.format(AddProjectCommand.MESSAGE_SUCCESS, Messages.format(validProject)),
@@ -46,7 +52,7 @@ public class AddProjectCommandIntegrationTest {
         try {
             CommandResult result = addProject.execute(newModel);
         } catch (Exception e) {
-            throw new Error("Issue with adding project in duplicate person test");
+            throw new Error("Issue with adding project in duplicate project test");
         }
 
         assertCommandFailure(new AddProjectCommand(validProject), newModel,

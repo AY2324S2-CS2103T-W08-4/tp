@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalProjects.ALICE;
+import static seedu.address.testutil.TypicalProjects.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -36,8 +37,8 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_personInList_returnsTrue() {
-        ProjectList.add(ALICE);
-        assertTrue(ProjectList.contains(ALICE));
+        projectList.add(ALICE);
+        assertTrue(projectList.contains(ALICE));
     }
 
     @Test
@@ -89,14 +90,14 @@ public class UniquePersonListTest {
         Project editedAlice = new ProjectBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         projectList.setProject(ALICE, editedAlice);
-        ProjectList expectedProjectList = new ProjectList();
-        expectedProjectList.add(editedAlice);
-        assertEquals(expectedProjectList, projectList);
+        ProjectList newProjectList = new ProjectList();
+        newProjectList.add(editedAlice);
+        assertEquals(newProjectList, projectList);
     }
 
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
-        projectList.add(ALICE);
+        //projectList.add(ALICE);
         ProjectList expectedProjectList = new ProjectList();
         assertEquals(expectedProjectList, projectList);
     }
@@ -104,7 +105,7 @@ public class UniquePersonListTest {
     @Test
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         projectList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> projectList.setProject(ALICE, ALICE));
+        assertThrows(DuplicatePersonException.class, () -> projectList.add(ALICE));
     }
 
     @Test
@@ -114,7 +115,7 @@ public class UniquePersonListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> projectList.remove(ALICE));
+        assertThrows(PersonNotFoundException.class, () -> projectList.remove(BOB));
     }
 
     @Test

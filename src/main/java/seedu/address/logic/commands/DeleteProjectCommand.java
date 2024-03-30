@@ -27,13 +27,23 @@ public class DeleteProjectCommand extends Command {
 
     private final String targetName;
 
+    private final Project project;
+
+    /**
+     * @param targetName name of project which needs to be deleted
+     */
     public DeleteProjectCommand(String targetName) {
         this.targetName = targetName;
+        project = new Project(targetName);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.hasProject(project)) {
+            throw new CommandException(String.format(MESSAGE_PROJECT_NOT_FOUND, Messages.format(project)));
+        }
 
         List<Project> lastShownList = model.getFilteredProjectList();
 
