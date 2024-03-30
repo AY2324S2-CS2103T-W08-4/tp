@@ -16,7 +16,7 @@ import seedu.address.model.project.Task;
  */
 public class EditTaskNameCommand extends RenameCommand {
     public static final String MESSAGE_USAGE = RenameCommand.COMMAND_WORD
-    + "NEW_TASK_NAME /of TARGET_TASK_NAME" 
+    + "NEW_TASK_NAME /of TARGET_TASK_NAME"
     + "/in PROJECT_NAME";
 
     public static final String MESSAGE_SUCCESS = "Task %1$s of project %2$s has been renamed to %3$s";
