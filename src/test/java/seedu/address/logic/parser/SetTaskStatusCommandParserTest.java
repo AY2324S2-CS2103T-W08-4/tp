@@ -6,12 +6,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.SetStatusCommand;
+import seedu.address.logic.commands.SetTaskStatusCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Task;
 
-class SetStatusCommandParserTest {
+class SetTaskStatusCommandParserTest {
     private SetStatusCommandParser parser = new SetStatusCommandParser();
 
     @Test
@@ -19,20 +19,23 @@ class SetStatusCommandParserTest {
         Person project = new Person(new Name("project"));
         Task task = new Task("task");
 
-        assertParseSuccess(parser, "complete /to task /in project", new SetStatusCommand("complete", task, project));
+        assertParseSuccess(
+            parser,
+            "complete /of task /in project",
+            new SetTaskStatusCommand("complete", task, project));
 
     }
 
     @Test
     public void parse_missingFields_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetStatusCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetTaskStatusCommand.MESSAGE_USAGE);
 
         // missing task and project name
         assertParseFailure(parser, "complete",
                 expectedMessage);
 
         // missing project name
-        assertParseFailure(parser, "complete /to task",
+        assertParseFailure(parser, "complete /of task",
                 expectedMessage);
 
     }
