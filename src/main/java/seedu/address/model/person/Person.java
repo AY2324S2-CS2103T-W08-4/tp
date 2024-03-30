@@ -22,7 +22,7 @@ public class Person {
 
     private final List<Task> taskList;
 
-    private List<Member> team;
+    private List<Member> team = new ArrayList<>();
     private String status;
 
     /**
@@ -175,6 +175,19 @@ public class Person {
     public boolean hasTask(Task task) {
         for (Task t : taskList) {
             if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param member member to be found inside the team member list
+     * @return boolean value (true/false) depending on whether the member is in the team
+     */
+    public boolean hasMember(Member member) {
+        for (Member m : team) {
+            if (m.equals(member)) {
                 return true;
             }
         }
