@@ -33,11 +33,11 @@ DevPlan Pro is a **desktop app for managing projects, optimized for use via a Co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `tp_new.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `tp_new.jar` from [here](https://github.com/AY2324S2-CS2103T-W08-4/tp/releases/tag/v1.2).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp_new.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -296,7 +296,7 @@ Expected output:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous DevPlan Pro home folder.
 
 ---
 
@@ -321,7 +321,6 @@ Expected output:
 | **Add person to task**         | `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `add person Joe /to unit test /in CS2103_TP`                                 |
 | **Set project status**         | `set status <STATUS> project <PROJECT_NAME>`<br> e.g., `set status complete project CS2103T Duke Chatbot Project`                                    |
 | **Set task status**            | `set status [complete/incomplete] /to <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `set status complete /to unit test /in CS2103T Duke Chatbot Project` |
-| **Edit**                       | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                          |
 | **Clear**                      | `clear`                                                                                                                                              |
 | **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                           |
 | **Help**                       | `help`                                                                                                                                               |
