@@ -8,25 +8,24 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.project.Task;
 import seedu.address.testutil.PersonBuilder;
 
-class SetDeadlineCommandTest {
+class SetDeadlineProjectCommandTest {
     private Person taskProject = new PersonBuilder().build();
 
     @Test
     public void equals() {
         Person project = new Person(new Name("project"));
-        Task task = new Task("task");
 
-        SetDeadlineCommand setDeadlineA = new SetDeadlineCommand("Mar 22 2024", task, project);
-        SetDeadlineCommand setDeadlineB = new SetDeadlineCommand("Mar 20 2023", task, project);
+
+        SetDeadlineProjectCommand setDeadlineA = new SetDeadlineProjectCommand("Mar 22 2024", project);
+        SetDeadlineProjectCommand setDeadlineB = new SetDeadlineProjectCommand("Mar 20 2023", project);
 
         // same object -> returns true
         assertTrue(setDeadlineA.equals(setDeadlineA));
 
         // same values -> returns true
-        SetDeadlineCommand setDeadlineACopy = new SetDeadlineCommand("Mar 22 2024", task, project);
+        SetDeadlineProjectCommand setDeadlineACopy = new SetDeadlineProjectCommand("Mar 22 2024", project);
         assertTrue(setDeadlineA.equals(setDeadlineACopy));
 
         // different types -> returns false
@@ -41,10 +40,9 @@ class SetDeadlineCommandTest {
 
     @Test
     public void toStringMethod() {
-        Task code = new Task("Code");
         String deadline = "Mar 23 2024";
-        SetDeadlineCommand setDeadlineCommand = new SetDeadlineCommand(deadline, code, taskProject);
-        String expected = SetDeadlineCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
-        assertEquals(expected, setDeadlineCommand.toString());
+        SetDeadlineProjectCommand setDeadlineProjectCommand = new SetDeadlineProjectCommand(deadline, taskProject);
+        String expected = SetDeadlineProjectCommand.class.getCanonicalName() + "{setDeadline=" + deadline + "}";
+        assertEquals(expected, setDeadlineProjectCommand.toString());
     }
 }
