@@ -23,6 +23,7 @@ public class Person {
 
     private final List<Task> taskList;
     private LocalDate deadlineDate;
+    private String category;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
@@ -109,6 +110,10 @@ public class Person {
         this.deadlineDate = LocalDate.parse(deadline, formatter);
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public Name getName() {
         return name;
     }
@@ -175,6 +180,12 @@ public class Person {
         return deadlineDate == null
                 ? ""
                 : deadlineDate.format(formatter);
+    }
+
+    public String getCategory() {
+        return category == null
+                ? ""
+                : category;
     }
 
     @Override

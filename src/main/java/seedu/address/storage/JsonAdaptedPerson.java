@@ -20,6 +20,8 @@ class JsonAdaptedPerson {
 
     private final String name;
     private final String deadline;
+    private final String category;
+
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -27,10 +29,11 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("category") String category, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.deadline = deadline;
+        this.category = category;
 
     }
 
@@ -40,6 +43,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         deadline = source.getDeadlineString();
+        category = source.getCategory();
     }
 
     /**
@@ -63,6 +67,9 @@ class JsonAdaptedPerson {
         Person toReturn = new Person(modelName);
         if (deadline != null && deadline.length() != 0) {
             toReturn.setDeadline(deadline);
+        }
+        if (category != null && category.length() != 0) {
+            toReturn.setCategory(category);
         }
         return toReturn;
     }

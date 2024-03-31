@@ -21,6 +21,8 @@ public class TaskListPanel extends UiPart<Region> {
     @FXML
     private Label showingProjectDeadline;
     @FXML
+    private Label showingProjectCategory;
+    @FXML
     private ListView<Task> undoneTaskListView;
     @FXML
     private ListView<Task> doneTaskListView;
