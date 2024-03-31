@@ -3,18 +3,37 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+DevPlan Pro is a **desktop app for managing projects, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your project management tasks done faster than traditional GUI apps.
 
-- Table of Contents
-  {:toc}
+## Table of Contents
 
----
+  <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+
+- [Quick start](#quick-start)
+- [Features](#features)
+  - [Adding a project: `add project`](#adding-a-project-add-project)
+  - [Editing a project : `edit project`](#editing-a-project-edit-project)
+  - [Locating projects by name: `find`](#locating-projects-by-name-find)
+  - [Deleting a project : `delete project`](#deleting-a-project-delete-project)
+  - [Assign member to task : `add person`](#assign-member-to-task-add-person)
+  - [Assign deadline to project : `add deadline`](#assign-deadline-to-project-add-deadline)
+  - [Assign deadline to task : `add deadline`](#assign-deadline-to-task-add-deadline)
+  - [Add task : `add task`](#add-task-add-task)
+  - [Remove task : `delete task`](#remove-task-delete-task)
+  - [Set Task Status : `set status of Task`](#set-task-status-set-status-of-task)
+  - [Set Project Status : `set status of Project`](#set-project-status-set-status-of-project)
+  - [Show Project : `show project`](#show-project-show-project)
+- [FAQ](#faq)
+- [Known issues](#known-issues)
+- [Command summary](#command-summary)
+
+<!-- TOC end -->
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `tp_new.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -22,7 +41,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 
    - `add project Duke` : Adds a project named `Duke` to the DevPlanPro.
@@ -61,14 +80,6 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
-
-Format: `help`
-
 ### Adding a project: `add project`
 
 Adds a project to the project manager.
@@ -85,7 +96,6 @@ Expected output:
 - Success: `<PROJECT_NAME> has been added to the project list.`
 - Failure: `Project <PROJECT_NAME> already exists.`
 
-
 ### Editing a project : `edit project`
 
 Edits an existing project in the DevPlanPro.
@@ -96,7 +106,7 @@ Format: `edit project <OLD_PROJECT_NAME> /to <NEW_PROJECT_NAME>`
 
 Examples:
 
-- `edit project Duke /to Duke Chatbot` 
+- `edit project Duke /to Duke Chatbot`
 
 ### Locating projects by name: `find`
 
@@ -115,7 +125,6 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a project : `delete project`
 
@@ -300,7 +309,7 @@ Expected output:
 ## Command summary
 
 | Action                         | Format, Examples                                                                                                                                     |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Show project**               | `show project <PROJECT_NAME>` <br> e.g., `show project CS2101 Presentation`                                                                          |
 | **Add project**                | `add project <PROJECT_NAME>` <br> e.g., `add project CS2101 Presentation`                                                                            |
 | **Add task**                   | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> e.g., `add task add deadline command /to CS2103T Duke Chatbot Project`                                |
