@@ -8,6 +8,7 @@ import seedu.address.logic.commands.SetProjectCategoryCommand;
 import seedu.address.logic.commands.ShowProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Category;
 
 /**
  * Parses input arguments and creates a new SetProjectCategoryCommand object
@@ -26,11 +27,13 @@ public class SetProjectCategoryCommandParser implements Parser<SetProjectCategor
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         SetProjectCategoryCommand.MESSAGE_USAGE));
             }
-            String category = args.split(" /to")[0].trim();
+            String categoryName = args.split(" /to")[0].trim();
             String projectName = args.split("/to ")[1];
             if ((projectName.length() == 0)) {
                 throw new ParseException("Please enter the project field");
             }
+            Category category = ParserUtil.parseTag(categoryName);
+
             Person project = new Person(ParserUtil.parseName(projectName));
             return new SetProjectCategoryCommand(category, project);
 

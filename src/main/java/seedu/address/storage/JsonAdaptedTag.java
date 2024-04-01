@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.Category;
 
 /**
- * Jackson-friendly version of {@link Tag}.
+ * Jackson-friendly version of {@link Category}.
  */
 class JsonAdaptedTag {
 
-    private final String tagName;
+    private final String category;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
     public JsonAdaptedTag(String tagName) {
-        this.tagName = tagName;
+        this.category = tagName;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedTag(Tag source) {
-        tagName = source.tagName;
+    public JsonAdaptedTag(Category source) {
+        category = source.tagName;
     }
 
     @JsonValue
     public String getTagName() {
-        return tagName;
+        return category;
     }
 
     /**
@@ -38,11 +38,11 @@ class JsonAdaptedTag {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
-    public Tag toModelType() throws IllegalValueException {
-        if (!Tag.isValidTagName(tagName)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+    public Category toModelType() throws IllegalValueException {
+        if (!Category.isValidTagName(category)) {
+            throw new IllegalValueException(Category.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(tagName);
+        return new Category(category);
     }
 
 }

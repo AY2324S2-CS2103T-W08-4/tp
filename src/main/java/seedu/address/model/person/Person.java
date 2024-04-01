@@ -5,12 +5,15 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.project.Task;
+import seedu.address.model.tag.Category;
 
 /**
  * Represents a Person in the address book.
@@ -23,7 +26,9 @@ public class Person {
 
     private final List<Task> taskList;
     private LocalDate deadlineDate;
-    private String category;
+
+    private final Set<Category> category = new HashSet<>();
+
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
@@ -38,6 +43,7 @@ public class Person {
         List<Task> taskList = new ArrayList<>();
         this.taskList = taskList;
         status = "incomplete";
+
     }
 
     /**
@@ -46,7 +52,24 @@ public class Person {
     private Person(Name name, List<Task> tasks) {
         this.taskList = tasks;
         this.name = name;
+
+
     }
+
+    /**
+     * Constructs a Person object with specified taskList and categoryList for creating edited Person
+     */
+    public Person(Name name, Set<Category> category) {
+        requireAllNonNull(name, category);
+        List<Task> taskList = new ArrayList<>();
+        this.taskList = taskList;
+        this.name = name;
+
+        this.category.addAll(category);
+
+    }
+
+
 
     /**
      * Adds task to the Person object
@@ -110,8 +133,8 @@ public class Person {
         this.deadlineDate = LocalDate.parse(deadline, formatter);
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setCategory(Category category) {
+        this.category.add(category);
     }
 
     public Name getName() {
@@ -182,10 +205,9 @@ public class Person {
                 : deadlineDate.format(formatter);
     }
 
-    public String getCategory() {
-        return category == null
-                ? ""
-                : category;
+    public Set<Category> getCategory() {
+
+        return category;
     }
 
     @Override
@@ -211,6 +233,7 @@ public class Person {
      */
     public Person createEditedPerson(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
+
         Person newPerson = new Person(newName, newTaskList);
         return newPerson;
     }

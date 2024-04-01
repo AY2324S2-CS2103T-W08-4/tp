@@ -1,7 +1,10 @@
 package seedu.address.ui;
 
+import java.util.Comparator;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
@@ -32,7 +35,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private Label category;
+    private FlowPane categories;
 
     @FXML
     private Label deadlineDate;
@@ -48,6 +51,10 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         deadlineDate.setText("Due: " + person.getDeadlineString());
         status.setText(person.isCompleted() ? "complete" : "");
-        category.setText(person.getCategory());
+
+        person.getCategory().forEach(tag -> {
+            Label categoryLabel = new Label(tag.tagName);
+            categories.getChildren().add(categoryLabel);
+        });
     }
 }

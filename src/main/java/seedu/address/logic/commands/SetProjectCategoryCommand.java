@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Category;
 
 public class SetProjectCategoryCommand extends Command {
     public static final String COMMAND_WORD = "set category";
@@ -23,9 +24,9 @@ public class SetProjectCategoryCommand extends Command {
             + "Please make sure the project exists.";
 
     private final Person project;
-    private final String category;
+    private final Category category;
 
-    public SetProjectCategoryCommand(String categoryName, Person project) {
+    public SetProjectCategoryCommand(Category categoryName, Person project) {
         requireNonNull(project);
         this.project = project;
         this.category = categoryName;
