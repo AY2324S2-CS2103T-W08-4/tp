@@ -65,7 +65,7 @@ public class Person {
     public void addMember(Member member) {
         team.add(member);
     }
-  
+
     public void assignTeam(List<Member> team) {
         this.team = team;
     }
