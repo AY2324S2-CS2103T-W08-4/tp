@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.project.Member;
@@ -23,7 +24,7 @@ public class Person {
     private final List<Task> taskList;
 
     private List<Member> team = new ArrayList<>();
-    private String status;
+    private String status = "None";
 
     /**
      * Constructs a Person object with empty taskList
@@ -167,6 +168,12 @@ public class Person {
     public String toString() {
         return new ToStringBuilder(this)
                 .add("name", name).toString();
+    }
+
+    public String getTeam() {
+        return team.stream()
+                .map(Member::toString) // Assuming Member class has getName() method returning String
+                .collect(Collectors.joining(", "));
     }
 
     /**
