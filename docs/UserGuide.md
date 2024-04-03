@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-DevPlan Pro is a **desktop app for managing projects, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, DevPlan Pro can get your project management tasks done faster than traditional GUI apps.
+# DevPlan Pro User Guide
+
+Welcome to the user guide for our CLI-based project management application! This tool is designed to streamline your project organization and task management, all from the command line interface. With a range of features tailored to enhance efficiency and collaboration, you can easily create, update, and monitor your projects and tasks.
 
 ## Table of Contents
 
@@ -322,19 +324,18 @@ Format: `list`
 
 ## Command summary
 
-| Action                         | Format, Examples                                                                                                                                     |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Show project**               | `show project <PROJECT_NAME>` <br> e.g., `show project CS2101 Presentation`                                                                          |
-| **Add project**                | `add project <PROJECT_NAME>` <br> e.g., `add project CS2101 Presentation`                                                                            |
-| **Add task**                   | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> e.g., `add task add deadline command /to CS2103T Duke Chatbot Project`                                |
-| **Delete project**             | `delete project <PROJECT_NAME>`<br> e.g., `delete project CS2101 Presentation`                                                                       |
-| **Delete task**                | `delete task <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `delete task add deadline command /in CS2103T Duke Chatbot Project`                           |
-| **Assign deadline to project** | `add deadline <DEADLINE> /to <PROJECT_NAME>`<br> e.g., `add deadline Feb 25 2024 /to CS2103_TP`                                                      |
-| **Assign deadline to task**    | `add deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `add deadline Feb 25 2024 /to submit feature list /in CS2103_TP`              |
-| **Add person to project**      | `add person <PERSON_NAME> /to <PROJECT_NAME>`<br> e.g., `add person Joe /to CS2103_TP`                                                               |
-| **Add person to task**         | `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `add person Joe /to unit test /in CS2103_TP`                                 |
-| **Set project status**         | `set status <STATUS> project <PROJECT_NAME>`<br> e.g., `set status complete project CS2103T Duke Chatbot Project`                                    |
-| **Set task status**            | `set status [complete/incomplete] /to <TASK_NAME> /in <PROJECT_NAME>`<br> e.g., `set status complete /to unit test /in CS2103T Duke Chatbot Project` |
-| **Clear**                      | `clear`                                                                                                                                              |
-| **Find**                       | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                           |
-| **Help**                       | `help`                                                                                                                                               |
+| Action                      | Format, Examples                                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add project**             | `add project <PROJECT_NAME>` <br> Example: `add project CS2101 Presentation`                                                                    |
+| **Delete project**          | `delete project <PROJECT_NAME>` <br> Example: `delete project CS2101 Presentation`                                                              |
+| **Add task**                | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `add task Prepare slides for presentation /to CS2101 Presentation`                      |
+| **Delete task**             | `delete task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `delete task Prepare slides for presentation /to CS2101 Presentation`                |
+| **Show project**            | `show project <PROJECT_NAME>` <br> Example: `show project CS2101 Presentation`                                                                  |
+| **Set deadline of project** | `set deadline <DEADLINE> /of <PROJECT_NAME>` <br> Example: `add deadline to project CS2101 Presentation Apr 10 2024`                            |
+| **Set deadline of task**    | `set deadline <DEADLINE> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `add deadline to task 1 Apr 10 2024 /in CS2101 Presentation`         |
+| **Add member to project**   | `add person <PERSON_NAME> /to <PROJECT_NAME>` <br> Example: `add person to project John /to CS2101 Presentation`                                |
+| **Assign member to task**   | `assign person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `assign person Alice /to Prepare slides /in CS2101 Presentation` |
+| **Set status of project**   | `set status <STATUS> /of <PROJECT_NAME>` <br> Example: `set status Completed /of CS2101 Presentation`                                           |
+| **Set status of task**      | `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set status Completed /of Prepare slides /in CS2101 Presentation`        |
+| **Find project**            | `find project <SEARCH_TERM>` <br> Example: `find project Presentation`                                                                          |
+| **List project**            | `list project`                                                                                                                                  |
