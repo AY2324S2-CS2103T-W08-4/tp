@@ -20,12 +20,12 @@ Welcome to the user guide for our CLI-based project management application! This
   - [Show Project : `show project`](#show-project--show-project)
   - [Assign deadline to project : `add deadline`](#assign-deadline-to-project--add-deadline)
   - [Assign deadline to task : `add deadline`](#assign-deadline-to-task--add-deadline)
-  - [Set Project Status : `set status of Project`](#set-project-status--set-status-of-project)
-  - [Set Task Status : `set status of Task`](#set-task-status--set-status-of-task)
+  - [Set Project Status : `set status`](#set-project-status--set-status)
+  - [Set Task Status : `set status`](#set-task-status--set-status)
   - [Add member to project : `add person`](#add-member-to-project--add-person)
-  - [Assign member to task : `add person`](#assign-member-to-task--add-person)
-  - [Locating projects by name: `find`](#locating-projects-by-name-find)
-  - [Listing all persons : `list`](#listing-all-persons--list)
+  - [Assign member to task : `assign person`](#assign-member-to-task--assign-person)
+  - [Locating projects by name: `find project`](#locating-projects-by-name-find-project)
+  - [Listing all projects : `list project`](#listing-all-projects--list-project)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -47,9 +47,9 @@ Welcome to the user guide for our CLI-based project management application! This
 1. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 
-   - `add project Duke` : Adds a project named `Duke` to the DevPlanPro.
+   - `add project Duke` : Adds a project named `Duke` to the project list.
 
-   - `delete project Duke` : Deletes the Duke project from the list.
+   - `delete project Duke` : Deletes the Duke project from the project list.
 
    - `clear` : Deletes all projects and tasks.
 
@@ -76,46 +76,50 @@ Welcome to the user guide for our CLI-based project management application! This
 
 ### Adding a project: `add project`
 
-Adds a project to the project manager.
+**Format:** `add project <PROJECT_NAME>`
 
-Format: `add project <PROJECT_NAME>`
+⚠️ **Warning:** Project name needs to be unique.
 
-Examples:
+**Examples:**
 
 - `add project CS2103T Duke Chatbot Project`
 - `add project CS2101 Presentation`
 
-Expected output:
+**Expected output:**
 
 - Success: `<PROJECT_NAME> has been added to the project list.`
 - Failure: `Project <PROJECT_NAME> already exists.`
 
 ### Deleting a project : `delete project`
 
-Deletes the specified project from the project list.
+**Format:** `delete project <PROJECT_NAME>`
 
-Format: `delete project <PROJECT_NAME>`
+⚠️ **Warning:** The project to be deleted must exist.
 
-Examples:
+**Examples:**
 
 - `delete project CS2101 Presentation`
 
-Expected output:
+**Expected output:**
 
-- Successful deletion: `<PROJECT_NAME> has been deleted from the project list.`
-- Failed deletion: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Success: `<PROJECT_NAME> has been deleted from the project list.`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Add task : `add task`
 
 Adds the specified task to a project.
 
-Format: `add task <TASK_NAME> /to <PROJECT_NAME>`
+**Format:** `add task <TASK_NAME> /to <PROJECT_NAME>`
 
-Examples:
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** The task name has to be unique within the project.
+
+**Examples:**
 
 - `add task Prepare slides for presentation /to CS2101 Presentation`
 
-Expected output:
+**Expected output:**
 
 - Success: `<TASK_NAME> has been added to <PROJECT_NAME>.`
 - Failure:
@@ -126,13 +130,17 @@ Expected output:
 
 Deletes the specified task from a project.
 
-Format: `delete task <TASK_NAME> /in <PROJECT_NAME>`
+**Format:** `delete task <TASK_NAME> /in <PROJECT_NAME>`
 
-Examples:
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** The specified task must exist.
+
+**Examples:**
 
 - `delete task Prepare slides for presentation /in CS2101 Presentation`
 
-Expected output:
+**Expected output:**
 
 - Success: `<TASK_NAME> has been deleted from <PROJECT_NAME>.`
 - Failure:
@@ -141,77 +149,94 @@ Expected output:
 
 ### Show Project : `show project`
 
-Shows the project’s details.
+Sets the current showing project as the specified project.
 
-Format: `show project <PROJECT_NAME>`
+⚠️ **Warning:** The specified project must exist.
 
-Examples:
+**Format:** `show project <PROJECT_NAME>`
+
+**Examples:**
 
 - `show project CS2101 Presentation`
 
-Expected output:
+**Expected output:**
 
 - Success: The UI now shows the project’s information.
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
+![Show Project Command Result](images/showProjectCommandResult.png)
+Description: An example of the result after executing the "show project" command, displaying project information in the UI.
+
 ### Assign deadline to project : `add deadline`
 
-Assigns a deadline to a project.
+**Format:** `add deadline <DEADLINE> /to <PROJECT_NAME>`
 
-Format: `add deadline <DEADLINE> /to <PROJECT_NAME>`
+⚠️ **Warning:** The specified project must exist.
 
-Examples:
+⚠️ **Warning:** The deadline must be in the `Mmm D YYYY` format.
+
+**Examples:**
 
 - `add deadline Feb 25 2024 /to CS2103_TP`
 
-Expected output:
+**Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>.`
 - Failure: `Deadline needs to be in MMM D YYYY format.`
 
 ### Assign deadline to task : `add deadline`
 
-Assigns a deadline to a task in a project.
+**Format:** `add deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
 
-Format: `add deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
+⚠️ **Warning:** The specified project must exist.
 
-Examples:
+⚠️ **Warning:** The specified task must exist.
+
+⚠️ **Warning:** The deadline must be in the `Mmm D YYYY` format.
+
+**Examples:**
 
 - `add deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
 
-Expected output:
+**Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
 - Failure: `Deadline needs to be in MMM D YYYY format.`
 
-### Set Project Status : `set status of Project`
+### Set Project Status : `set status`
 
-Sets the status of a project as finished or unfinished.
+**Format:** `set status <STATUS> /of <PROJECT_NAME>`
 
-Format: `set status <STATUS> project <PROJECT_NAME>`
+⚠️ **Warning:** The specified project must exist.
 
-Examples:
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
-- `set status done project CS2103T Duke Chatbot Project`
+**Examples:**
 
-Expected output:
+- `set status complete /of CS2103T Duke Chatbot Project`
+
+**Expected output:**
 
 - Success: `Project <PROJECT_NAME> is set as <STATUS>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Status was entered incorrectly.`
 
-### Set Task Status : `set status of Task`
+### Set Task Status : `set status`
 
-Sets the status of a task as completed or incomplete.
+⚠️ **Warning:** The specified project must exist.
 
-Format: `set status <STATUS> /to task <TASK_NAME> /in <PROJECT_NAME>`
+⚠️ **Warning:** The specified task must exist.
 
-Examples:
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
-- `set status complete /to unit test /in CS2103T Duke Chatbot Project`
+**Format:** `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>`
 
-Expected output:
+**Examples:**
+
+- `set status complete /of unit test /in CS2103T Duke Chatbot Project`
+
+**Expected output:**
 
 - Success: `Task <TASK_NAME> is set as <STATUS>.`
 - Failure:
@@ -221,53 +246,57 @@ Expected output:
 
 ### Add member to project : `add person`
 
-Assigns a team member to a task within a project.
+**Format:** `add person <PERSON_NAME> /to <PROJECT_NAME>`
 
-Format: `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
+⚠️ **Warning:** The specified project must exist.
 
-Examples:
+⚠️ **Warning:** Person name must be unique within the project.
 
-- `add person Joe /to unit test /in CS2103_TP`
+**Examples:**
 
-Expected output:
+- `add person Joe /to CS2103_TP`
+
+**Expected output:**
+
+- Success: `<PERSON_NAME> has been added to <PROJECT_NAME>`
+- Failure: `Project <PROJECT_NAME> does not exist.`
+
+### Assign member to task : `assign person`
+
+**Format:** `assign person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** The specified task must exist.
+
+**Examples:**
+
+- `assign person Joe /to unit test /in CS2103_TP`
+
+**Expected output:**
 
 - Success: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>.`
 - Failure: `Person <PERSON_NAME> is not a team member.`
 
-### Assign member to task : `add person`
+### Locating projects by name: `find project`
 
-Assigns a team member to a task within a project.
+Finds projects whose names contain any of the given keywords. The updated project list will show the projects that matches. To see the full project list, use [list project command.](#listing-all-projects--list-project)
 
-Format: `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
+**Format:** `find project [KEYWORDS]`
 
-Examples:
+**Examples:**
 
-- `add person Joe /to unit test /in CS2103_TP`
+- `find project CS2103`
 
-Expected output:
-
-- Success: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>.`
-- Failure: `Person <PERSON_NAME> is not a team member.`
-
-### Locating projects by name: `find`
-
-Finds projects whose names contain any of the given keywords.
-
-Format: `find project [KEYWORDS]`
-
-Examples:
-
-- `find project Presentation`
-
-Expected output:
+**Expected output:**
 
 - Returns projects containing the specified keyword(s).
 
-### Listing all projects : `list`
+### Listing all projects : `list project`
 
 Shows a list of all projects in the project list.
 
-Format: `list`
+**Format:** `list project`
 
 ---
 
