@@ -33,7 +33,7 @@ public class TaskListPanel extends UiPart<Region> {
         super(FXML);
         this.currentProject = currentProject;
         showingProjectName.setText("Showing Project: " + currentProject.getName().fullName);
-        team.setText(currentProject.getTeam());
+        team.setText("Team Members:" + currentProject.getTeam());
 
         undoneTaskListView.getItems().clear();
         undoneTaskListView.getItems().addAll(currentProject.getUndoneTasks());
