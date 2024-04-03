@@ -85,7 +85,6 @@ Expected output:
 - Success: `<PROJECT_NAME> has been added to the project list.`
 - Failure: `Project <PROJECT_NAME> already exists.`
 
-
 ### Editing a project : `edit project`
 
 Edits an existing project in the DevPlanPro.
@@ -96,7 +95,7 @@ Format: `edit project <OLD_PROJECT_NAME> /to <NEW_PROJECT_NAME>`
 
 Examples:
 
-- `edit project Duke /to Duke Chatbot` 
+- `edit project Duke /to Duke Chatbot`
 
 ### Locating projects by name: `find`
 
@@ -153,29 +152,29 @@ Expected output:
 - Successful assignment: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>`
 - Failed assignment (example): `Person <PERSON_NAME> is not a team member.`
 
-### Assign deadline to project : `add deadline`
+### Set deadline to project : `set deadline`
 
 Assigns a deadline to a project.
 
-Format: `add deadline <DEADLINE> /to <PROJECT_NAME>`
+Format: `set deadline <DEADLINE> /to <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
 - The deadline must be in `MMM D YYYY` format
 
 Examples:
 
-- `add deadline Feb 25 2024 /to CS2103_TP`
+- `set deadline Feb 25 2024 /to CS2103_TP`
 
 Expected output:
 
 - Successful assignment: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>`
 - Failed assignment (example): `Deadline needs to be in MMM D YYYY format.`
 
-### Assign deadline to task : `add deadline`
+### Set deadline to task : `add deadline`
 
 Assigns a deadline to a task in a project.
 
-Format: `add deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
+Format: `set deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
 - The specified task name must exist in the project's tasks.
@@ -226,6 +225,25 @@ Expected output:
   - invalid project name: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - invalid task name: `Task <TASK_NAME> not found: Please make sure the task exists`
 
+### Set Project Status : `set status of Project`
+
+sets the status of a project as finished or unfinished
+
+Format: `set status <STATUS> project <PROJECT_NAME>`
+
+- The specified project name must exist in the project list.
+- The project status can either be `done` or `undone`
+
+Examples:
+
+- `set status done project CS2103T Duke Chatbot Project`
+
+Expected output:
+
+- Successful status update: `Project <PROJECT_NAME> is set as <STATUS>`
+- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- `Status was entered incorrectly.`
+
 ### Set Task Status : `set status of Task`
 
 sets the status of a task as completed or incomplete.
@@ -245,25 +263,6 @@ Expected output:
 - Failed commands: `Task <TASK_NAME> not found: Please make sure the task exists.`
 - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 - `Status was entered incorrectly.`,
-
-### Set Project Status : `set status of Project`
-
-sets the status of a project as finished or unfinished
-
-Format: `set status <STATUS> project <PROJECT_NAME>`
-
-- The specified project name must exist in the project list.
-- The project status can either be `done` or `undone`
-
-Examples:
-
-- `set status done project CS2103T Duke Chatbot Project`
-
-Expected output:
-
-- Successful status update: `Project <PROJECT_NAME> is set as <STATUS>`
-- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-- `Status was entered incorrectly.`
 
 ### Show Project : `show project`
 
@@ -300,7 +299,7 @@ Expected output:
 ## Command summary
 
 | Action                         | Format, Examples                                                                                                                                     |
-|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Show project**               | `show project <PROJECT_NAME>` <br> e.g., `show project CS2101 Presentation`                                                                          |
 | **Add project**                | `add project <PROJECT_NAME>` <br> e.g., `add project CS2101 Presentation`                                                                            |
 | **Add task**                   | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> e.g., `add task add deadline command /to CS2103T Duke Chatbot Project`                                |
