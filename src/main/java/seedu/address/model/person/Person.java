@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.project.Member;
 import seedu.address.model.project.Task;
 
 /**
@@ -26,7 +28,8 @@ public class Person {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    private String status;
+    private List<Member> team = new ArrayList<>();
+    private String status = "None";
     private String category;
 
     /**
@@ -53,6 +56,10 @@ public class Person {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    public void assignTeam(List<Member> team) {
+        this.team = team;
     }
 
     /**
@@ -197,12 +204,31 @@ public class Person {
                 .add("name", name).toString();
     }
 
+    public String getTeam() {
+        return team.stream()
+                .map(Member::toString) // Assuming Member class has getName() method returning String
+                .collect(Collectors.joining(", "));
+    }
+
     /**
      * Returns true if the Person has a task that is equal to the specified task
      */
     public boolean hasTask(Task task) {
         for (Task t : taskList) {
             if (t.equals(task)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @param member member to be found inside the team member list
+     * @return boolean value (true/false) depending on whether the member is in the team
+     */
+    public boolean hasMember(Member member) {
+        for (Member m : team) {
+            if (m.equals(member)) {
                 return true;
             }
         }
