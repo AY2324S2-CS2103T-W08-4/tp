@@ -19,19 +19,20 @@ class JsonAdaptedPerson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
+    private final String deadline;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final String category;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
+            @JsonProperty("category") String category, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.deadline = deadline;
+        this.category = category;
     }
 
     /**
@@ -39,6 +40,8 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
+        deadline = source.getDeadlineString();
+        category = source.getCategory();
     }
 
     /**
@@ -59,7 +62,14 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
-        return new Person(modelName);
+        Person toReturn = new Person(modelName);
+        if (deadline != null && deadline.length() != 0) {
+            toReturn.setDeadline(deadline);
+        }
+        if (category != null && category.length() != 0) {
+            toReturn.setCategory(category);
+        }
+        return toReturn;
     }
 
 }

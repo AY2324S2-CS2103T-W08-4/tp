@@ -319,6 +319,10 @@
   -fx-text-fill: #008000;
 }
 
+#categoryText {
+  -fx-text-fill: #f5ba6e;
+}
+
 #commandTypeLabel {
   -fx-font-size: 11px;
   -fx-text-fill: #f70d1a;

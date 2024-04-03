@@ -6,7 +6,7 @@ import seedu.address.logic.commands.ShowProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ShowProjectCommand object
  */
 public class ShowProjectCommandParser implements Parser<ShowProjectCommand> {
 
