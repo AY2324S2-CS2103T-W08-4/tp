@@ -80,6 +80,8 @@ Welcome to the user guide for our CLI-based project management application! This
 
 ⚠️ **Warning:** Project name needs to be unique.
 
+⚠️ **Warning:** Project name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
+
 **Examples:**
 
 - `add project CS2103T Duke Chatbot Project`
@@ -114,6 +116,8 @@ Adds the specified task to a project.
 ⚠️ **Warning:** The specified project must exist.
 
 ⚠️ **Warning:** The task name has to be unique within the project.
+
+⚠️ **Warning:** Task name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
 
 **Examples:**
 
@@ -173,7 +177,7 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The deadline must be in the `Mmm D YYYY` format.
+⚠️ **Warning:** The deadline must be in the `Mmm DD YYYY` format.
 
 **Examples:**
 
@@ -182,7 +186,8 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>.`
-- Failure: `Deadline needs to be in MMM D YYYY format.`
+- Failure: `Deadline needs to be in MMM DD YYYY format.`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Assign deadline to task : `add deadline`
 
@@ -192,7 +197,7 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified task must exist.
 
-⚠️ **Warning:** The deadline must be in the `Mmm D YYYY` format.
+⚠️ **Warning:** The deadline must be in the `Mmm DD YYYY` format.
 
 **Examples:**
 
@@ -201,7 +206,9 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `Deadline needs to be in MMM D YYYY format.`
+- Failure: `Deadline needs to be in MMM DD YYYY format.`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
 
 ### Set Project Status : `set status`
 
