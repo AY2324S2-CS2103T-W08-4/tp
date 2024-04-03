@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.project.Task;
 
 /**
- * Adds a task to a project.
+ * Deletes a task from a project.
  */
 public class DeleteTaskCommand extends Command {
 

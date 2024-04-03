@@ -2,6 +2,8 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,10 +23,14 @@ public class Person {
     private final Name name;
 
     private final List<Task> taskList;
+    private LocalDate deadlineDate;
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private final List<Member> team = new ArrayList<>();
 
     private String status;
+    private String category;
 
     /**
      * Constructs a Person object with empty taskList
@@ -92,6 +98,13 @@ public class Person {
     }
 
     /**
+     * Sets category of project
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
      * Sets status of project as incomplete
      */
     public void setIncomplete() {
@@ -116,6 +129,15 @@ public class Person {
         return foundTask.get();
     }
 
+
+    /**
+     * Sets the deadline of the task
+     * @param deadline the datetime string to be parsed and set as deadline
+     */
+    public void setDeadline(String deadline) {
+        this.deadlineDate = LocalDate.parse(deadline, formatter);
+    }
+
     public Name getName() {
         return name;
     }
@@ -128,6 +150,12 @@ public class Person {
             }
         }
         return tmp;
+    }
+
+    public String getCategory() {
+        return category == null
+                ? ""
+                : category;
     }
 
     public List<Task> getUndoneTasks() {
@@ -176,6 +204,12 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name);
+    }
+
+    public String getDeadlineString() {
+        return deadlineDate == null
+                ? ""
+                : deadlineDate.format(formatter);
     }
 
     @Override

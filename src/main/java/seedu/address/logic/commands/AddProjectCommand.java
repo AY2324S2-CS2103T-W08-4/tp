@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a project to the DevPlanPro.
  */
 public class AddProjectCommand extends Command {
 
