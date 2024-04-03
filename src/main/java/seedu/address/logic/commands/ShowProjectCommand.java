@@ -13,7 +13,7 @@ import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a project identified using it's name from the project list.
+ * Shows a project and displays all its project details.
  */
 public class ShowProjectCommand extends Command {
 
