@@ -34,6 +34,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private Label deadlineDate;
+    @FXML
+    private Label category;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -46,5 +48,6 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         deadlineDate.setText("Due: " + person.getDeadlineString());
         status.setText(person.isCompleted() ? "complete" : "");
+        category.setText(person.getCategory());
     }
 }

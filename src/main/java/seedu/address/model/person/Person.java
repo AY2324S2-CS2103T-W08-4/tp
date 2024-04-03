@@ -27,6 +27,7 @@ public class Person {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private String status;
+    private String category;
 
     /**
      * Constructs a Person object with empty taskList
@@ -76,6 +77,13 @@ public class Person {
     }
 
     /**
+     * Sets category of project
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    /**
      * Sets status of project as incomplete
      */
     public void setIncomplete() {
@@ -121,6 +129,12 @@ public class Person {
             }
         }
         return tmp;
+    }
+
+    public String getCategory() {
+        return category == null
+                ? ""
+                : category;
     }
 
     public List<Task> getUndoneTasks() {
