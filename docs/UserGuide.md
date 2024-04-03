@@ -3,26 +3,27 @@ layout: page
 title: User Guide
 ---
 
-DevPlan Pro is a **desktop app for managing projects, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your project management tasks done faster than traditional GUI apps.
+DevPlan Pro is a **desktop app for managing projects, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, DevPlan Pro can get your project management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
-  <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
+<!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Adding a project: `add project`](#adding-a-project-add-project)
-  - [Editing a project : `edit project`](#editing-a-project-edit-project)
+  - [Deleting a project : `delete project`](#deleting-a-project--delete-project)
+  - [Add task : `add task`](#add-task--add-task)
+  - [Remove task : `delete task`](#remove-task--delete-task)
+  - [Show Project : `show project`](#show-project--show-project)
+  - [Assign deadline to project : `add deadline`](#assign-deadline-to-project--add-deadline)
+  - [Assign deadline to task : `add deadline`](#assign-deadline-to-task--add-deadline)
+  - [Set Project Status : `set status of Project`](#set-project-status--set-status-of-project)
+  - [Set Task Status : `set status of Task`](#set-task-status--set-status-of-task)
+  - [Add member to project : `add person`](#add-member-to-project--add-person)
+  - [Assign member to task : `add person`](#assign-member-to-task--add-person)
   - [Locating projects by name: `find`](#locating-projects-by-name-find)
-  - [Deleting a project : `delete project`](#deleting-a-project-delete-project)
-  - [Assign member to task : `add person`](#assign-member-to-task-add-person)
-  - [Assign deadline to project : `add deadline`](#assign-deadline-to-project-add-deadline)
-  - [Assign deadline to task : `add deadline`](#assign-deadline-to-task-add-deadline)
-  - [Add task : `add task`](#add-task-add-task)
-  - [Remove task : `delete task`](#remove-task-delete-task)
-  - [Set Task Status : `set status of Task`](#set-task-status-set-status-of-task)
-  - [Set Project Status : `set status of Project`](#set-project-status-set-status-of-project)
-  - [Show Project : `show project`](#show-project-show-project)
+  - [Listing all persons : `list`](#listing-all-persons--list)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -96,36 +97,6 @@ Expected output:
 - Success: `<PROJECT_NAME> has been added to the project list.`
 - Failure: `Project <PROJECT_NAME> already exists.`
 
-### Editing a project : `edit project`
-
-Edits an existing project in the DevPlanPro.
-
-Format: `edit project <OLD_PROJECT_NAME> /to <NEW_PROJECT_NAME>`
-
-- Edits the name of a project
-
-Examples:
-
-- `edit project Duke /to Duke Chatbot`
-
-### Locating projects by name: `find`
-
-Finds project whose names contain any of the given keywords.
-
-Format: `find project [KEYWORDS]`
-
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Projects matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
-
 ### Deleting a project : `delete project`
 
 Deletes the specified project from the project list.
@@ -143,24 +114,58 @@ Expected output:
 - Successful deletion: `<PROJECT_NAME> has been deleted from the project list.`
 - Failed deletion: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
-### Assign member to task : `add person`
+### Add task : `add task`
 
-Assigns a team member to a task within a project.
+Add the specified task to a project.
 
-Format: `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
+Format: `add task <TASK_NAME> /to <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
-- The specified task name must exist in the project's task.
-- The specified member name must be a member of the project team.
-
-Examples:
-
-- `add person Joe /to unit test /in CS2103_TP`
+- The task's name must be unique
+  Examples:
+- `add task add deadline command /to CS2103T Duke Chatbot Project`
 
 Expected output:
 
-- Successful assignment: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>`
-- Failed assignment (example): `Person <PERSON_NAME> is not a team member.`
+- Successful add command: `<TASK_NAME> has been added to <PROJECT_NAME>`
+- Failed commands:
+  - invalid project name: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - repeated task: `Task <TASK_NAME> already exists in <PROJECT_NAME>`
+
+### Remove task : `delete task`
+
+Deletes the specified task from a project.
+
+Format: `delete task <TASK_NAME> /in <PROJECT_NAME>`
+
+- The specified project name must exist in the project list.
+- The task name must exist
+  Examples:
+- `delete task add deadline command /in CS2103T Duke Chatbot Project`
+
+Expected output:
+
+- Successful deletion: `<TASK_NAME> has been deleted from <PROJECT_NAME>`
+- Failed commands:
+  - invalid project name: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - invalid task name: `Task <TASK_NAME> not found: Please make sure the task exists`
+
+### Show Project : `show project`
+
+shows the project’s details
+
+Format: `show project <PROJECT_NAME>`
+
+- The specified project name must exist in the project list.
+
+Examples:
+
+- `show project CS2103T Duke Chatbot Project`
+
+Expected output:
+
+- Successful display: `The ui now shows the project’s information`
+- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Assign deadline to project : `add deadline`
 
@@ -199,41 +204,24 @@ Expected output:
 - Successful assignment: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>`
 - Failed assignment (example): `Deadline needs to be in MMM D YYYY format.`
 
-### Add task : `add task`
+### Set Project Status : `set status of Project`
 
-Add the specified task to a project.
+sets the status of a project as finished or unfinished
 
-Format: `add task <TASK_NAME> /to <PROJECT_NAME>`
+Format: `set status <STATUS> project <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
-- The task's name must be unique
-  Examples:
-- `add task add deadline command /to CS2103T Duke Chatbot Project`
+- The project status can either be `done` or `undone`
+
+Examples:
+
+- `set status done project CS2103T Duke Chatbot Project`
 
 Expected output:
 
-- Successful add command: `<TASK_NAME> has been added to <PROJECT_NAME>`
-- Failed commands:
-  - invalid project name: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - repeated task: `Task <TASK_NAME> already exists in <PROJECT_NAME>`
-
-### Remove task : `delete task`
-
-Deletes the specified task from a project.
-
-Format: `delete task <TASK_NAME> /in <PROJECT_NAME>`
-
-- The specified project name must exist in the project list.
-- The task name must exist
-  Examples:
-- `delete task add deadline command /in CS2103T Duke Chatbot Project`
-
-Expected output:
-
-- Successful deletion: `<TASK_NAME> has been deleted from <PROJECT_NAME>`
-- Failed commands:
-  - invalid project name: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - invalid task name: `Task <TASK_NAME> not found: Please make sure the task exists`
+- Successful status update: `Project <PROJECT_NAME> is set as <STATUS>`
+- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- `Status was entered incorrectly.`
 
 ### Set Task Status : `set status of Task`
 
@@ -255,41 +243,67 @@ Expected output:
 - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 - `Status was entered incorrectly.`,
 
-### Set Project Status : `set status of Project`
+### Add member to project : `add person`
 
-sets the status of a project as finished or unfinished
+Assigns a team member to a task within a project.
 
-Format: `set status <STATUS> project <PROJECT_NAME>`
+Format: `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
-- The project status can either be `done` or `undone`
+- The specified task name must exist in the project's task.
+- The specified member name must be a member of the project team.
 
 Examples:
 
-- `set status done project CS2103T Duke Chatbot Project`
+- `add person Joe /to unit test /in CS2103_TP`
 
 Expected output:
 
-- Successful status update: `Project <PROJECT_NAME> is set as <STATUS>`
-- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-- `Status was entered incorrectly.`
+- Successful assignment: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>`
+- Failed assignment (example): `Person <PERSON_NAME> is not a team member.`
 
-### Show Project : `show project`
+### Assign member to task : `add person`
 
-shows the project’s details
+Assigns a team member to a task within a project.
 
-Format: `show project <PROJECT_NAME>`
+Format: `add person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>`
 
 - The specified project name must exist in the project list.
+- The specified task name must exist in the project's task.
+- The specified member name must be a member of the project team.
 
 Examples:
 
-- `show project CS2103T Duke Chatbot Project`
+- `add person Joe /to unit test /in CS2103_TP`
 
 Expected output:
 
-- Successful display: `The ui now shows the project’s information`
-- Failed commands: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Successful assignment: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>`
+- Failed assignment (example): `Person <PERSON_NAME> is not a team member.`
+
+### Locating projects by name: `find`
+
+Finds project whose names contain any of the given keywords.
+
+Format: `find project [KEYWORDS]`
+
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Projects matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+
+- `find John` returns `john` and `John Doe`
+- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the Project list.
+
+Format: `list`
 
 ---
 
