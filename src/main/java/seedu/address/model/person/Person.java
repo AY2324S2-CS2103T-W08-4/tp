@@ -26,7 +26,7 @@ public class Person {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    private String status;
+    private String status = "None";
     private String category;
 
     /**
@@ -91,9 +91,10 @@ public class Person {
     }
 
     /**
-     * Returns true if ptoject is complete
+     * Returns true if project is complete
      */
     public boolean isCompleted() {
+
         return status.equals("complete");
     }
 
