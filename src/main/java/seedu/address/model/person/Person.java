@@ -29,6 +29,7 @@ public class Person {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private List<Member> team = new ArrayList<>();
+    private String status = "None";
     private String category;
 
     /**
