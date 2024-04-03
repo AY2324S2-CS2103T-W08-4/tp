@@ -171,9 +171,9 @@ Sets the current showing project as the specified project.
 ![Show Project Command Result](images/showProjectCommandResult.png)
 Description: An example of the result after executing the "show project" command, displaying project information in the UI.
 
-### Assign deadline to project : `add deadline`
+### Set deadline of project : `set deadline`
 
-**Format:** `add deadline <DEADLINE> /to <PROJECT_NAME>`
+**Format:** `set deadline <DEADLINE> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
@@ -181,17 +181,17 @@ Description: An example of the result after executing the "show project" command
 
 **Examples:**
 
-- `add deadline Feb 25 2024 /to CS2103_TP`
+- `set deadline Feb 25 2024 /to CS2103_TP`
 
 **Expected output:**
 
-- Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>.`
-- Failure: `Deadline needs to be in MMM DD YYYY format.`
+- Success: `The project <PROJECT_NAME> has been set with the following deadline <DEADLINE>.`
+- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
-### Assign deadline to task : `add deadline`
+### Set deadline to task : `set deadline`
 
-**Format:** `add deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
+**Format:** `set deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
@@ -201,7 +201,7 @@ Description: An example of the result after executing the "show project" command
 
 **Examples:**
 
-- `add deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
+- `Set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
 
 **Expected output:**
 
@@ -254,6 +254,23 @@ Description: An example of the result after executing the "show project" command
 ### Add member to project : `add person`
 
 **Format:** `add person <PERSON_NAME> /to <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** Person name must be unique within the project.
+
+**Examples:**
+
+- `add person Joe /to CS2103_TP`
+
+**Expected output:**
+
+- Success: `<PERSON_NAME> has been added to <PROJECT_NAME>`
+- Failure: `Project <PROJECT_NAME> does not exist.`
+
+### Remove member from project : `delete person`
+
+**Format:** `delete person <PERSON_NAME> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
