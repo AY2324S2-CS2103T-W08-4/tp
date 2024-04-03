@@ -27,6 +27,9 @@ public class AssignPersonCommand extends Command {
     public static final String MESSAGE_TASK_NOT_FOUND = "Task %1s not found: "
             + "Please make sure the task exists.";
 
+    public static final String MESSAGE_MEMBER_NOT_FOUND = "Team member %1s not found: "
+            + "Please make sure the person exists.";
+
     public static final String MESSAGE_SUCCESS = "The person %1$s has been assigned to the following task %2$s.";
 
     private final Task task;
@@ -53,6 +56,10 @@ public class AssignPersonCommand extends Command {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
+        }
+
+        if (!projectAssign.hasMember(member)) {
+            throw new CommandException(String.format(MESSAGE_MEMBER_NOT_FOUND, member));
         }
 
         Task assignTask = projectAssign.findTask(task.getName());
