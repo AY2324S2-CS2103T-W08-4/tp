@@ -29,10 +29,8 @@ public class Person {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-
     private List<Member> team = new ArrayList<>();
     private String status = "None";
-
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -122,9 +120,10 @@ public class Person {
     }
 
     /**
-     * Returns true if ptoject is complete
+     * Returns true if project is complete
      */
     public boolean isCompleted() {
+
         return status.equals("complete");
     }
 
