@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.project.Comment;
 import seedu.address.model.project.Member;
 import seedu.address.model.project.Task;
 
@@ -33,6 +34,8 @@ public class Person {
     private String status = "None";
 
     private String category;
+
+    private List<Comment> comments = new ArrayList<>();
 
     /**
      * Constructs a Person object with empty taskList
@@ -231,6 +234,10 @@ public class Person {
                 .collect(Collectors.joining(", "));
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
     /**
      * Returns true if the Person has a task that is equal to the specified task
      */
@@ -254,6 +261,10 @@ public class Person {
             }
         }
         return false;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
     }
 
     /**

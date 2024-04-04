@@ -49,7 +49,7 @@
                 </StackPane>
 
                 <VBox fx:id="personList" styleClass="pane-with-border"
-                        minWidth="360" prefWidth="360" VBox.vgrow="ALWAYS">
+                        minWidth="200" prefWidth="200" VBox.vgrow="ALWAYS">
                     <padding>
                         <Insets top="10" right="10" bottom="10" left="10" />
                     </padding>
@@ -57,7 +57,7 @@
                 </VBox>
             </VBox>
             <VBox fx:id="currentProject" styleClass="pane-with-border"
-                    minWidth="640" prefWidth="640" VBox.vgrow="ALWAYS">
+                    minWidth="800" prefWidth="800" VBox.vgrow="ALWAYS">
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10" />
                 </padding>

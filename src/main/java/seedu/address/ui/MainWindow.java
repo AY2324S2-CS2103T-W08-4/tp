@@ -51,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane currentProjectPanelPlaceholder;
 
+    @FXML
+    private StackPane addComment;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
