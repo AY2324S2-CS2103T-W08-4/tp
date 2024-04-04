@@ -39,7 +39,7 @@ public class Member {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Task)) {
+        if (!(obj instanceof Member)) {
             return false;
         }
         Member other = (Member) obj;
