@@ -1,11 +1,15 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Comment;
 import seedu.address.model.project.Task;
 
 /**
@@ -15,6 +19,8 @@ public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
     public final Person currentProject;
+
+    private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private Label showingProjectName;
@@ -27,6 +33,11 @@ public class TaskListPanel extends UiPart<Region> {
 
     @FXML
     private Label team;
+
+    @FXML
+    private ListView<Comment> comments;
+
+
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -46,6 +57,11 @@ public class TaskListPanel extends UiPart<Region> {
         doneTaskListView.getItems().addAll(currentProject.getDoneTasks());
 
         doneTaskListView.setCellFactory(param -> new TaskListCell());
+
+        comments.getItems().clear();
+        comments.getItems().addAll(currentProject.getComments());
+
+        comments.setCellFactory(param -> new CommentListCell());
     }
 
     class TaskListCell extends ListCell<Task> {
@@ -56,6 +72,18 @@ public class TaskListPanel extends UiPart<Region> {
                 setGraphic(null);
             } else {
                 setGraphic(new TaskCard(task).getRoot());
+            }
+        }
+    }
+
+    class CommentListCell extends ListCell<Comment> {
+        @Override
+        protected void updateItem(Comment comment, boolean empty) {
+            super.updateItem(comment, empty);
+            if (empty || comment == null) {
+                setGraphic(null);
+            } else {
+                setGraphic(new CommentCard(comment).getRoot());
             }
         }
     }
