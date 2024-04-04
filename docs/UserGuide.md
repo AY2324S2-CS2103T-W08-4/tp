@@ -206,7 +206,7 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `Deadline needs to be in MMM DD YYYY format.`
+- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 - Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
 
@@ -216,7 +216,7 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The status can only be `complete` or `incomplete`.
+⚠️ **Warning:** The status should only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the project might be considered as `incomplete`.
 
 **Examples:**
 
@@ -227,7 +227,6 @@ Description: An example of the result after executing the "show project" command
 - Success: `Project <PROJECT_NAME> is set as <STATUS>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Status was entered incorrectly.`
 
 ### Set Task Status : `set status`
 
@@ -235,7 +234,7 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified task must exist.
 
-⚠️ **Warning:** The status can only be `complete` or `incomplete`.
+⚠️ **Warning:** The status can only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the task might be considered as `incomplete`.
 
 **Format:** `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>`
 
@@ -249,7 +248,23 @@ Description: An example of the result after executing the "show project" command
 - Failure:
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Status was entered incorrectly.`
+
+### Assign team to project: `assign team`
+
+**Format:** `assign team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] /to <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** Person name must be unique within the project.
+
+**Examples:**
+
+- `assign team Joe, Cody /to CS2103_TP`
+
+**Expected output:**
+
+- Success: `The team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] has been added to <PROJECT_NAME>`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Add member to project : `add person`
 
@@ -265,25 +280,27 @@ Description: An example of the result after executing the "show project" command
 
 **Expected output:**
 
-- Success: `<PERSON_NAME> has been added to <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> does not exist.`
+- Success: `The person <PERSON_NAME> has been assigned to the following project <PROJECT_NAME>`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Remove member from project : `delete person`
 
-**Format:** `delete person <PERSON_NAME> /to <PROJECT_NAME>`
+**Format:** `delete person <PERSON_NAME> /in <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** Person name must be unique within the project.
+⚠️ **Warning:** The specified person must exist in the project.
 
 **Examples:**
 
-- `add person Joe /to CS2103_TP`
+- `delete person Joe /in CS2103_TP`
 
 **Expected output:**
 
-- Success: `<PERSON_NAME> has been added to <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> does not exist.`
+- Success: `<PERSON_NAME> has been deleted from <PROJECT_NAME>`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Member <PERSON_NAME> not found: Please make sure the person exists in project <PROJECT_NAME>.`
 
 ### Assign member to task : `assign person`
 
@@ -291,7 +308,9 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The specified task must exist.
+⚠️ **Warning:** The specified task must exist in the project.
+
+⚠️ **Warning:** The specified person must exist in the project.
 
 **Examples:**
 
@@ -300,7 +319,82 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `<PERSON_NAME> has been assigned to <PROJECT_NAME>: <TASK_NAME>.`
-- Failure: `Person <PERSON_NAME> is not a team member.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Task <TASK_NAME> not found: Please make sure the task exists`
+  - `Member <PERSON_NAME> not found: Please make sure the person exists.`
+
+### Rename a project: `set name`
+
+**Format:** `set name <NEW_NAME> /of <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+**Examples:**
+
+- `set name f2103 /of CS2103_TP`
+
+**Expected output:**
+
+- Success: `Project <PROJECT_NAME> has been renamed to <NEW_NAME>`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+
+### Rename a task: `set name`
+
+**Format:** `set name <NEW_NAME> /of <TASK_NAME> /in <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** The specified task must exist in the project.
+
+**Examples:**
+
+- `set name assign person command /of add person command /in CS2103_TP`
+
+**Expected output:**
+
+- Success: `Task <NEW_NAME> of project <PROJECT_NAME> has been renamed to <TASK_NAME>`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Task <TASK_NAME> not found: Please make sure the task exists in project <PROJECT_NAME>`
+
+### Set project category: `set category`
+
+Similar to adding a tag to the project
+
+**Format:** `set category <CATEGORY> /to <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+**Examples:**
+
+- `set category urgent /to 2103`
+
+**Expected output:**
+
+- Success: `The project <PROJECT_NAME> category is set as <CATEGORY>.`
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+
+### Filter projects by category:
+
+### Add comments to project: `add comment`
+
+**Format:** `add comment <COMMENT> /from <MEMBER_NAME> /to <PROJECT_NAME>`
+
+⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** The specified member must exist in the project.
+
+**Examples:**
+
+- `add comment delete task can only be started after add task is implemented /from Mary /to 2103`
+
+**Expected output:**
+
+- Success: `The comment <COMMENT> has been added to the project <PROJECT_NAME>.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Team member <MEMBER_NAME> not found: Please make sure the person exists.`
 
 ### Locating projects by name: `find project`
 
@@ -316,11 +410,27 @@ Finds projects whose names contain any of the given keywords. The updated projec
 
 - Returns projects containing the specified keyword(s).
 
-### Listing all projects : `list project`
+### Listing all projects: `list project`
 
 Shows a list of all projects in the project list.
 
 **Format:** `list project`
+
+### Clear project list: `clear project`
+
+Clears the project list, making the project list empty.
+
+**Format:** `clear project`
+
+### Show help: `show help`
+
+Opens a help window containing the url to this user guide.
+
+**Format:** `show help`
+
+### Exit DevPlan Pro: `exit program`
+
+**Format:** `exit program`
 
 ---
 
