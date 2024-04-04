@@ -57,5 +57,19 @@
                 <ListView fx:id="doneTaskListView" VBox.vgrow="ALWAYS" />
             </VBox>
         </VBox>
+        <VBox styleClass="pane-with-border">
+            <Label text="Comments" styleClass="cell_big_label">
+                <padding>
+                    <Insets top="12" left="12" />
+                </padding>
+            </Label>
+            <VBox fx:id="Comments"
+                  minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="8" right="8" bottom="8" left="8" />
+                </padding>
+                <ListView fx:id="comments" VBox.vgrow="ALWAYS" />
+            </VBox>
+        </VBox>
     </HBox>
 </VBox>
