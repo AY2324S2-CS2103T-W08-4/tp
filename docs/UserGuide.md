@@ -160,7 +160,7 @@ Sets the current showing project as the specified project.
 **Format:** `show project <PROJECT_NAME>`
 
 **Examples:**
-
+  
 - `show project CS2101 Presentation`
 
 **Expected output:**
@@ -176,7 +176,7 @@ Description: An example of the result after executing the "show project" command
 **Format:** `set deadline <DEADLINE> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
-
+ 
 ⚠️ **Warning:** The deadline must be in the `Mmm DD YYYY` format.
 
 **Examples:**
@@ -219,7 +219,7 @@ Description: An example of the result after executing the "show project" command
 ⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Examples:**
-
+  
 - `set status complete /of CS2103T Duke Chatbot Project`
 
 **Expected output:**
@@ -338,7 +338,7 @@ Shows a list of all projects in the project list.
 ---
 
 ## Command summary
-
+  
 | Action                      | Format, Examples                                                                                                                                |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add project**             | `add project <PROJECT_NAME>` <br> Example: `add project CS2101 Presentation`                                                                    |

@@ -8,11 +8,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.AssignPersonCommand;
+import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -22,6 +25,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListProjectCommand;
 import seedu.address.logic.commands.RenameCommand;
 import seedu.address.logic.commands.SetDeadlineCommand;
+import seedu.address.logic.commands.SetProjectCategoryCommand;
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.logic.commands.ShowProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -67,8 +71,14 @@ public class AddressBookParser {
 
         switch (commandWord) {
 
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
+
         case AssignPersonCommand.COMMAND_WORD:
             return new AssignPersonCommandParser().parse(arguments);
+
+        case AssignTeamCommand.COMMAND_WORD:
+            return new AssignTeamCommandParser().parse(arguments);
 
         case SetStatusCommand.COMMAND_WORD:
             return new SetStatusCommandParser().parse(arguments);
@@ -88,11 +98,17 @@ public class AddressBookParser {
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments.trim());
 
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments.trim());
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SetDeadlineCommand.COMMAND_WORD:
             return new SetDeadlineCommandParser().parse(arguments);
+
+        case SetProjectCategoryCommand.COMMAND_WORD:
+            return new SetProjectCategoryCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
