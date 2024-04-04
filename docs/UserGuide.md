@@ -16,10 +16,10 @@ Welcome to the user guide for our CLI-based project management application! This
   - [Adding a project: `add project`](#adding-a-project-add-project)
   - [Deleting a project : `delete project`](#deleting-a-project--delete-project)
   - [Add task : `add task`](#add-task--add-task)
-  - [Remove task : `delete task`](#remove-task--delete-task)
+  - [Delete task : `delete task`](#remove-task--delete-task)
   - [Show Project : `show project`](#show-project--show-project)
-  - [Assign deadline to project : `add deadline`](#assign-deadline-to-project--add-deadline)
-  - [Assign deadline to task : `add deadline`](#assign-deadline-to-task--add-deadline)
+  - [Assign deadline to project : `set deadline`](#assign-deadline-to-project--add-deadline)
+  - [Assign deadline to task : `set deadline`](#assign-deadline-to-task--add-deadline)
   - [Set Project Status : `set status`](#set-project-status--set-status)
   - [Set Task Status : `set status`](#set-task-status--set-status)
   - [Add member to project : `add person`](#add-member-to-project--add-person)
@@ -130,7 +130,7 @@ Adds the specified task to a project.
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> already exists in <PROJECT_NAME>.`
 
-### Remove task : `delete task`
+### Delete task : `delete task`
 
 Deletes the specified task from a project.
 
@@ -160,7 +160,7 @@ Sets the current showing project as the specified project.
 **Format:** `show project <PROJECT_NAME>`
 
 **Examples:**
-  
+
 - `show project CS2101 Presentation`
 
 **Expected output:**
@@ -176,7 +176,7 @@ Description: An example of the result after executing the "show project" command
 **Format:** `set deadline <DEADLINE> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
- 
+
 ⚠️ **Warning:** The deadline must be in the `Mmm DD YYYY` format.
 
 **Examples:**
@@ -219,7 +219,7 @@ Description: An example of the result after executing the "show project" command
 ⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Examples:**
-  
+
 - `set status complete /of CS2103T Duke Chatbot Project`
 
 **Expected output:**
@@ -338,7 +338,7 @@ Shows a list of all projects in the project list.
 ---
 
 ## Command summary
-  
+
 | Action                      | Format, Examples                                                                                                                                |
 | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add project**             | `add project <PROJECT_NAME>` <br> Example: `add project CS2101 Presentation`                                                                    |
@@ -346,8 +346,8 @@ Shows a list of all projects in the project list.
 | **Add task**                | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `add task Prepare slides for presentation /to CS2101 Presentation`                      |
 | **Delete task**             | `delete task <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `delete task Prepare slides for presentation /in CS2101 Presentation`                |
 | **Show project**            | `show project <PROJECT_NAME>` <br> Example: `show project CS2101 Presentation`                                                                  |
-| **Set deadline of project** | `set deadline <DEADLINE> /of <PROJECT_NAME>` <br> Example: `add deadline to project CS2101 Presentation Apr 10 2024`                            |
-| **Set deadline of task**    | `set deadline <DEADLINE> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `add deadline to task 1 Apr 10 2024 /in CS2101 Presentation`         |
+| **Set deadline of project** | `set deadline <DEADLINE> /of <PROJECT_NAME>` <br> Example: `set deadline to project CS2101 Presentation Apr 10 2024`                            |
+| **Set deadline of task**    | `set deadline <DEADLINE> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set deadline to task 1 Apr 10 2024 /in CS2101 Presentation`         |
 | **Add member to project**   | `add person <PERSON_NAME> /to <PROJECT_NAME>` <br> Example: `add person to project John /to CS2101 Presentation`                                |
 | **Assign member to task**   | `assign person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `assign person Alice /to Prepare slides /in CS2101 Presentation` |
 | **Set status of project**   | `set status <STATUS> /of <PROJECT_NAME>` <br> Example: `set status Completed /of CS2101 Presentation`                                           |
