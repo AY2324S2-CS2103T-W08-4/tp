@@ -63,7 +63,7 @@ Welcome to the user guide for our CLI-based project management application! This
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the commands:**<br>
 
 - Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
   e.g. in `add project <PROJECT_NAME>`, `<PROJECT_NAME>` is a parameter which can be used as `add project CS2103`.
@@ -72,6 +72,8 @@ Welcome to the user guide for our CLI-based project management application! This
   e.g. if the command specifies `list project 123`, it will be interpreted as `list project`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
+- 🚨 Some commands that interact with the UI are laggy in V1.3. If you use a command and doesn't notice a change in the UI then try to **click on the project cards and tasks** and it should update to it's current data.
 </div>
 
 ### Adding a project: `add project`
@@ -257,6 +259,8 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** Person name must be unique within the project.
 
+🔔 **Note**: The part of the format in `[ ]` is optional
+
 **Examples:**
 
 - `assign team Joe, Cody /to CS2103_TP`
@@ -375,7 +379,17 @@ Similar to adding a tag to the project
 - Success: `The project <PROJECT_NAME> category is set as <CATEGORY>.`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
-### Filter projects by category:
+### Filter projects by category: `filter category`
+
+**Format:** `filter category <CATEGORY>`
+
+**Examples:**
+
+- `filter category urgent`
+
+**Expected output:**
+
+The project list will only show projects with the specified category.
 
 ### Add comments to project: `add comment`
 
