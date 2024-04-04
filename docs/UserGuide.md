@@ -459,22 +459,34 @@ Opens a help window containing the url to this user guide.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+2. **When using v1.3 features**, sometimes the UI doesn't update once the commands are executed. The remedy is to click on the project cards and task cards to update the UI so that it shows the latest data.
+
 ---
 
 ## Command summary
 
-| Action                      | Format, Examples                                                                                                                                |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Add project**             | `add project <PROJECT_NAME>` <br> Example: `add project CS2101 Presentation`                                                                    |
-| **Delete project**          | `delete project <PROJECT_NAME>` <br> Example: `delete project CS2101 Presentation`                                                              |
-| **Add task**                | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `add task Prepare slides for presentation /to CS2101 Presentation`                      |
-| **Delete task**             | `delete task <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `delete task Prepare slides for presentation /in CS2101 Presentation`                |
-| **Show project**            | `show project <PROJECT_NAME>` <br> Example: `show project CS2101 Presentation`                                                                  |
-| **Set deadline of project** | `set deadline <DEADLINE> /of <PROJECT_NAME>` <br> Example: `set deadline to project CS2101 Presentation Apr 10 2024`                            |
-| **Set deadline of task**    | `set deadline <DEADLINE> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set deadline to task 1 Apr 10 2024 /in CS2101 Presentation`         |
-| **Add member to project**   | `add person <PERSON_NAME> /to <PROJECT_NAME>` <br> Example: `add person to project John /to CS2101 Presentation`                                |
-| **Assign member to task**   | `assign person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `assign person Alice /to Prepare slides /in CS2101 Presentation` |
-| **Set status of project**   | `set status <STATUS> /of <PROJECT_NAME>` <br> Example: `set status Completed /of CS2101 Presentation`                                           |
-| **Set status of task**      | `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set status Completed /of Prepare slides /in CS2101 Presentation`        |
-| **Find project**            | `find project <SEARCH_TERM>` <br> Example: `find project Presentation`                                                                          |
-| **List project**            | `list project`                                                                                                                                  |
+| Action                          | Format, Examples                                                                                                                                                             |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Add project**                 | `add project <PROJECT_NAME>` <br> Example: `add project CS2101 Presentation`                                                                                                 |
+| **Delete project**              | `delete project <PROJECT_NAME>` <br> Example: `delete project CS2101 Presentation`                                                                                           |
+| **Add task**                    | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `add task Prepare slides for presentation /to CS2101 Presentation`                                                   |
+| **Delete task**                 | `delete task <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `delete task Prepare slides for presentation /in CS2101 Presentation`                                             |
+| **Show Project**                | `show project <PROJECT_NAME>` <br> Example: `show project CS2101 Presentation`                                                                                               |
+| **Set deadline of project**     | `set deadline <DEADLINE> /to <PROJECT_NAME>` <br> Example: `set deadline Feb 25 2024 /to CS2103_TP`                                                                          |
+| **Set deadline to task**        | `set deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `Set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`                                  |
+| **Set Project Status**          | `set status <STATUS> /of <PROJECT_NAME>` <br> Example: `set status complete /of CS2103T Duke Chatbot Project`                                                                |
+| **Set Task Status**             | `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set status complete /of unit test /in CS2103T Duke Chatbot Project`                                  |
+| **Assign team to project**      | `assign team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] /to <PROJECT_NAME>` <br> Example: `assign team Joe, Cody /to CS2103_TP`                                |
+| **Add member to project**       | `add person <PERSON_NAME> /to <PROJECT_NAME>` <br> Example: `add person Joe /to CS2103_TP`                                                                                   |
+| **Remove member from project**  | `delete person <PERSON_NAME> /in <PROJECT_NAME>` <br> Example: `delete person Joe /in CS2103_TP`                                                                             |
+| **Assign member to task**       | `assign person <PERSON_NAME> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `assign person Joe /to unit test /in CS2103_TP`                                               |
+| **Rename a project**            | `set name <NEW_NAME> /of <PROJECT_NAME>` <br> Example: `set name f2103 /of CS2103_TP`                                                                                        |
+| **Rename a task**               | `set name <NEW_NAME> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set name assign person command /of add person command /in CS2103_TP`                                 |
+| **Set project category**        | `set category <CATEGORY> /to <PROJECT_NAME>` <br> Example: `set category urgent /to 2103`                                                                                    |
+| **Filter projects by category** | `filter category <CATEGORY>` <br> Example: `filter category urgent`                                                                                                          |
+| **Add comments to project**     | `add comment <COMMENT> /from <MEMBER_NAME> /to <PROJECT_NAME>` <br> Example: `add comment delete task can only be started after add task is implemented /from Mary /to 2103` |
+| **Locating projects by name**   | `find project [KEYWORDS]` <br> Example: `find project CS2103`                                                                                                                |
+| **Listing all projects**        | `list project`                                                                                                                                                               |
+| **Clear project list**          | `clear project`                                                                                                                                                              |
+| **Show help**                   | `show help`                                                                                                                                                                  |
+| **Exit DevPlan Pro**            | `exit program`                                                                                                                                                               |
