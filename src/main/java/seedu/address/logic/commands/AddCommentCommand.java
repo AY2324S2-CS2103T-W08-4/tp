@@ -18,7 +18,7 @@ public class AddCommentCommand extends Command {
     public static final String COMMAND_WORD = "add comment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " /from PERSON_NAME"
-            + " /in PROJECT_NAME";
+            + " /to PROJECT_NAME";
 
     public static final String MESSAGE_SUCCESS = "The comment %1$s has been added to the project %2$s.";
 
