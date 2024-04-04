@@ -15,6 +15,13 @@
             <Insets top="20" right="8" bottom="20" left="8" />
         </padding>
         <Label fx:id="showingProjectName" styleClass="cell_big_label" />
+    </StackPane>
+    <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border"
+               minWidth="280" prefWidth="280" minHeight="54" prefHeight="54">
+        <padding>
+            <Insets top="120" right="8" bottom="120" left="8" />
+        </padding>
+        <Label fx:id="team" styleClass="cell_big_label" />
 
     </StackPane>
     <HBox fx:id="taskList" styleClass="pane-with-border"
@@ -48,6 +55,20 @@
                     <Insets top="8" right="8" bottom="8" left="8" />
                 </padding>
                 <ListView fx:id="doneTaskListView" VBox.vgrow="ALWAYS" />
+            </VBox>
+        </VBox>
+        <VBox styleClass="pane-with-border">
+            <Label text="Comments" styleClass="cell_big_label">
+                <padding>
+                    <Insets top="12" left="12" />
+                </padding>
+            </Label>
+            <VBox fx:id="Comments"
+                  minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+                <padding>
+                    <Insets top="8" right="8" bottom="8" left="8" />
+                </padding>
+                <ListView fx:id="comments" VBox.vgrow="ALWAYS" />
             </VBox>
         </VBox>
     </HBox>
