@@ -29,8 +29,10 @@ public class Person {
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
+
     private List<Member> team = new ArrayList<>();
     private String status = "None";
+
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -61,6 +63,11 @@ public class Person {
         taskList.add(task);
     }
 
+
+    public void addMember(Member member) {
+        team.add(member);
+    }
+
     public void assignTeam(List<Member> team) {
         this.team = team;
     }
@@ -73,6 +80,20 @@ public class Person {
         for (Task t : taskList) {
             if (t.equals(task)) {
                 taskList.remove(i);
+                break;
+            }
+            i += 1;
+        }
+    }
+
+    /**
+     * Removes member from the Project object
+     */
+    public void removeMember(Member member) {
+        int i = 0;
+        for (Member m : team) {
+            if (m.equals(member)) {
+                team.remove(i);
                 break;
             }
             i += 1;
