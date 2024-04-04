@@ -27,7 +27,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));
             }
-            if (!args.contains(" /in ")) { // Check if the input correctly uses "/to"
+            if (!args.contains(" /to ")) { // Check if the input correctly uses "/to"
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));
@@ -37,9 +37,9 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             if ((comment.length() == 0) || (comment.length() == 0)) {
                 throw new ParseException("Please enter a comment");
             }
-            String memberName = memberAndProject.split(" /in")[0];
+            String memberName = memberAndProject.split(" /to")[0];
             Member member = new Member(memberName);
-            String projectName = memberAndProject.split(" /in")[1];
+            String projectName = memberAndProject.split(" /to")[1];
             Name name = ParserUtil.parseName(projectName);
             Person project = new Person(name);
             return new AddCommentCommand(project, member, comment);
