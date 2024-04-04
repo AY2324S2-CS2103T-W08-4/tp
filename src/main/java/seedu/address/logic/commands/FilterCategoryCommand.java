@@ -15,9 +15,9 @@ public class FilterCategoryCommand extends Command {
 
     public static final String COMMAND_WORD = "filter category";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all projects whose names matches the input "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all projects whose category matches the input "
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + "FrontEnd";
+            + "Example: " + COMMAND_WORD + "A";
 
     private final CategoryEqualsPredicate predicate;
 
@@ -30,7 +30,7 @@ public class FilterCategoryCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CATEGORY_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
