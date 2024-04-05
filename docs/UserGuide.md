@@ -170,7 +170,7 @@ Sets the current showing project as the specified project.
 - Success: The UI now shows the project’s information.
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
-![Show Project Command Result](images/showProjectCommandResult.png)
+![Show Project Command Result](images/Ui.png)
 Description: An example of the result after executing the "show project" command, displaying project information in the UI.
 
 ### Set deadline of project : `set deadline`
