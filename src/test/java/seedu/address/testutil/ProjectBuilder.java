@@ -78,7 +78,7 @@ public class ProjectBuilder {
     }
 
     public Project build() {
-        return new Project(name.toString());
+        return new Project(name);
     }
 
 }

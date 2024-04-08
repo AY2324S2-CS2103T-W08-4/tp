@@ -3,26 +3,26 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProjects.getTypicalPlanner;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProjectBuilder;
 
 class DeleteTaskCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalPlanner(), new UserPrefs());
 
     private Task tempTask1 = new Task("rehearse");
     private Task tempTask2 = new Task("Write script");
 
-    private Person presentation = new PersonBuilder().withName("Presentation").build();
+    private Project presentation = new ProjectBuilder().withName("Presentation").build();
 
-    private Person codingProject = new PersonBuilder().withName("Coding Project").build();
+    private Project codingProject = new ProjectBuilder().withName("Coding Project").build();
 
 
     @Test

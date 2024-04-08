@@ -11,7 +11,6 @@ import static seedu.address.testutil.TypicalProjects.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddProjectCommand;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 import seedu.address.testutil.ProjectBuilder;
 

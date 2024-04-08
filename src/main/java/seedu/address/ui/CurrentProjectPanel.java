@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 // import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 
 /**
@@ -19,7 +18,7 @@ public class CurrentProjectPanel extends UiPart<Region> {
     // private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> currentProjectView;
+    private ListView<Project> currentProjectView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -27,22 +26,22 @@ public class CurrentProjectPanel extends UiPart<Region> {
     public CurrentProjectPanel(ObservableList<Project> currentProject) {
         super(FXML);
         currentProjectView.setItems(currentProject);
-        currentProjectView.setCellFactory(listView -> new PersonListViewCell());
+        currentProjectView.setCellFactory(listView -> new ProjectListViewCell());
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class ProjectListViewCell extends ListCell<Project> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Project project, boolean empty) {
+            super.updateItem(project, empty);
 
-            if (empty || person == null) {
+            if (empty || project == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TaskListPanel(person).getRoot());
+                setGraphic(new TaskListPanel(project).getRoot());
             }
         }
     }

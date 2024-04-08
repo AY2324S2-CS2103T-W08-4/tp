@@ -28,9 +28,9 @@ public class FilterCategoryCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+        model.updateFilteredProjectList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_CATEGORY_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_CATEGORY_LISTED_OVERVIEW, model.getFilteredProjectList().size()));
     }
 
     @Override

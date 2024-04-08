@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -18,7 +18,7 @@ class AddTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task task = new Task("task");
 
         assertParseSuccess(parser, "task /to project", new AddTaskCommand(task, project));

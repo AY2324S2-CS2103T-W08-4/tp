@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Task of Project
@@ -24,7 +23,8 @@ public class Project {
     private final Name name;
 
     private final List<Task> taskList;
-    private LocalDate deadlineDate;
+
+    private String deadlineDate;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
@@ -35,8 +35,8 @@ public class Project {
     private List<Comment> comments = new ArrayList<>();
 
     /**
-     * Constructs a new task object
-     * @param name the task name
+     * Constructs a new project object
+     * @param name the project name
      */
     public Project(Name name) {
         requireAllNonNull(name);
@@ -46,11 +46,20 @@ public class Project {
         status = "incomplete";
     }
 
+    /**
+     * Constructs a new project object
+     * @param name the project name
+     * @param tasks the list of tasks within the project
+     */
     private Project(Name name, List<Task> tasks) {
         this.taskList = tasks;
         this.name = name;
     }
 
+    /**
+     * @param otherProject project to be compared to
+     * @return boolean value (true/false) whether the two projects are the same
+     */
     public boolean isSameProject(Project otherProject) {
         if (otherProject == this) {
             return true;
@@ -60,10 +69,18 @@ public class Project {
                 && otherProject.getName().equals(getName());
     }
 
+    /**
+     * adds a task to the specified project
+     * @param task task to be added to the project list
+     */
     public void addTask(Task task) {
         taskList.add(task);
     }
 
+    /**
+     * removes a project in the specified project
+     * @param task task to be removed from the project list
+     */
     public void removeTask(Task task) {
         int i = 0;
         for (Task t : taskList) {
@@ -76,7 +93,7 @@ public class Project {
     }
 
     /**
-     * Returns true if the Project has a task that is equal to the specified task
+     * Returns true if the Project has a task with the same name as the specified task
      */
     public boolean hasTask(Task task) {
         for (Task t : taskList) {
@@ -100,13 +117,17 @@ public class Project {
     }
 
     /**
-     * Assigns a Person to the task
-     * @param member the person assigned to the task
+     * Adds a Person to the team
+     * @param member the person added to the team
      */
     public void addMember(Member member) {
         team.add(member);
     }
 
+    /**
+     * Removes a Person from the team
+     * @param member the person removed from the team
+     */
     public void removeMember(Member member) {
         int i = 0;
         for (Member m : team) {
@@ -183,7 +204,7 @@ public class Project {
      * @param deadline the datetime string to be parsed and set as deadline
      */
     public void setDeadline(String deadline) {
-        this.deadlineDate = LocalDate.parse(deadline);
+        this.deadlineDate = deadline;
     }
 
     /**
@@ -219,7 +240,7 @@ public class Project {
     public String getDeadlineString() {
         return deadlineDate == null
                 ? ""
-                : deadlineDate.format(formatter);
+                : deadlineDate;
     }
 
     @Override

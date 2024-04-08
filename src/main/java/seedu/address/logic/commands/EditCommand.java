@@ -24,7 +24,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.project.Project;
 import seedu.address.model.tag.Tag;
@@ -96,7 +95,7 @@ public class EditCommand extends Command {
     private static Project createEditedProject(Project projectToEdit, EditProjectDescriptor editProjectDescriptor) {
         assert projectToEdit != null;
         Name updatedName = editProjectDescriptor.getName().orElse(projectToEdit.getName());
-        return new Project(updatedName.toString());
+        return new Project(new Name(updatedName.toString()));
     }
 
     @Override

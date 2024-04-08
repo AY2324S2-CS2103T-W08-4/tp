@@ -8,27 +8,24 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
-import seedu.address.testutil.PersonBuilder;
-
-
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 class DeletePersonCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
     private Member member = new Member("James");
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new DeletePersonCommand(member, null));
         assertThrows(NullPointerException.class, () -> new DeletePersonCommand(null, taskProject));
-
     }
 
     @Test
     public void equals() {
         Member memberBob = new Member("Bob");
-        Person projectB = new Person(new Name("B"));
+        Project projectB = new Project(new Name("B"));
         DeletePersonCommand deleteJames = new DeletePersonCommand(member, taskProject);
         DeletePersonCommand deleteBob = new DeletePersonCommand(memberBob, taskProject);
         DeletePersonCommand deleteJamesDiffProject = new DeletePersonCommand(member, projectB);

@@ -6,7 +6,7 @@ import seedu.address.logic.commands.SetProjectStatusCommand;
 import seedu.address.logic.commands.SetStatusCommand;
 import seedu.address.logic.commands.SetTaskStatusCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -22,6 +22,17 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
      */
     public SetStatusCommand parse(String args) throws ParseException {
         try {
+
+            if (args.contains(" /to ")) {
+                String status = args.split(" /to ")[0].trim();
+                String projectString = args.split(" /to ")[1].trim();
+                if ((projectString.length() == 0) || (status.length() == 0)) {
+                    throw new ParseException("Please enter the status and project fields");
+                }
+                Project project = new Project(ParserUtil.parseName(projectString));
+                return new SetProjectStatusCommand(status, project);
+            }
+
             if (!args.contains(" /of ")) {
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT,
@@ -31,20 +42,12 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             String status = args.split(" /of")[0].trim();
             String taskAndProject = args.split(" /of")[1].trim();
 
-            if (!args.contains(" /in ")) {
-                if ((taskAndProject.length() == 0) || (status.length() == 0)) {
-                    throw new ParseException("Please enter the status and project fields");
-                }
-                Person project = new Person(ParserUtil.parseName(taskAndProject));
-                return new SetProjectStatusCommand(status, project);
-            }
-
             String taskName = taskAndProject.split("/in ")[0].trim();
             String projectName = taskAndProject.split("/in ")[1];
             if ((projectName.length() == 0) || (taskName.length() == 0) || (status.length() == 0)) {
                 throw new ParseException("Please enter the status, project and task fields");
             }
-            Person project = new Person(ParserUtil.parseName(projectName));
+            Project project = new Project(ParserUtil.parseName(projectName));
             Task newTask = new Task(taskName);
             return new SetTaskStatusCommand(status, newTask, project);
         } catch (IndexOutOfBoundsException e) {

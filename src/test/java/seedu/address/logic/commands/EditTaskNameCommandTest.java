@@ -8,14 +8,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProjectBuilder;
 
 
 
 class EditTaskNameCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
     private Task code = new Task("Code");
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -27,7 +27,7 @@ class EditTaskNameCommandTest {
 
     @Test
     public void equals() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task speech = new Task("Speech");
 
 

@@ -7,7 +7,7 @@ import seedu.address.logic.commands.EditTaskNameCommand;
 import seedu.address.logic.commands.RenameCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -40,12 +40,12 @@ public class RenameCommandParser implements Parser<RenameCommand> {
                     throw new ParseException("Please enter both the target task name and the project it belongs to");
                 }
                 Name targetProjectName = ParserUtil.parseName(projectName);
-                Person targetProject = new Person(targetProjectName);
+                Project targetProject = new Project(targetProjectName);
                 Task targetTask = new Task(taskName);
                 return new EditTaskNameCommand(changedTo, targetProject, targetTask);
             } else {
                 Name name = ParserUtil.parseName(possibleTargetName);
-                Person targetProject = new Person(name);
+                Project targetProject = new Project(name);
                 return new EditProjectNameCommand(changedTo, targetProject);
             }
         } catch (ArrayIndexOutOfBoundsException e) {

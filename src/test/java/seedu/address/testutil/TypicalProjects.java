@@ -16,7 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.Planner;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Project;
 
 /**

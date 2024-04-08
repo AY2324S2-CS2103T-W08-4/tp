@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SetDeadlineProjectCommand;
 import seedu.address.logic.commands.SetDeadlineTaskCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 class SetDeadlineCommandParserTest {
@@ -17,7 +17,7 @@ class SetDeadlineCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task task = new Task("task");
 
         assertParseSuccess(parser, "Mar 22 2024 /to task /in project",
@@ -35,8 +35,5 @@ class SetDeadlineCommandParserTest {
         // missing task and project name
         assertParseFailure(parser, "Mar 22 2024 /to ",
                 expectedMessage);
-
-
-
     }
 }

@@ -8,8 +8,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Comment;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -18,7 +18,7 @@ import seedu.address.model.project.Task;
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
 
-    public final Person currentProject;
+    public final Project currentProject;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -42,7 +42,7 @@ public class TaskListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public TaskListPanel(Person currentProject) {
+    public TaskListPanel(Project currentProject) {
         super(FXML);
         this.currentProject = currentProject;
         showingProjectName.setText("Showing Project: " + currentProject.getName().fullName);

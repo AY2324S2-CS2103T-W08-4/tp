@@ -9,8 +9,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a task to a project.
@@ -26,14 +26,14 @@ public class AssignTeamCommand extends Command {
             + "Please make sure the project exists.";
 
     public static final String MESSAGE_SUCCESS = "The team %1$s has been assigned to the following project %2$s.";
-    private final Person project;
+    private final Project project;
 
     private final List<Member> team;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AssignTeamCommand(List<String> team, Person project) {
+    public AssignTeamCommand(List<String> team, Project project) {
         requireNonNull(project);
         requireNonNull(team);
 
@@ -47,7 +47,7 @@ public class AssignTeamCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person projectAssign = model.findPerson(project.getName());
+        Project projectAssign = model.findProject(project.getName());
 
         if (projectAssign.equals(null)) {
             throw new CommandException(String.format(
