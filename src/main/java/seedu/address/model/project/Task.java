@@ -3,9 +3,9 @@ package seedu.address.model.project;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Task of Project
@@ -14,16 +14,16 @@ import seedu.address.model.person.Person;
 public class Task {
 
     // Identity fields
-    private final Name taskName;
+    private Name taskName;
 
-    private Person person;
+    private Member member;
 
     private boolean status;
     private Integer progressCounter = 0;
 
     private LocalDate deadlineDate;
 
-    private Integer priorityNumber;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
      * Constructs a new task object
@@ -37,10 +37,10 @@ public class Task {
 
     /**
      * Assigns a Person to the task
-     * @param person the person assigned to the task
+     * @param member the person assigned to the task
      */
-    public void assignPerson(Person person) {
-        this.person = person;
+    public void assignPerson(Member member) {
+        this.member = member;
     }
 
     /**
@@ -64,11 +64,7 @@ public class Task {
      */
     public String getStatus() {
         if (status) {
-            if (progressCounter > 0) {
-                return "In progress";
-            } else {
-                return "Incomplete";
-            }
+            return "Incomplete";
         } else {
             return "Complete";
         }
@@ -79,23 +75,28 @@ public class Task {
      * @param deadline the datetime string to be parsed and set as deadline
      */
     public void setDeadline(String deadline) {
-        this.deadlineDate = LocalDate.parse(deadline);
-    }
-
-    /**
-     * Set the priority of the task
-     * @param priorityNumber the priorityNumber of the task
-     */
-    public void setPriority(Integer priorityNumber) {
-        this.priorityNumber = priorityNumber;
+        this.deadlineDate = LocalDate.parse(deadline, formatter);
     }
 
     /**
      * Get the name of the task
      * @return
      */
+
     public Name getName() {
         return taskName;
+    }
+
+    public String getMemberName() {
+        return member == null
+            ? ""
+            : member.getName().fullName;
+    }
+
+    public String getDeadlineString() {
+        return deadlineDate == null
+            ? ""
+            : deadlineDate.format(formatter);
     }
 
     /**
@@ -114,5 +115,13 @@ public class Task {
         return taskName.equals(other.taskName);
     }
 
+    @Override
+    public String toString() {
+        return taskName.toString();
+    }
+
+    public void setName(Name newName) {
+        this.taskName = newName;
+    }
 
 }

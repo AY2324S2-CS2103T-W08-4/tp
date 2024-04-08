@@ -25,8 +25,6 @@ public class AddProjectCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + "Bob Choo", new AddProjectCommand(expectedPerson));
 
-
-
     }
 
 

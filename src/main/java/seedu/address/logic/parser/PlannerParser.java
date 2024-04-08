@@ -8,17 +8,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddCommentCommand;
+import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.AssignPersonCommand;
+import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FilterCategoryCommand;
+import seedu.address.logic.commands.FindProjectCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListProjectCommand;
+import seedu.address.logic.commands.RenameCommand;
+import seedu.address.logic.commands.SetDeadlineCommand;
+import seedu.address.logic.commands.SetProjectCategoryCommand;
+import seedu.address.logic.commands.SetStatusCommand;
+import seedu.address.logic.commands.ShowProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -45,7 +56,9 @@ public class PlannerParser {
         if (userInput.length() == 0) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_UNKNOWN_COMMAND, HelpCommand.MESSAGE_USAGE));
         }
@@ -57,7 +70,27 @@ public class PlannerParser {
         // log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
+
         switch (commandWord) {
+
+        case AddCommentCommand.COMMAND_WORD:
+            return new AddCommentCommandParser().parse(arguments);
+
+        case AddPersonCommand.COMMAND_WORD:
+            return new AddPersonCommandParser().parse(arguments);
+
+        case AssignPersonCommand.COMMAND_WORD:
+            return new AssignPersonCommandParser().parse(arguments);
+
+        case AssignTeamCommand.COMMAND_WORD:
+            return new AssignTeamCommandParser().parse(arguments);
+
+        case SetStatusCommand.COMMAND_WORD:
+            return new SetStatusCommandParser().parse(arguments);
+
+        case ShowProjectCommand.COMMAND_WORD:
+            return new ShowProjectCommandParser().parse(arguments);
+
         case AddProjectCommand.COMMAND_WORD:
             return new AddProjectCommandParser().parse(arguments);
 
@@ -70,17 +103,26 @@ public class PlannerParser {
         case DeleteTaskCommand.COMMAND_WORD:
             return new DeleteTaskCommandParser().parse(arguments.trim());
 
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments.trim());
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case SetDeadlineCommand.COMMAND_WORD:
+            return new SetDeadlineCommandParser().parse(arguments);
+
+        case SetProjectCategoryCommand.COMMAND_WORD:
+            return new SetProjectCategoryCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindProjectCommand.COMMAND_WORD:
+            return new FindProjectCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListProjectCommand.COMMAND_WORD:
+            return new ListProjectCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -88,10 +130,16 @@ public class PlannerParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case RenameCommand.COMMAND_WORD:
+            return new RenameCommandParser().parse(arguments);
+
+        case FilterCategoryCommand.COMMAND_WORD:
+            return new FilterCategoryCommandParser().parse(arguments);
+
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
-    }
 
+    }
 }

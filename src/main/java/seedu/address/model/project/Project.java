@@ -3,8 +3,14 @@ package seedu.address.model.project;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -15,29 +21,34 @@ import seedu.address.model.person.Person;
 public class Project {
 
     // Identity fields
-    private final Name projectName;
+    private final Name name;
 
+    private final List<Task> taskList;
     private LocalDate deadlineDate;
 
-    private boolean status;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
-    private List<Person> people;
-    private List<Task> tasks;
+    private List<Member> team = new ArrayList<>();
+    private String status = "None";
+    private String category;
+
+    private List<Comment> comments = new ArrayList<>();
 
     /**
      * Constructs a new task object
      * @param name the task name
      */
-    public Project(String name) {
-        requireAllNonNull(name);
-        this.projectName = new Name(name);
-        this.status = true;
-    }
-
     public Project(Name name) {
         requireAllNonNull(name);
-        this.projectName = name;
-        this.status = true;
+        this.name = name;
+        List<Task> taskList = new ArrayList<>();
+        this.taskList = taskList;
+        status = "incomplete";
+    }
+
+    private Project(Name name, List<Task> tasks) {
+        this.taskList = tasks;
+        this.name = name;
     }
 
     public boolean isSameProject(Project otherProject) {
@@ -50,14 +61,14 @@ public class Project {
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
+        taskList.add(task);
     }
 
     public void removeTask(Task task) {
         int i = 0;
-        for (Task t : tasks) {
+        for (Task t : taskList) {
             if (t.equals(task)) {
-                tasks.remove(i);
+                taskList.remove(i);
                 break;
             }
             i += 1;
@@ -68,7 +79,7 @@ public class Project {
      * Returns true if the Project has a task that is equal to the specified task
      */
     public boolean hasTask(Task task) {
-        for (Task t : tasks) {
+        for (Task t : taskList) {
             System.out.println(task.getName().fullName);
             if (t.equals(task)) {
                 return true;
@@ -78,25 +89,85 @@ public class Project {
     }
 
     /**
-     * Assigns a Person to the task
-     * @param person the person assigned to the task
+     * @param taskName name to be matched with the tasks listed in my project
+     * @return task in the project with the matching taskName
      */
-    public void addPerson(Person person) {
-        this.people.add(person);
+    public Task findTask(Name taskName) {
+        Optional<Task> foundTask = taskList.stream()
+                .filter(task -> task.getName().toString().equals(taskName.toString()))
+                .findFirst();
+        return foundTask.get();
+    }
+
+    /**
+     * Assigns a Person to the task
+     * @param member the person assigned to the task
+     */
+    public void addMember(Member member) {
+        team.add(member);
+    }
+
+    public void removeMember(Member member) {
+        int i = 0;
+        for (Member m : team) {
+            if (m.equals(member)) {
+                team.remove(i);
+                break;
+            }
+            i += 1;
+        }
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void assignTeam(List<Member> team) {
+        this.team = team;
     }
 
     /**
      * Sets the task status as complete
      */
     public void setComplete() {
-        this.status = false;
+        this.status = "complete";
     }
 
     /**
      * Sets the task status as incomplete
      */
     public void setIncomplete() {
-        this.status = true;
+        this.status = "incomplete";
+    }
+
+    public boolean isCompleted() {
+        return status.equals("complete");
+    }
+
+    public List<Task> getDoneTasks() {
+        ArrayList<Task> tmp = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getStatus() == "Complete") {
+                tmp.add(task);
+            }
+        }
+        return tmp;
+    }
+
+    public String getCategory() {
+        return category == null
+                ? ""
+                : category;
+    }
+
+    public List<Task> getUndoneTasks() {
+        ArrayList<Task> tmp = new ArrayList<>();
+        for (Task task : taskList) {
+            if (task.getStatus() == "Incomplete") {
+                tmp.add(task);
+            }
+        }
+        return tmp;
     }
 
     /**
@@ -104,11 +175,7 @@ public class Project {
      * @return the string represeting the status of the task
      */
     public String getStatus() {
-        if (status) {
-            return "Incomplete";
-        } else {
-            return "Complete";
-        }
+        return status;
     }
 
     /**
@@ -124,7 +191,7 @@ public class Project {
      * @return
      */
     public Name getName() {
-        return projectName;
+        return name;
     }
 
     /**
@@ -140,7 +207,61 @@ public class Project {
             return false;
         }
         Project other = (Project) obj;
-        return projectName.equals(other.projectName);
+        return name.equals(other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name);
+    }
+
+    public String getDeadlineString() {
+        return deadlineDate == null
+                ? ""
+                : deadlineDate.format(formatter);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("name", name).toString();
+    }
+
+    public String getTeam() {
+        return team.stream()
+                .map(Member::toString) // Assuming Member class has getName() method returning String
+                .collect(Collectors.joining(", "));
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    /**
+     * @param member member to be found inside the team member list
+     * @return boolean value (true/false) depending on whether the member is in the team
+     */
+    public boolean hasMember(Member member) {
+        for (Member m : team) {
+            if (m.equals(member)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    /**
+     * Returns a new person with new name but the same task (for edit person command)
+     */
+    public Project createEditedProject(Name newName) {
+        List<Task> newTaskList = new ArrayList<>(this.taskList);
+        Project newProject = new Project(newName, newTaskList);
+        return newProject;
     }
 
 }

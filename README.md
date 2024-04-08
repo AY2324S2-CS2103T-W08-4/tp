@@ -6,9 +6,9 @@
     <p align="center">
         Keep track of your projects in a single app
         <br/>
-        <a href="https://github.com/othneildrew/Best-README-Template">Project Website</a>
+        <a href="https://ay2324s2-cs2103t-w08-4.github.io/tp/">Project Website</a>
         ·
-        <a href="https://github.com/othneildrew/Best-README-Template/issues">Planned Features</a>
+        <a href="https://github.com/AY2324S2-CS2103T-W08-4/tp/issues">Planned Features</a>
     </p>
 </div>
 
@@ -16,7 +16,7 @@
 
 ### About The Project
 
-**Devplan Pro** is a project management app that is catered towards project managers who love typing. It allows the user to keep track of their various projects, the ongoing tasks within the projects, and people who are responsible for those tasks. Every action is executed through the input box using an intuitive [list of commands](https://github.com/othneildrew/Best-README-Template). Download now get a boost to your productivity.
+**Devplan Pro** is a project management app that is catered towards project managers who love typing. It allows the user to keep track of their various projects, the ongoing tasks within the projects, and people who are responsible for those tasks. Every action is executed through the input box using an intuitive [list of commands](https://ay2324s2-cs2103t-w08-4.github.io/tp/UserGuide.html). Download now get a boost to your productivity.
 
 ### Installation
 

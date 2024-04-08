@@ -82,9 +82,18 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Project> getFilteredProjectList();
 
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Project> getCurrentProject();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredProjectList(Predicate<Project> predicate);
+
+    /**
+     * Updates the filter of the current project to change the current project by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateCurrentProject(Predicate<Project> predicate);
 }

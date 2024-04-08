@@ -16,14 +16,13 @@ public class AddTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "add task";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task in a project "
-            + "Parameters: "
-            + "PROJECT_NAME, TASK_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " TASK_NAME /to PROJECT_NAME";
 
     public static final String MESSAGE_SUCCESS = "%1$s has been added to the project %2$s.";
 
-    public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %2$s not found: "
+    public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
+
     public static final String MESSAGE_DUPLICATE_TASK = "Task %1$s already exists in project %2$s";
 
     private final Task toAdd;
@@ -45,16 +44,18 @@ public class AddTaskCommand extends Command {
         if (!model.hasProject(taskProject)) {
             throw new CommandException(String.format(
                 MESSAGE_PROJECT_NOT_FOUND,
-                Messages.format(toAdd),
                 Messages.format(taskProject)));
         }
+
         Project combineTask = model.findProject(taskProject.getName());
+
         if (combineTask.hasTask(toAdd)) {
             throw new CommandException(String.format(
-                MESSAGE_DUPLICATE_TASK,
-                Messages.format(toAdd),
-                Messages.format(taskProject)));
+                    MESSAGE_DUPLICATE_TASK,
+                    Messages.format(toAdd),
+                    Messages.format(combineTask)));
         }
+
         combineTask.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(combineTask)));
     }
@@ -71,7 +72,8 @@ public class AddTaskCommand extends Command {
         }
 
         AddTaskCommand otherAddTaskCommand = (AddTaskCommand) other;
-        return toAdd.equals(otherAddTaskCommand.toAdd);
+        return toAdd.equals(otherAddTaskCommand.toAdd)
+                && taskProject.equals(otherAddTaskCommand.taskProject);
     }
 
     @Override

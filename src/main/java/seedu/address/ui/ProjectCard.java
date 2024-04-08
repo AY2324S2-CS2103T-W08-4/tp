@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.project.Project;
@@ -31,13 +30,12 @@ public class ProjectCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label status;
+
     @FXML
-    private Label address;
+    private Label deadlineDate;
     @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
+    private Label category;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -45,7 +43,11 @@ public class ProjectCard extends UiPart<Region> {
     public ProjectCard(Project project, int displayedIndex) {
         super(FXML);
         this.project = project;
+
         id.setText(displayedIndex + ". ");
         name.setText(project.getName().fullName);
+        deadlineDate.setText("Due: " + project.getDeadlineString());
+        status.setText(project.isCompleted() ? "complete" : "");
+        category.setText(project.getCategory());
     }
 }

@@ -72,6 +72,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Project> getCurrentProject() {
+        return model.getCurrentProject();
+    }
+
+    @Override
     public Path getPlannerFilePath() {
         return model.getPlannerFilePath();
     }

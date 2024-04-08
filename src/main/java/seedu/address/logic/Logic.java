@@ -33,6 +33,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Project> getFilteredProjectList();
 
+    /** Returns an unmodifiable view of the current showing project (list of one entity) */
+    ObservableList<Project> getCurrentProject();
+
     /**
      * Returns the user prefs' address book file path.
      */

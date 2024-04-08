@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Project;
 
 /**
@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final Planner planner;
     private final UserPrefs userPrefs;
     private final FilteredList<Project> filteredProjects;
+    private final FilteredList<Project> currentProject;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +37,13 @@ public class ModelManager implements Model {
         this.planner = new Planner(planner);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredProjects = new FilteredList<>(this.planner.getProjectList());
+        if (filteredProjects.size() > 0) {
+            currentProject = new FilteredList<>(
+                this.planner.getProjectList(),
+                new NameEqualsPredicate(filteredProjects.get(0).getName().fullName));
+        } else {
+            currentProject = new FilteredList<>(this.planner.getProjectList());
+        }
     }
 
     public ModelManager() {
@@ -136,6 +144,23 @@ public class ModelManager implements Model {
         filteredProjects.setPredicate(predicate);
     }
 
+    //=========== Current Project Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Project> getCurrentProject() {
+        return currentProject;
+    }
+
+    @Override
+    public void updateCurrentProject(Predicate<Project> predicate) {
+        requireNonNull(predicate);
+        currentProject.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -150,7 +175,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return planner.equals(otherModelManager.planner)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredProjects.equals(otherModelManager.filteredProjects);
+                && filteredProjects.equals(otherModelManager.filteredProjects)
+                && currentProject.equals(otherModelManager.currentProject);
     }
 
 }
