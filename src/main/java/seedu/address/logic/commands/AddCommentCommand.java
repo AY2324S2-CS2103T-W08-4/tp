@@ -39,6 +39,8 @@ public class AddCommentCommand extends Command {
      */
     public AddCommentCommand(Person project, Member member, String comment) {
         requireNonNull(project);
+        requireNonNull(member);
+        requireNonNull(comment);
         this.commentProject = project;
         this.commentFrom = member;
         this.comment = new Comment(comment, member);
@@ -77,13 +79,17 @@ public class AddCommentCommand extends Command {
         }
 
         AddCommentCommand otherAddCommentCommand = (AddCommentCommand) other;
-        return commentProject.equals(otherAddCommentCommand.commentProject);
+        return commentProject.equals(otherAddCommentCommand.commentProject)
+                && commentFrom.equals(otherAddCommentCommand.commentFrom)
+                && comment.equals(otherAddCommentCommand.comment);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("Project", commentProject)
+                .add("toAddTo", commentProject)
+                .add("toAdd", comment)
+                .add("toAddFrom", commentFrom)
                 .toString();
     }
 }

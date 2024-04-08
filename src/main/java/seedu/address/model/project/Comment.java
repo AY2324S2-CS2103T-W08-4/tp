@@ -26,6 +26,20 @@ public class Comment {
     }
 
     /**
+     * Returns true if both comments have the same content and author.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Comment)) {
+            return false;
+        }
+        Comment other = (Comment) obj;
+        return comment.equals(other.comment);
+    }
+    /**
      * @return comment in string format
      */
     @Override

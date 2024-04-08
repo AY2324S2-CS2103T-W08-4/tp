@@ -70,7 +70,7 @@ public class DeletePersonCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteTaskCommand)) {
+        if (!(other instanceof DeletePersonCommand)) {
             return false;
         }
 

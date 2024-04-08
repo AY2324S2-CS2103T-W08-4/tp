@@ -34,6 +34,9 @@ public class AssignTeamCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AssignTeamCommand(List<String> team, Person project) {
+        requireNonNull(project);
+        requireNonNull(team);
+
         this.project = project;
         this.team = new ArrayList<>();
         for (String name : team) {
@@ -55,6 +58,22 @@ public class AssignTeamCommand extends Command {
         projectAssign.assignTeam(this.team);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, team, Messages.format(projectAssign)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AssignTeamCommand)) {
+            return false;
+        }
+
+        AssignTeamCommand otherDeletePersonCommand = (AssignTeamCommand) other;
+        return project.equals(otherDeletePersonCommand.project)
+                && team.equals(otherDeletePersonCommand.team);
     }
 
     @Override

@@ -48,9 +48,16 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             Task newTask = new Task(taskName);
             return new SetTaskStatusCommand(status, newTask, project);
         } catch (IndexOutOfBoundsException e) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetTaskStatusCommand.MESSAGE_USAGE));
+            if (args.contains(" /in ")) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        SetTaskStatusCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        SetProjectStatusCommand.MESSAGE_USAGE));
+            }
+
         }
     }
 }

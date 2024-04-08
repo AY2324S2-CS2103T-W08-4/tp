@@ -35,6 +35,7 @@ public class EditTaskNameCommand extends RenameCommand {
     public EditTaskNameCommand(Name newName, Person currentProject, Task currentTask) {
         requireNonNull(newName);
         requireNonNull(currentProject);
+        requireNonNull(currentTask);
         this.changeTo = newName;
         this.targetProject = currentProject;
         this.targetTask = currentTask;
