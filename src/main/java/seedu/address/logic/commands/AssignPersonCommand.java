@@ -77,6 +77,22 @@ public class AssignPersonCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AssignPersonCommand)) {
+            return false;
+        }
+
+        AssignPersonCommand otherDeletePersonCommand = (AssignPersonCommand) other;
+        return task.equals(otherDeletePersonCommand.task)
+                && member.equals(otherDeletePersonCommand.member)
+                && project.equals(otherDeletePersonCommand.project);
+    }
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("set Member", member)

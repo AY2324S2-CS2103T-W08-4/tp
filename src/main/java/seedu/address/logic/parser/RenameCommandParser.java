@@ -49,9 +49,15 @@ public class RenameCommandParser implements Parser<RenameCommand> {
                 return new EditProjectNameCommand(changedTo, targetProject);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditProjectNameCommand.MESSAGE_USAGE));
+            if (args.contains(" /in ")) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditTaskNameCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        EditProjectNameCommand.MESSAGE_USAGE));
+            }
         }
     }
 

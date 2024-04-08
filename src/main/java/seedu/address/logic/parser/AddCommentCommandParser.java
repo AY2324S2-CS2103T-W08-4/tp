@@ -32,21 +32,26 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));
             }
-            String comment = args.split(" /from")[0];
+            String comment = args.split(" /from ")[0];
             String memberAndProject = args.split(" /from ")[1];
-            if ((comment.length() == 0) || (comment.length() == 0)) {
+            if (comment.length() == 0) {
                 throw new ParseException("Please enter a comment");
             }
-            String memberName = memberAndProject.split(" /to")[0];
+            String memberName = memberAndProject.split(" /to ")[0];
+            String projectName = memberAndProject.split(" /to ")[1];
+            if (memberName.length() == 0 || projectName.length() == 0) {
+                throw new ParseException(String.format(
+                        MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddTaskCommand.MESSAGE_USAGE));
+            }
             Member member = new Member(memberName);
-            String projectName = memberAndProject.split(" /to")[1];
             Name name = ParserUtil.parseName(projectName);
             Person project = new Person(name);
             return new AddCommentCommand(project, member, comment);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddTaskCommand.MESSAGE_USAGE));
+                    AddCommentCommand.MESSAGE_USAGE));
         }
     }
 }

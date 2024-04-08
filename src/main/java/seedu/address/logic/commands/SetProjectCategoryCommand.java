@@ -30,6 +30,7 @@ public class SetProjectCategoryCommand extends Command {
 
     public SetProjectCategoryCommand(String categoryName, Person project) {
         requireNonNull(project);
+        requireNonNull(categoryName);
         this.project = project;
         this.category = categoryName;
     }

@@ -32,6 +32,9 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
             List<String> team = Arrays.stream(members.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
+            if (team.stream().anyMatch(member -> member.length() == 0)) {
+                throw new ParseException("Please enter valid names");
+            }
             if ((team.size() == 0) || (projectName.length() == 0)) {
                 throw new ParseException("Please enter the project and team fields");
             }

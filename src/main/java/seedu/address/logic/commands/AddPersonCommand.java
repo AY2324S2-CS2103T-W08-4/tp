@@ -30,6 +30,8 @@ public class AddPersonCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddPersonCommand(Member member, Person project) {
+        requireNonNull(project);
+        requireNonNull(member);
         this.project = project;
         this.member = member;
     }
@@ -51,9 +53,25 @@ public class AddPersonCommand extends Command {
     }
 
     @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddPersonCommand)) {
+            return false;
+        }
+
+        AddPersonCommand otherDeletePersonCommand = (AddPersonCommand) other;
+        return project.equals(otherDeletePersonCommand.project)
+                && member.equals(otherDeletePersonCommand.member);
+    }
+
+    @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("set Member", member)
+                .add("setMember", member)
                 .toString();
     }
 }
