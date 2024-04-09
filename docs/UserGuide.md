@@ -16,16 +16,26 @@ Welcome to the user guide for our CLI-based project management application! This
   - [Adding a project: `add project`](#adding-a-project-add-project)
   - [Deleting a project : `delete project`](#deleting-a-project--delete-project)
   - [Add task : `add task`](#add-task--add-task)
-  - [Delete task : `delete task`](#remove-task--delete-task)
+  - [Delete task : `delete task`](#delete-task--delete-task)
   - [Show Project : `show project`](#show-project--show-project)
-  - [Assign deadline to project : `set deadline`](#assign-deadline-to-project--add-deadline)
-  - [Assign deadline to task : `set deadline`](#assign-deadline-to-task--add-deadline)
+  - [Set deadline of project : `set deadline`](#set-deadline-of-project--set-deadline)
+  - [Set deadline to task : `set deadline`](#set-deadline-to-task--set-deadline)
   - [Set Project Status : `set status`](#set-project-status--set-status)
   - [Set Task Status : `set status`](#set-task-status--set-status)
+  - [Assign team to project: `assign team`](#assign-team-to-project-assign-team)
   - [Add member to project : `add person`](#add-member-to-project--add-person)
+  - [Remove member from project : `delete person`](#remove-member-from-project--delete-person)
   - [Assign member to task : `assign person`](#assign-member-to-task--assign-person)
+  - [Rename a project: `set name`](#rename-a-project-set-name)
+  - [Rename a task: `set name`](#rename-a-task-set-name)
+  - [Set project category: `set category`](#set-project-category-set-category)
+  - [Filter projects by category: `filter category`](#filter-projects-by-category-filter-category)
+  - [Add comments to project: `add comment`](#add-comments-to-project-add-comment)
   - [Locating projects by name: `find project`](#locating-projects-by-name-find-project)
-  - [Listing all projects : `list project`](#listing-all-projects--list-project)
+  - [Listing all projects: `list project`](#listing-all-projects-list-project)
+  - [Clear project list: `clear project`](#clear-project-list-clear-project)
+  - [Show help: `show help`](#show-help-show-help)
+  - [Exit DevPlan Pro: `exit program`](#exit-devplan-pro-exit-program)
 - [FAQ](#faq)
 - [Known issues](#known-issues)
 - [Command summary](#command-summary)
@@ -203,7 +213,7 @@ Description: An example of the result after executing the "show project" command
 
 **Examples:**
 
-- `Set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
+- `set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
 
 **Expected output:**
 
