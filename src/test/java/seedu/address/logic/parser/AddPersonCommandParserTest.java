@@ -8,13 +8,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
-
-
+import seedu.address.model.project.Project;
 
 class AddPersonCommandParserTest {
-    private Person taskProject = new Person(new Name("Code"));
+    private Project taskProject = new Project(new Name("Code"));
     private Member member = new Member("James");
     private AddPersonCommandParser parser = new AddPersonCommandParser();
 

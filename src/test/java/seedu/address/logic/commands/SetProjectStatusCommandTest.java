@@ -8,13 +8,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
-
-
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 class SetProjectStatusCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -24,8 +22,8 @@ class SetProjectStatusCommandTest {
     }
     @Test
     public void equals() {
-        Person projectA = new Person(new Name("projectA"));
-        Person projectB = new Person(new Name("projectB"));
+        Project projectA = new Project(new Name("projectA"));
+        Project projectB = new Project(new Name("projectB"));
 
         SetProjectStatusCommand setProjectStatusComplete = new SetProjectStatusCommand("complete", projectA);
         SetProjectStatusCommand setProjectStatusIncomplete = new SetProjectStatusCommand("incomplete", projectA);

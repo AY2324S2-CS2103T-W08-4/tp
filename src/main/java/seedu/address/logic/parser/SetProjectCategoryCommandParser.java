@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.SetProjectCategoryCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Parses input arguments and creates a new SetProjectCategoryCommand object
@@ -28,7 +28,7 @@ public class SetProjectCategoryCommandParser implements Parser<SetProjectCategor
             if ((projectName.length() == 0) || category.length() == 0) {
                 throw new ParseException("Please enter the project field");
             }
-            Person project = new Person(ParserUtil.parseName(projectName));
+            Project project = new Project(ParserUtil.parseName(projectName));
             return new SetProjectCategoryCommand(category, project);
 
         } catch (Exception e) {

@@ -14,18 +14,19 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.Planner;
+import seedu.address.model.ReadOnlyPlanner;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ProjectBuilder;
 
 public class AddTaskCommandTest {
 
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -88,67 +89,67 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getPlannerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setPlannerFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addProject(Project project) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public Person findPerson(Name name) {
+        public Project findProject(Name name) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setPlanner(ReadOnlyPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyPlanner getPlanner() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasProject(Project project) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteProject(Project target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setProject(Project target, Project editedProject) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Project> getFilteredProjectList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredProjectList(Predicate<Project> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getCurrentProject() {
+        public ObservableList<Project> getCurrentProject() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateCurrentProject(Predicate<Person> predicate) {
+        public void updateCurrentProject(Predicate<Project> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -165,7 +166,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasProject(Project project) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
         }
@@ -175,23 +176,23 @@ public class AddTaskCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<Project> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasProject(Project project) {
+            requireNonNull(project);
+            return personsAdded.stream().anyMatch(project::isSameProject);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addProject(Project project) {
+            requireNonNull(project);
+            personsAdded.add(project);
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyPlanner getPlanner() {
+            return new Planner();
         }
     }
 

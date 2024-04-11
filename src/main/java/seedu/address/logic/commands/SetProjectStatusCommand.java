@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a task to a project.
@@ -19,12 +19,12 @@ public class SetProjectStatusCommand extends SetStatusCommand {
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
 
-    private final Person project;
+    private final Project project;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SetProjectStatusCommand(String status, Person project) {
+    public SetProjectStatusCommand(String status, Project project) {
         super(status);
         requireNonNull(project);
         this.project = project;
@@ -34,13 +34,13 @@ public class SetProjectStatusCommand extends SetStatusCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(project)) {
+        if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
 
-        Person statusProject = model.findPerson(project.getName());
+        Project statusProject = model.findProject(project.getName());
 
         if (isCompleted()) {
             statusProject.setComplete();

@@ -5,7 +5,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 
 /**
@@ -25,8 +25,8 @@ public class AddProjectCommandParser implements Parser<AddProjectCommand> {
                 throw new ParseException("Please enter the project field.");
             }
             Name name = ParserUtil.parseName(projectName);
-            Person person = new Person(name);
-            return new AddProjectCommand(person);
+            Project project = new Project(name);
+            return new AddProjectCommand(project);
         } catch (Exception e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,

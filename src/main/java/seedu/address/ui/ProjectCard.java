@@ -4,12 +4,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 /**
  * An UI component that displays information of a {@code Person}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ProjectCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -21,7 +21,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Project project;
 
     @FXML
     private HBox cardPane;
@@ -40,14 +40,14 @@ public class PersonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public ProjectCard(Project project, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.project = project;
 
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        deadlineDate.setText("Due: " + person.getDeadlineString());
-        status.setText(person.isCompleted() ? "complete" : "");
-        category.setText(person.getCategory());
+        name.setText(project.getName().fullName);
+        deadlineDate.setText("Due: " + project.getDeadlineString());
+        status.setText(project.isCompleted() ? "complete" : "");
+        category.setText(project.getCategory());
     }
 }

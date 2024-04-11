@@ -8,14 +8,12 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
-import seedu.address.testutil.PersonBuilder;
-
-
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 class AddPersonCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
     private Member member = new Member("James");
 
     @Test
@@ -28,7 +26,7 @@ class AddPersonCommandTest {
     @Test
     public void equals() {
         Member memberBob = new Member("Bob");
-        Person projectB = new Person(new Name("B"));
+        Project projectB = new Project(new Name("B"));
         AddPersonCommand deleteJames = new AddPersonCommand(member, taskProject);
         AddPersonCommand deleteBob = new AddPersonCommand(memberBob, taskProject);
         AddPersonCommand deleteJamesDiffProject = new AddPersonCommand(member, projectB);

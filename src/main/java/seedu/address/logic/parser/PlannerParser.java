@@ -19,7 +19,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCategoryCommand;
 import seedu.address.logic.commands.FindProjectCommand;
@@ -35,14 +34,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class PlannerParser {
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>[^\\s]+\\s[^\\s]+)(?<arguments>.*)");
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(PlannerParser.class);
 
     /**
      * Parses user input into command for execution.
@@ -105,9 +104,6 @@ public class AddressBookParser {
 
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments.trim());
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
 
         case SetDeadlineCommand.COMMAND_WORD:
             return new SetDeadlineCommandParser().parse(arguments);
