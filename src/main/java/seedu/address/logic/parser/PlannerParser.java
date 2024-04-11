@@ -19,7 +19,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCategoryCommand;
 import seedu.address.logic.commands.FindProjectCommand;
@@ -105,9 +104,6 @@ public class PlannerParser {
 
         case DeletePersonCommand.COMMAND_WORD:
             return new DeletePersonCommandParser().parse(arguments.trim());
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
 
         case SetDeadlineCommand.COMMAND_WORD:
             return new SetDeadlineCommandParser().parse(arguments);

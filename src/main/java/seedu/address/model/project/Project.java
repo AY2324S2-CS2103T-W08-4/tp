@@ -2,7 +2,6 @@ package seedu.address.model.project;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +19,7 @@ import seedu.address.model.person.Name;
 public class Project {
 
     // Identity fields
-    private final Name name;
+    private Name name;
 
     private final List<Task> taskList;
 
@@ -137,6 +136,10 @@ public class Project {
             }
             i += 1;
         }
+    }
+
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public void setCategory(String category) {

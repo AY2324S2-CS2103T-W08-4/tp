@@ -3,19 +3,21 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.TypicalProjects.getTypicalPlanner;
+import static seedu.address.testutil.TypicalProjects.getTypicalProjects;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Planner;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 import seedu.address.testutil.ProjectBuilder;
 
 class DeleteTaskCommandTest {
-    private Model model = new ModelManager(getTypicalPlanner(), new UserPrefs());
+    private Model model;
 
     private Task tempTask1 = new Task("rehearse");
     private Task tempTask2 = new Task("Write script");
@@ -24,6 +26,13 @@ class DeleteTaskCommandTest {
 
     private Project codingProject = new ProjectBuilder().withName("Coding Project").build();
 
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new Planner(), new UserPrefs());
+        for (Project project : getTypicalProjects()) {
+            model.addProject(project);
+        }
+    }
 
     @Test
     public void equals() {

@@ -53,18 +53,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditProjectDescriptor editProjectDescriptor;
+    private final Project editProjectDescriptor;
 
     /**
      * @param index of the person in the filtered person list to edit
      * @param editProjectDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditProjectDescriptor editProjectDescriptor) {
+    public EditCommand(Index index, Project editProjectDescriptor) {
         requireNonNull(index);
         requireNonNull(editProjectDescriptor);
 
         this.index = index;
-        this.editProjectDescriptor = new EditProjectDescriptor(editProjectDescriptor);
+        this.editProjectDescriptor = editProjectDescriptor;
     }
 
     @Override
@@ -92,9 +92,9 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Project createEditedProject(Project projectToEdit, EditProjectDescriptor editProjectDescriptor) {
+    private static Project createEditedProject(Project projectToEdit, Project editProjectDescriptor) {
         assert projectToEdit != null;
-        Name updatedName = editProjectDescriptor.getName().orElse(projectToEdit.getName());
+        Name updatedName = editProjectDescriptor.getName();
         return new Project(new Name(updatedName.toString()));
     }
 
@@ -139,12 +139,8 @@ public class EditCommand extends Command {
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditProjectDescriptor(EditProjectDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
-            setTags(toCopy.tags);
+        public EditProjectDescriptor(Project toCopy) {
+            setName(toCopy.getName());
         }
 
         /**
@@ -225,12 +221,7 @@ public class EditCommand extends Command {
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("tags", tags)
-                    .toString();
+                    .add("name", name).toString();
         }
     }
 }

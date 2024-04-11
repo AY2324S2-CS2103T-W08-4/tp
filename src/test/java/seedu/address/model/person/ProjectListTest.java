@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -21,9 +22,14 @@ import seedu.address.model.project.Project;
 import seedu.address.model.project.ProjectList;
 import seedu.address.testutil.ProjectBuilder;
 
-public class UniquePersonListTest {
+public class ProjectListTest {
 
-    private final ProjectList projectList = new ProjectList();
+    private ProjectList projectList = new ProjectList();
+
+    @BeforeEach
+    public void setUp() {
+        projectList = new ProjectList();
+    }
 
     @Test
     public void contains_nullPerson_throwsNullPointerException() {
@@ -37,8 +43,8 @@ public class UniquePersonListTest {
 
     @Test
     public void contains_personInList_returnsTrue() {
-        ProjectList.add(ALICE);
-        assertTrue(ProjectList.contains(ALICE));
+        projectList.add(ALICE);
+        assertTrue(projectList.contains(ALICE));
     }
 
     @Test

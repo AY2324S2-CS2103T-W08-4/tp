@@ -41,7 +41,9 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
 
             String status = args.split(" /of")[0].trim();
             String taskAndProject = args.split(" /of")[1].trim();
-
+            if ((taskAndProject.length() == 0) || (status.length() == 0)) {
+                throw new ParseException("Please enter the status, project and task fields");
+            }
             String taskName = taskAndProject.split("/in ")[0].trim();
             String projectName = taskAndProject.split("/in ")[1];
             if ((projectName.length() == 0) || (taskName.length() == 0) || (status.length() == 0)) {

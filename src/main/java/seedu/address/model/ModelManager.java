@@ -75,7 +75,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-        public Path getPlannerFilePath() {
+    public Path getPlannerFilePath() {
         return userPrefs.getPlannerFilePath();
     }
 

@@ -16,7 +16,6 @@ import seedu.address.logic.commands.EditCommand.EditProjectDescriptor;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.project.Project;
-import seedu.address.testutil.EditProjectDescriptorBuilder;
 import seedu.address.testutil.ProjectBuilder;
 import seedu.address.testutil.ProjectUtil;
 
@@ -47,7 +46,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Project person = new ProjectBuilder().build();
-        EditProjectDescriptor descriptor = new EditProjectDescriptorBuilder(person).build();
+        EditProjectDescriptor descriptor = new EditProjectDescriptor(person);
         //edit function not yet implemented
         assertEquals(0, 0);
     }
