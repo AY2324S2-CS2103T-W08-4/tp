@@ -1,14 +1,15 @@
 package seedu.address.storage;
 
-import javax.lang.model.element.Name;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.project.Member;
 import seedu.address.model.project.Task;
-import seedu.address.model.tag.Tag;
 
+/**
+ * Jackson-friendly version of {@link Task}.
+ */
 public class JsonAdaptedTask {
     private final String name;
     private final String deadline;

@@ -2,11 +2,14 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.project.Comment;
 import seedu.address.model.project.Member;
 
+/**
+ * Jackson-friendly version of {@link Comment}.
+ */
 public class JsonAdaptedComment {
     private final String authorName;
     private final String comment;

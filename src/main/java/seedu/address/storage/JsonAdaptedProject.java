@@ -10,8 +10,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.project.Comment;
-import seedu.address.model.project.Project;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -37,7 +37,8 @@ class JsonAdaptedProject {
      */
     @JsonCreator
     public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-                              @JsonProperty("category") String category, @JsonProperty("projectStatus") String projectStatus,
+                              @JsonProperty("category") String category,
+                              @JsonProperty("projectStatus") String projectStatus,
                               @JsonProperty("team") List<JsonAdaptedMember> team,
                               @JsonProperty("doneTaskList") List<JsonAdaptedTask> doneTaskList,
                               @JsonProperty("undoneTaskList") List<JsonAdaptedTask> undoneTaskList,
