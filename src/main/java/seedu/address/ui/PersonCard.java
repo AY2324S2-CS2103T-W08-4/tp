@@ -30,7 +30,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label status;
+    private Label projectStatus;
 
     @FXML
     private Label deadlineDate;
@@ -47,7 +47,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         deadlineDate.setText("Due: " + person.getDeadlineString());
-        status.setText(person.isCompleted() ? "complete" : "");
+        projectStatus.setText(person.isCompleted() ? "complete" : "");
         category.setText(person.getCategory());
     }
 }

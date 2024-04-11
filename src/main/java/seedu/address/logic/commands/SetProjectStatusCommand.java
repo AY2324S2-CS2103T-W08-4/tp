@@ -12,7 +12,7 @@ import seedu.address.model.person.Person;
  */
 public class SetProjectStatusCommand extends SetStatusCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " [complete/incomplete] /to PROJECT_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [complete/incomplete] /of PROJECT_NAME";
 
     public static final String MESSAGE_SUCCESS = "The project %1$s is set as %2$s.";
 
