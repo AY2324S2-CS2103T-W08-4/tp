@@ -60,6 +60,9 @@ public class Person {
     public void addTask(Task task) {
         taskList.add(task);
     }
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
+    }
 
 
     public void addMember(Member member) {

@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Task;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +28,8 @@ class JsonAdaptedPerson {
     private final String projectStatus;
 
     private final List<JsonAdaptedMember> team = new ArrayList<>();
+    private final List<JsonAdaptedTask> doneTaskList = new ArrayList<>();
+    private final List<JsonAdaptedTask> undoneTaskList = new ArrayList<>();
 
 
     /**
@@ -35,13 +38,21 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
             @JsonProperty("category") String category, @JsonProperty("projectStatus") String projectStatus,
-            @JsonProperty("team") List<JsonAdaptedMember> team) {
+            @JsonProperty("team") List<JsonAdaptedMember> team,
+            @JsonProperty("doneTaskList") List<JsonAdaptedTask> doneTaskList,
+            @JsonProperty("undoneTaskList") List<JsonAdaptedTask> undoneTaskList) {
         this.name = name;
         this.deadline = deadline;
         this.category = category;
         this.projectStatus = projectStatus;
         if (team != null) {
             this.team.addAll(team);
+        }
+        if (doneTaskList != null) {
+            this.doneTaskList.addAll(doneTaskList);
+        }
+        if (undoneTaskList != null) {
+            this.undoneTaskList.addAll(undoneTaskList);
         }
     }
 
@@ -56,6 +67,12 @@ class JsonAdaptedPerson {
         team.addAll(source.getTeamList().stream()
                 .map(JsonAdaptedMember::new)
                 .collect(Collectors.toList()));
+        doneTaskList.addAll(source.getDoneTasks().stream()
+                .map(JsonAdaptedTask::new)
+                .collect(Collectors.toList()));
+        undoneTaskList.addAll(source.getUndoneTasks().stream()
+                .map(JsonAdaptedTask::new)
+                .collect(Collectors.toList()));
 
     }
 
@@ -68,6 +85,16 @@ class JsonAdaptedPerson {
         final List<Member> members = new ArrayList<>();
         for (JsonAdaptedMember member : team) {
             members.add(member.toModelType());
+        }
+
+        final List<Task> tasks = new ArrayList<>();
+        for (JsonAdaptedTask task : doneTaskList) {
+            Task current = task.toModelType();
+            current.setComplete();
+            tasks.add(current);
+        }
+        for (JsonAdaptedTask task : undoneTaskList) {
+            tasks.add(task.toModelType());
         }
 
         if (name == null) {
@@ -92,6 +119,7 @@ class JsonAdaptedPerson {
             }
         }
         toReturn.assignTeam(members);
+        toReturn.setTaskList(tasks);
 
         return toReturn;
     }

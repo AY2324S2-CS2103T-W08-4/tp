@@ -4,28 +4,29 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Task;
 import seedu.address.model.tag.Tag;
 
-public class JsonAdaptedMember {
+public class JsonAdaptedTask {
     private final String name;
 
     /**
      * Constructs a {@code JsonAdaptedMember} with the given {@code name}.
      */
     @JsonCreator
-    public JsonAdaptedMember(String name) {
+    public JsonAdaptedTask(String name) {
         this.name = name;
     }
 
     /**
      * Converts a given {@code Member} into this class for Jackson use.
      */
-    public JsonAdaptedMember(Member source) {
+    public JsonAdaptedTask(Task source) {
         name = source.getName().fullName;
     }
 
     @JsonValue
-    public String getMemberName() {
+    public String getTaskName() {
         return name;
     }
 
@@ -34,8 +35,8 @@ public class JsonAdaptedMember {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted Member.
      */
-    public Member toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
 
-        return new Member(name);
+        return new Task(name);
     }
 }
