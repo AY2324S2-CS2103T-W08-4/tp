@@ -1,10 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
+
+import java.util.Random;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 
 /**
@@ -30,6 +34,21 @@ public class SetProjectStatusCommand extends SetStatusCommand {
         this.project = project;
     }
 
+    /**
+     * Creates a random string of digits with the specified length
+     *
+     * @param length the length of the resulting string
+     * @return the string
+     */
+    private static String generateRandomDigitString(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -41,16 +60,22 @@ public class SetProjectStatusCommand extends SetStatusCommand {
         }
 
         Project statusProject = model.findProject(project.getName());
-
+        Project dupProject = statusProject.createEditedProject(new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        model.setProject(statusProject, dupProject);
+        Project realProject = dupProject.createEditedProject(project.getName());
+        String resultString = "";
         if (isCompleted()) {
-            statusProject.setComplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "complete"));
+            realProject.setComplete();
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "complete");
         } else if (isIncompleted()) {
-            statusProject.setIncomplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "incomplete"));
+            realProject.setIncomplete();
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "incomplete");
         } else {
             throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
+        model.setProject(dupProject, realProject);
+        model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
+        return new CommandResult(resultString);
     }
 
     @Override
