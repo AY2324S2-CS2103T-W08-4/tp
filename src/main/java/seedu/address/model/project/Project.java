@@ -28,7 +28,7 @@ public class Project {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private List<Member> team = new ArrayList<>();
-    private String status = "None";
+    private String status;
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -74,6 +74,15 @@ public class Project {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
+    }
+
+
+    public void setCommentList(List<Comment> commentList) {
+        this.comments.addAll(commentList);
     }
 
     /**
@@ -203,7 +212,9 @@ public class Project {
      * @return the string represeting the status of the task
      */
     public String getStatus() {
-        return status;
+        return status == null
+                ? ""
+                : status;
     }
 
     /**
@@ -260,6 +271,10 @@ public class Project {
         return team.stream()
                 .map(Member::toString) // Assuming Member class has getName() method returning String
                 .collect(Collectors.joining(", "));
+    }
+
+    public List<Member> getTeamList() {
+        return team;
     }
 
     public List<Comment> getComments() {

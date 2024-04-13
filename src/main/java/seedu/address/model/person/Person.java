@@ -30,7 +30,7 @@ public class Person {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private List<Member> team = new ArrayList<>();
-    private String status = "None";
+    private String status;
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -52,6 +52,17 @@ public class Person {
     private Person(Name name, List<Task> tasks) {
         this.taskList = tasks;
         this.name = name;
+    }
+
+
+    /**
+     * Adds task to the Person object
+     */
+    public void addTask(Task task) {
+        taskList.add(task);
+    }
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
     }
 
     public void addMember(Member member) {
@@ -145,6 +156,12 @@ public class Person {
                 : category;
     }
 
+    public String getStatus() {
+        return status == null
+                ? ""
+                : status;
+    }
+
     public List<Task> getUndoneTasks() {
         ArrayList<Task> tmp = new ArrayList<>();
         for (Task task : taskList) {
@@ -209,6 +226,10 @@ public class Person {
         return team.stream()
                 .map(Member::toString) // Assuming Member class has getName() method returning String
                 .collect(Collectors.joining(", "));
+    }
+
+    public List<Member> getTeamList() {
+        return team;
     }
 
     public List<Comment> getComments() {
