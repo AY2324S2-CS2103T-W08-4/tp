@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.project.Member;
+import seedu.address.model.project.Task;
+
 
 /**
  * Jackson-friendly version of {@link Project}.
@@ -22,17 +25,35 @@ class JsonAdaptedProject {
     private final String deadline;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
     private final String category;
+    private final String projectStatus;
+
+    private final List<JsonAdaptedMember> team = new ArrayList<>();
+    private final List<JsonAdaptedTask> doneTaskList = new ArrayList<>();
+    private final List<JsonAdaptedTask> undoneTaskList = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-            @JsonProperty("category") String category, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("category") String category, @JsonProperty("projectStatus") String projectStatus,
+            @JsonProperty("team") List<JsonAdaptedMember> team,
+            @JsonProperty("doneTaskList") List<JsonAdaptedTask> doneTaskList,
+            @JsonProperty("undoneTaskList") List<JsonAdaptedTask> undoneTaskList) {
         this.name = name;
         this.deadline = deadline;
         this.category = category;
+        this.projectStatus = projectStatus;
+        if (team != null) {
+            this.team.addAll(team);
+        }
+        if (doneTaskList != null) {
+            this.doneTaskList.addAll(doneTaskList);
+        }
+        if (undoneTaskList != null) {
+            this.undoneTaskList.addAll(undoneTaskList);
+        }
     }
 
     /**
@@ -42,6 +63,17 @@ class JsonAdaptedProject {
         name = source.getName().fullName;
         deadline = source.getDeadlineString();
         category = source.getCategory();
+        projectStatus = source.getStatus();
+        team.addAll(source.getTeamList().stream()
+                .map(JsonAdaptedMember::new)
+                .collect(Collectors.toList()));
+        doneTaskList.addAll(source.getDoneTasks().stream()
+                .map(JsonAdaptedTask::new)
+                .collect(Collectors.toList()));
+        undoneTaskList.addAll(source.getUndoneTasks().stream()
+                .map(JsonAdaptedTask::new)
+                .collect(Collectors.toList()));
+
     }
 
     /**
@@ -50,9 +82,19 @@ class JsonAdaptedProject {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Project toModelType() throws IllegalValueException {
-        final List<Tag> projectTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
-            projectTags.add(tag.toModelType());
+        final List<Member> members = new ArrayList<>();
+        for (JsonAdaptedMember member : team) {
+            members.add(member.toModelType());
+        }
+
+        final List<Task> tasks = new ArrayList<>();
+        for (JsonAdaptedTask task : doneTaskList) {
+            Task current = task.toModelType();
+            current.setComplete();
+            tasks.add(current);
+        }
+        for (JsonAdaptedTask task : undoneTaskList) {
+            tasks.add(task.toModelType());
         }
 
         if (name == null) {
@@ -70,6 +112,16 @@ class JsonAdaptedProject {
         if (category != null && category.length() != 0) {
             toReturn.setCategory(category);
         }
+        if (projectStatus != null && projectStatus.length() != 0) {
+            if (projectStatus.equals("complete")) {
+                toReturn.setComplete();
+            } else {
+                toReturn.setIncomplete();
+            }
+        }
+        toReturn.assignTeam(members);
+        toReturn.setTaskList(tasks);
+
         return toReturn;
     }
 

@@ -76,6 +76,11 @@ public class Project {
         taskList.add(task);
     }
 
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
+    }
+
+
     /**
      * removes a project in the specified project
      * @param task task to be removed from the project list
@@ -256,6 +261,10 @@ public class Project {
         return team.stream()
                 .map(Member::toString) // Assuming Member class has getName() method returning String
                 .collect(Collectors.joining(", "));
+    }
+
+    public List<Member> getTeamList() {
+        return team;
     }
 
     public List<Comment> getComments() {

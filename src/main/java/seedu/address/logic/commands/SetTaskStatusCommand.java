@@ -13,7 +13,7 @@ import seedu.address.model.project.Task;
  */
 public class SetTaskStatusCommand extends SetStatusCommand {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " [complete/incomplete] /to TASK_NAME /in PROJECT_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " [complete/incomplete] /of TASK_NAME /in PROJECT_NAME";
 
     public static final String MESSAGE_SUCCESS = "The task %1$s is set as %2$s.";
 
