@@ -3,11 +3,12 @@ package seedu.address.model.person;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.project.Project;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
-public class NameEqualsPredicate implements Predicate<Person> {
+public class NameEqualsPredicate implements Predicate<Project> {
     private final String name;
 
     public NameEqualsPredicate(String name) {
@@ -15,8 +16,8 @@ public class NameEqualsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return person.getName().fullName.equals(name);
+    public boolean test(Project project) {
+        return project.getName().fullName.equals(name);
     }
 
     @Override

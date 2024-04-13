@@ -6,7 +6,7 @@ import seedu.address.logic.commands.SetDeadlineCommand;
 import seedu.address.logic.commands.SetDeadlineProjectCommand;
 import seedu.address.logic.commands.SetDeadlineTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -34,7 +34,7 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
                 if ((projectName.length() == 0)) {
                     throw new ParseException("Please enter the project field");
                 }
-                Person project = new Person(ParserUtil.parseName(projectName));
+                Project project = new Project(ParserUtil.parseName(projectName));
                 return new SetDeadlineProjectCommand(deadline, project);
             } else {
                 //SetDeadlineTaskCommand
@@ -44,7 +44,7 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
                 if ((projectName.length() == 0) || (taskName.length() == 0)) {
                     throw new ParseException("Please enter the project and task fields");
                 }
-                Person project = new Person(ParserUtil.parseName(projectName));
+                Project project = new Project(ParserUtil.parseName(projectName));
                 Task newTask = new Task(taskName);
                 return new SetDeadlineTaskCommand(deadline, newTask, project);
             }

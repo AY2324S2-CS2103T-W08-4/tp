@@ -8,13 +8,13 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 
 
 class EditProjectNameCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -24,7 +24,7 @@ class EditProjectNameCommandTest {
 
     @Test
     public void equals() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
 
         EditProjectNameCommand editProjectNameToA = new EditProjectNameCommand(new Name("A"), project);
         EditProjectNameCommand editProjectNameToB = new EditProjectNameCommand(new Name("B"), project);

@@ -7,7 +7,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -26,13 +26,13 @@ public class EditTaskNameCommand extends RenameCommand {
     public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s not found: "
             + "Please make sure the task exists in project %2$s";
     private final Name changeTo;
-    private final Person targetProject;
+    private final Project targetProject;
     private final Task targetTask;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public EditTaskNameCommand(Name newName, Person currentProject, Task currentTask) {
+    public EditTaskNameCommand(Name newName, Project currentProject, Task currentTask) {
         requireNonNull(newName);
         requireNonNull(currentProject);
         requireNonNull(currentTask);
@@ -45,12 +45,12 @@ public class EditTaskNameCommand extends RenameCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasPerson(targetProject)) {
+        if (!model.hasProject(targetProject)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(targetProject)));
         }
-        Person targetPerson = model.findPerson(targetProject.getName());
+        Project targetPerson = model.findProject(targetProject.getName());
         if (!targetPerson.hasTask(targetTask)) {
             throw new CommandException(String.format(
                     MESSAGE_TASK_NOT_FOUND,

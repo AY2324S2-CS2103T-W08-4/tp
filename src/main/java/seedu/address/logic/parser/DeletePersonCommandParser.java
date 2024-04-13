@@ -5,8 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.DeletePersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -31,7 +31,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             if ((memberName.length() == 0) || (projectName.length() == 0)) {
                 throw new ParseException("Please enter the member and the project field");
             }
-            return new DeletePersonCommand(new Member(memberName), new Person(new Name(projectName)));
+            return new DeletePersonCommand(new Member(memberName), new Project(new Name(projectName)));
         } catch (Exception e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,

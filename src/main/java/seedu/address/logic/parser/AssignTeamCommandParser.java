@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 
 
 /**
@@ -38,7 +38,7 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
             if ((team.size() == 0) || (projectName.length() == 0)) {
                 throw new ParseException("Please enter the project and team fields");
             }
-            Person project = new Person(ParserUtil.parseName(projectName));
+            Project project = new Project(ParserUtil.parseName(projectName));
             return new AssignTeamCommand(team, project);
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

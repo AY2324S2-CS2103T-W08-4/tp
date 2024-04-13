@@ -54,14 +54,6 @@ public class Person {
         this.name = name;
     }
 
-    /**
-     * Adds task to the Person object
-     */
-    public void addTask(Task task) {
-        taskList.add(task);
-    }
-
-
     public void addMember(Member member) {
         team.add(member);
     }
@@ -78,20 +70,6 @@ public class Person {
         for (Task t : taskList) {
             if (t.equals(task)) {
                 taskList.remove(i);
-                break;
-            }
-            i += 1;
-        }
-    }
-
-    /**
-     * Removes member from the Project object
-     */
-    public void removeMember(Member member) {
-        int i = 0;
-        for (Member m : team) {
-            if (m.equals(member)) {
-                team.remove(i);
                 break;
             }
             i += 1;

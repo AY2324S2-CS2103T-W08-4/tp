@@ -5,9 +5,8 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import seedu.address.logic.commands.AddPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
-
+import seedu.address.model.project.Project;
 
 /**
  * Parses input arguments and creates a new AddTaskCommand object
@@ -35,8 +34,8 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
             }
             Member member = new Member(memberName);
             Name name = ParserUtil.parseName(projectName);
-            Person person = new Person(name);
-            return new AddPersonCommand(member, person);
+            Project project = new Project(name);
+            return new AddPersonCommand(member, project);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
