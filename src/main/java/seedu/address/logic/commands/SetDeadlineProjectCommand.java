@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
+import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 
 /**
@@ -53,7 +56,12 @@ public class SetDeadlineProjectCommand extends SetDeadlineCommand {
         }
 
         Project deadlineProject = model.findProject(project.getName());
-        deadlineProject.setDeadline(deadline);
+        Project dupProject = deadlineProject.createEditedProject(new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        model.setProject(deadlineProject, dupProject);
+        Project realProject = dupProject.createEditedProject(project.getName());
+        realProject.setDeadline(deadline);
+        model.setProject(dupProject, realProject);
+        model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(deadlineProject), deadline));
     }
