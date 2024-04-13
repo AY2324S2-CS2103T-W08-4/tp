@@ -5,27 +5,37 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.ELLE;
-import static seedu.address.testutil.TypicalPersons.FIONA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalProjects.CARL;
+import static seedu.address.testutil.TypicalProjects.ELLE;
+import static seedu.address.testutil.TypicalProjects.FIONA;
+import static seedu.address.testutil.TypicalProjects.getTypicalProjects;
 
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.Planner;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.project.Project;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindProjectCommand}.
  */
 public class FindProjectCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(new Planner(), new UserPrefs());
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(new Planner(), new UserPrefs());
+        for (Project project : getTypicalProjects()) {
+            model.addProject(project);
+        }
+    }
 
     @Test
     public void equals() {
@@ -59,9 +69,8 @@ public class FindProjectCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindProjectCommand command = new FindProjectCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, model, expectedMessage);
+        assertEquals(Collections.emptyList(), model.getFilteredProjectList());
     }
 
     @Test
@@ -69,9 +78,8 @@ public class FindProjectCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindProjectCommand command = new FindProjectCommand(predicate);
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
+        assertCommandSuccess(command, model, expectedMessage);
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredProjectList());
     }
 
     @Test

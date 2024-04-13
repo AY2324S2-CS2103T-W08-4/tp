@@ -10,11 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 class AssignTeamCommandParserTest {
-    private Person taskProject = new Person(new Name("Code"));
+    private Project taskProject = new Project(new Name("Code"));
     private Member member = new Member("James");
     private List<String> team = new ArrayList<>();
     private AssignTeamCommandParser parser = new AssignTeamCommandParser();

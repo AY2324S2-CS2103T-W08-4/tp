@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 class SetDeadlineProjectCommandTest {
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
 
     @Test
     public void equals() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
 
 
         SetDeadlineProjectCommand setDeadlineA = new SetDeadlineProjectCommand("Mar 22 2024", project);

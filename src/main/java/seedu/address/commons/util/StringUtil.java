@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +65,20 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Creates a random string of digits with the specified length
+     *
+     * @param length the length of the resulting string
+     * @return the string
+     */
+    public static String generateRandomDigitString(int length) {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
     }
 }

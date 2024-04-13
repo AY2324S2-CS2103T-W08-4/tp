@@ -6,8 +6,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
+import seedu.address.model.project.Task;
 
 /**
  * Deletes a member from a project
@@ -26,12 +28,12 @@ public class DeletePersonCommand extends Command {
             + "Please make sure the person exists in project %2$s";
 
     private final Member toDelete;
-    private final Person memberProject;
+    private final Project memberProject;
 
     /**
      * Creates a DeleteTaskCommand to delete the specified task in a project
      */
-    public DeletePersonCommand(Member member, Person memberProject) {
+    public DeletePersonCommand(Member member, Project memberProject) {
         requireNonNull(member);
         requireNonNull(memberProject);
         this.toDelete = member;
@@ -42,13 +44,13 @@ public class DeletePersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(memberProject)) {
+        if (!model.hasProject(memberProject)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(memberProject)));
         }
 
-        Person project = model.findPerson(memberProject.getName());
+        Project project = model.findProject(memberProject.getName());
 
         if (!project.hasMember(toDelete)) {
             throw new CommandException(String.format(MESSAGE_PERSON_NOT_FOUND,
@@ -56,6 +58,22 @@ public class DeletePersonCommand extends Command {
         }
 
         project.removeMember(toDelete);
+
+        // cascading
+        for (Task task : project.getUndoneTasks()) {
+            if (task.getMemberName().equals(toDelete.getName().fullName)) {
+                task.assignPerson(null);
+            }
+        }
+        for (Task task : project.getDoneTasks()) {
+            if (task.getMemberName().equals(toDelete.getName().fullName)) {
+                task.assignPerson(null);
+            }
+        }
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,

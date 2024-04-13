@@ -6,9 +6,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Comment;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a project to the DevPlanPro.
@@ -28,7 +29,7 @@ public class AddCommentCommand extends Command {
     public static final String MESSAGE_MEMBER_NOT_FOUND = "Team member %1s not found: "
             + "Please make sure the person exists.";
 
-    private final Person commentProject;
+    private final Project commentProject;
 
     private final Member commentFrom;
 
@@ -37,7 +38,7 @@ public class AddCommentCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommentCommand(Person project, Member member, String comment) {
+    public AddCommentCommand(Project project, Member member, String comment) {
         requireNonNull(project);
         requireNonNull(member);
         requireNonNull(comment);
@@ -50,19 +51,22 @@ public class AddCommentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(commentProject)) {
+        if (!model.hasProject(commentProject)) {
             throw new CommandException(String.format(MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(commentProject)));
         }
 
-        Person foundProject = model.findPerson(commentProject.getName());
+        Project foundProject = model.findProject(commentProject.getName());
 
         if (!foundProject.hasMember(commentFrom)) {
             throw new CommandException(String.format(MESSAGE_MEMBER_NOT_FOUND, commentFrom));
         }
 
-        Person project = model.findPerson(commentProject.getName());
-        project.addComment(comment);
+        foundProject.addComment(comment);
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, comment, Messages.format(commentProject)));
     }

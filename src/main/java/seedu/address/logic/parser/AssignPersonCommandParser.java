@@ -4,7 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.AssignPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -32,7 +32,7 @@ public class AssignPersonCommandParser implements Parser<AssignPersonCommand> {
             if ((taskName.length() == 0) || (projectName.length() == 0) || (member.length() == 0)) {
                 throw new ParseException("Please enter the task, project and member fields");
             }
-            Person project = new Person(ParserUtil.parseName(projectName));
+            Project project = new Project(ParserUtil.parseName(projectName));
             Task newTask = new Task(taskName);
             return new AssignPersonCommand(member, newTask, project);
         } catch (IndexOutOfBoundsException e) {

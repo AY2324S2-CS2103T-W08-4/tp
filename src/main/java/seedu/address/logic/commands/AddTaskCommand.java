@@ -6,7 +6,8 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.NameEqualsPredicate;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
@@ -26,12 +27,12 @@ public class AddTaskCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "Task %1$s already exists in project %2$s";
 
     private final Task toAdd;
-    private final Person taskProject;
+    private final Project taskProject;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddTaskCommand(Task task, Person taskProject) {
+    public AddTaskCommand(Task task, Project taskProject) {
         requireNonNull(task);
         requireNonNull(taskProject);
         this.toAdd = task;
@@ -41,13 +42,13 @@ public class AddTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasPerson(taskProject)) {
+        if (!model.hasProject(taskProject)) {
             throw new CommandException(String.format(
                 MESSAGE_PROJECT_NOT_FOUND,
                 Messages.format(taskProject)));
         }
 
-        Person combineTask = model.findPerson(taskProject.getName());
+        Project combineTask = model.findProject(taskProject.getName());
 
         if (combineTask.hasTask(toAdd)) {
             throw new CommandException(String.format(
@@ -57,6 +58,9 @@ public class AddTaskCommand extends Command {
         }
 
         combineTask.addTask(toAdd);
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd), Messages.format(combineTask)));
     }
 

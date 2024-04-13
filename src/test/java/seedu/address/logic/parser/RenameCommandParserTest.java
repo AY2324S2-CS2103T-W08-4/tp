@@ -9,17 +9,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.EditProjectNameCommand;
 import seedu.address.logic.commands.EditTaskNameCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
-
-
 
 class RenameCommandParserTest {
     private RenameCommandParser parser = new RenameCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task task = new Task("task");
 
         assertParseSuccess(parser, "A /of project",
@@ -47,10 +45,6 @@ class RenameCommandParserTest {
         // missing task name
         assertParseFailure(parser, "A /of  /in proj",
                 "Please enter both the target task name and the project it belongs to");
-
-
-
-
     }
 
 }

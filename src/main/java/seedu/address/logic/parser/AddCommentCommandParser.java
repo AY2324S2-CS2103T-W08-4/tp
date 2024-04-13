@@ -6,8 +6,8 @@ import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 
 /**
@@ -46,7 +46,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             }
             Member member = new Member(memberName);
             Name name = ParserUtil.parseName(projectName);
-            Person project = new Person(name);
+            Project project = new Project(name);
             return new AddCommentCommand(project, member, comment);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(

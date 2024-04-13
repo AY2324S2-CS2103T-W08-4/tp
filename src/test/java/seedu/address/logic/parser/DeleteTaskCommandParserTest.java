@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 class DeleteTaskCommandParserTest {
@@ -16,7 +16,7 @@ class DeleteTaskCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteTaskCommand() {
-        Person project = new Person(new Name("project"));
+        Project project = new Project(new Name("project"));
         Task task = new Task("task");
         assertParseSuccess(parser, "task /in project", new DeleteTaskCommand(task, project));
     }

@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a task to a project.
@@ -19,12 +22,12 @@ public class SetProjectStatusCommand extends SetStatusCommand {
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
 
-    private final Person project;
+    private final Project project;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public SetProjectStatusCommand(String status, Person project) {
+    public SetProjectStatusCommand(String status, Project project) {
         super(status);
         requireNonNull(project);
         this.project = project;
@@ -34,23 +37,32 @@ public class SetProjectStatusCommand extends SetStatusCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPerson(project)) {
+        if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
 
-        Person statusProject = model.findPerson(project.getName());
+        Project statusProject = model.findProject(project.getName());
 
+        Project dupProject = statusProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        model.setProject(statusProject, dupProject);
+        Project realProject = dupProject.createEditedProject(project.getName());
+        String resultString = "";
         if (isCompleted()) {
-            statusProject.setComplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "complete"));
+            realProject.setComplete();
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "complete");
         } else if (isIncompleted()) {
-            statusProject.setIncomplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "incomplete"));
+            realProject.setIncomplete();
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "incomplete");
         } else {
             throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
+        model.setProject(dupProject, realProject);
+
+        model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
+        return new CommandResult(resultString);
     }
 
     @Override

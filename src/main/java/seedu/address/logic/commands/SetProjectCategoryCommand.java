@@ -1,12 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Name;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a category to a project.
@@ -21,14 +24,14 @@ public class SetProjectCategoryCommand extends Command {
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
 
-    private final Person project;
+    private final Project project;
     private final String category;
 
     /**
      * Creates an SetProjectCategoryCommand to add the specified {@code project}
      */
 
-    public SetProjectCategoryCommand(String categoryName, Person project) {
+    public SetProjectCategoryCommand(String categoryName, Project project) {
         requireNonNull(project);
         requireNonNull(categoryName);
         this.project = project;
@@ -38,16 +41,20 @@ public class SetProjectCategoryCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!model.hasPerson(project)) {
+        if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
 
-        Person categoryProject = model.findPerson(project.getName());
-        categoryProject.setCategory(category);
-
-
+        Project categoryProject = model.findProject(project.getName());
+        Project dupProject = categoryProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        model.setProject(categoryProject, dupProject);
+        Project realProject = dupProject.createEditedProject(project.getName());
+        realProject.setCategory(category);
+        model.setProject(dupProject, realProject);
+        model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
         return new CommandResult(String.format(MESSAGE_SHOW_PROJECT_SUCCESS,
                 Messages.format(categoryProject), category));
     }

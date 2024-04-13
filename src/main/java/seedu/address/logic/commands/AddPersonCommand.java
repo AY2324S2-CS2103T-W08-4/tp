@@ -6,8 +6,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 
 /**
  * Adds a task to a project.
@@ -22,14 +23,14 @@ public class AddPersonCommand extends Command {
             + "Please make sure the project exists.";
 
     public static final String MESSAGE_SUCCESS = "The person %1$s has been assigned to the following project %2$s.";
-    private final Person project;
+    private final Project project;
 
     private final Member member;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddPersonCommand(Member member, Person project) {
+    public AddPersonCommand(Member member, Project project) {
         requireNonNull(project);
         requireNonNull(member);
         this.project = project;
@@ -39,7 +40,7 @@ public class AddPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        Person projectAssign = model.findPerson(project.getName());
+        Project projectAssign = model.findProject(project.getName());
 
         if (projectAssign.equals(null)) {
             throw new CommandException(String.format(
@@ -48,6 +49,10 @@ public class AddPersonCommand extends Command {
         }
 
         projectAssign.addMember(member);
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, member, Messages.format(projectAssign)));
     }

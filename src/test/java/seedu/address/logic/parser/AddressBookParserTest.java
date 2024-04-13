@@ -12,22 +12,21 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddProjectCommand;
 import seedu.address.logic.commands.DeleteProjectCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditProjectDescriptor;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
+import seedu.address.testutil.ProjectUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final PlannerParser parser = new PlannerParser();
 
     @Test
     public void parseCommand_addProject() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddProjectCommand command = (AddProjectCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+        Project person = new ProjectBuilder().build();
+        AddProjectCommand command = (AddProjectCommand) parser.parseCommand(ProjectUtil.getAddCommand(person));
         assertEquals(new AddProjectCommand(person), command);
     }
 
@@ -46,8 +45,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        Project person = new ProjectBuilder().build();
+        EditProjectDescriptor descriptor = new EditProjectDescriptor(person);
         //edit function not yet implemented
         assertEquals(0, 0);
     }

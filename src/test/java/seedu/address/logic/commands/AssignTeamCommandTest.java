@@ -12,13 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.AssignTeamCommandParser;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.project.Project;
+import seedu.address.testutil.ProjectBuilder;
 
 
 class AssignTeamCommandTest {
 
-    private Person taskProject = new PersonBuilder().build();
+    private Project taskProject = new ProjectBuilder().build();
     private List<String> team = new ArrayList<>();
     private AssignTeamCommandParser parser = new AssignTeamCommandParser();
 
@@ -36,7 +36,7 @@ class AssignTeamCommandTest {
         List<String> teamB = new ArrayList<>();
         teamA.add("James");
         teamB.add("Rachel");
-        Person projectB = new Person(new Name("B"));
+        Project projectB = new Project(new Name("B"));
         AssignTeamCommand deleteJames = new AssignTeamCommand(teamA, taskProject);
         AssignTeamCommand deleteBob = new AssignTeamCommand(teamB, taskProject);
         AssignTeamCommand deleteJamesDiffProject = new AssignTeamCommand(teamA, projectB);
