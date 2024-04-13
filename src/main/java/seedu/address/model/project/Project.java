@@ -29,7 +29,7 @@ public class Project {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private List<Member> team = new ArrayList<>();
-    private String status = "None";
+    private String status;
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -75,6 +75,15 @@ public class Project {
      */
     public void addTask(Task task) {
         taskList.add(task);
+    }
+
+    public void setTaskList(List<Task> taskList) {
+        this.taskList.addAll(taskList);
+    }
+
+
+    public void setCommentList(List<Comment> commentList) {
+        this.comments.addAll(commentList);
     }
 
     /**
@@ -151,6 +160,10 @@ public class Project {
         this.team = team;
     }
 
+    public void setComment(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     /**
      * Sets the task status as complete
      */
@@ -200,7 +213,9 @@ public class Project {
      * @return the string represeting the status of the task
      */
     public String getStatus() {
-        return status;
+        return status == null
+                ? ""
+                : status;
     }
 
     /**
@@ -259,6 +274,10 @@ public class Project {
                 .collect(Collectors.joining(", "));
     }
 
+    public List<Member> getTeamList() {
+        return team;
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
@@ -286,6 +305,17 @@ public class Project {
     public Project createEditedProject(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         Project newProject = new Project(newName, newTaskList);
+        newProject.setDeadline(this.deadlineDate);
+        newProject.setCategory(this.category);
+        newProject.assignTeam(this.team);
+        newProject.setComment(this.comments);
+
+        if (this.isCompleted()) {
+            newProject.setComplete();
+        } else {
+            newProject.setIncomplete();
+        }
+
         return newProject;
     }
 
