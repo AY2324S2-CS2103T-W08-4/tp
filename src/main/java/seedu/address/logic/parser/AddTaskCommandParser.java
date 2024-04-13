@@ -31,13 +31,13 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             if ((taskName.length() == 0) || (projectName.length() == 0)) {
                 throw new ParseException("Please enter the task and project fields");
             }
-            Name taskname = ParserUtil.parseName(taskName);
+            ParserUtil.parseName(taskName);
             Task task = new Task(taskName);
             Name name = ParserUtil.parseName(projectName);
             Project project = new Project(name);
             return new AddTaskCommand(task, project);
         } catch (ParseException e) {
-            throw new ParseException("Names should be alphanumerical");
+            throw new ParseException("Names should be alphanumerical and not empty.");
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,

@@ -42,7 +42,7 @@ public class AddProjectCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, "",
-                expectedMessage);
+                "Project name should be alphanumerical and not empty.");
     }
 
 }

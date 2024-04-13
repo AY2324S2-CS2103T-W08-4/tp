@@ -36,7 +36,7 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
             String deadline = args.split(" /to")[0].trim();
             formatter.withResolverStyle(ResolverStyle.STRICT);
             LocalDate.parse(deadline, formatter.withResolverStyle(ResolverStyle.STRICT));
-        if (!args.contains(" /in ")) {
+            if (!args.contains(" /in ")) {
                 //SetDeadlineProjectCommand
                 String projectName = args.split("/to ")[1];
                 if ((projectName.length() == 0)) {
