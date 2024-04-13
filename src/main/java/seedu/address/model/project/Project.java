@@ -305,7 +305,9 @@ public class Project {
     public Project createEditedProject(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         Project newProject = new Project(newName, newTaskList);
-        newProject.setDeadline(this.deadlineDate.format(formatter));
+        if (deadlineDate != null) {
+            newProject.setDeadline(this.deadlineDate.format(formatter));
+        }
         newProject.setCategory(this.category);
         newProject.assignTeam(this.team);
         newProject.setComment(this.comments);
