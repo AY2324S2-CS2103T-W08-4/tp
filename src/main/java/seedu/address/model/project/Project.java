@@ -151,6 +151,10 @@ public class Project {
         this.team = team;
     }
 
+    public void setComment(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     /**
      * Sets the task status as complete
      */
@@ -286,6 +290,17 @@ public class Project {
     public Project createEditedProject(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         Project newProject = new Project(newName, newTaskList);
+        newProject.setDeadline(this.deadlineDate.format(formatter));
+        newProject.setCategory(this.category);
+        newProject.assignTeam(this.team);
+        newProject.setComment(this.comments);
+
+        if (this.isCompleted()) {
+            newProject.setComplete();
+        } else {
+            newProject.setIncomplete();
+        }
+
         return newProject;
     }
 
