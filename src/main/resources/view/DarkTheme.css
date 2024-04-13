@@ -133,11 +133,20 @@
   -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.scroll-pane {
+  -fx-background-color:  transparent;
+}
+
+.scroll-pane > .viewport {
+  -fx-background-color:  transparent;
+}
 .pane-with-border {
   -fx-background-color: derive(#1d1d1d, 20%);
   -fx-border-color: derive(#1d1d1d, 10%);
   -fx-border-top-width: 1px;
 }
+
+
 
 .status-bar {
   -fx-background-color: derive(#1d1d1d, 30%);
@@ -363,3 +372,5 @@
   -fx-background-radius: 2;
   -fx-font-size: 11;
 }
+
+
