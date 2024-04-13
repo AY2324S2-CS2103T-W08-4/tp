@@ -2,6 +2,7 @@ package seedu.address.model.project;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Project {
 
     private final List<Task> taskList;
 
-    private String deadlineDate;
+    private LocalDate deadlineDate;
 
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
@@ -207,7 +208,7 @@ public class Project {
      * @param deadline the datetime string to be parsed and set as deadline
      */
     public void setDeadline(String deadline) {
-        this.deadlineDate = deadline;
+        this.deadlineDate = LocalDate.parse(deadline, formatter);
     }
 
     /**
@@ -243,7 +244,7 @@ public class Project {
     public String getDeadlineString() {
         return deadlineDate == null
                 ? ""
-                : deadlineDate;
+                : deadlineDate.format(formatter);
     }
 
     @Override

@@ -188,7 +188,7 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> has been set with the following deadline <DEADLINE>.`
-- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Set deadline to task : `set deadline`
@@ -203,12 +203,12 @@ Description: An example of the result after executing the "show project" command
 
 **Examples:**
 
-- `Set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
+- `set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`
 
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 - Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
 
@@ -257,7 +257,9 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** Person name must be unique within the project.
+🔔 **Warning**: Each person name cannot be empty.
+
+⚠️ **Note:** We allow duplicate names, but it is recommended to add unique names within the project.
 
 🔔 **Note**: The part of the format in `[ ]` is optional
 
