@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
-
-import java.util.Random;
+import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,21 +31,6 @@ public class SetProjectStatusCommand extends SetStatusCommand {
         super(status);
         requireNonNull(project);
         this.project = project;
-    }
-
-    /**
-     * Creates a random string of digits with the specified length
-     *
-     * @param length the length of the resulting string
-     * @return the string
-     */
-    private static String generateRandomDigitString(int length) {
-        Random random = new Random();
-        StringBuilder sb = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
-            sb.append(random.nextInt(10));
-        }
-        return sb.toString();
     }
 
     @Override
