@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
@@ -57,16 +58,23 @@ public class SetTaskStatusCommand extends SetStatusCommand {
         }
 
         Task statusTask = statusProject.findTask(task.getName());
+        String resultString = "";
 
         if (isCompleted()) {
             statusTask.setComplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "complete"));
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "complete");
+
         } else if (isIncompleted()) {
             statusTask.setIncomplete();
-            return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "incomplete"));
+            resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "incomplete");
         } else {
             throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
+        return new CommandResult(resultString);
     }
 
     @Override

@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Comment;
 import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
@@ -62,6 +63,10 @@ public class AddCommentCommand extends Command {
         }
 
         foundProject.addComment(comment);
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, comment, Messages.format(commentProject)));
     }
