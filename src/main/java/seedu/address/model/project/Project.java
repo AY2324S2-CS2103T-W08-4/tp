@@ -28,7 +28,7 @@ public class Project {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     private List<Member> team = new ArrayList<>();
-    private String status = "None";
+    private String status;
     private String category;
 
     private List<Comment> comments = new ArrayList<>();
@@ -80,6 +80,10 @@ public class Project {
         this.taskList.addAll(taskList);
     }
 
+
+    public void setCommentList(List<Comment> commentList) {
+        this.comments.addAll(commentList);
+    }
 
     /**
      * removes a project in the specified project
@@ -208,7 +212,9 @@ public class Project {
      * @return the string represeting the status of the task
      */
     public String getStatus() {
-        return status;
+        return status == null
+                ? ""
+                : status;
     }
 
     /**

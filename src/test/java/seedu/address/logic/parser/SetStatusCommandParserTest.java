@@ -21,7 +21,7 @@ class SetStatusCommandParserTest {
         Project project = new Project(new Name("project"));
         Task task = new Task("task");
 
-        assertParseSuccess(parser, "complete /to project",
+        assertParseSuccess(parser, "complete /of project",
                 new SetProjectStatusCommand("complete", project));
 
         assertParseSuccess(parser, "complete /of task /in project",
@@ -35,7 +35,7 @@ class SetStatusCommandParserTest {
 
         // missing project name
         assertParseFailure(parser, "A /of ",
-                "Please enter the status, project and task fields");
+                "Please enter the status and project fields");
 
         assertParseFailure(parser, "A /of task /in ",
                 expectedMessageTask);

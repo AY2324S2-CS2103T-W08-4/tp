@@ -9,8 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Name;
-import seedu.address.model.project.Project;
+import seedu.address.model.project.Comment;
 import seedu.address.model.project.Member;
+import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 
@@ -30,17 +31,20 @@ class JsonAdaptedProject {
     private final List<JsonAdaptedMember> team = new ArrayList<>();
     private final List<JsonAdaptedTask> doneTaskList = new ArrayList<>();
     private final List<JsonAdaptedTask> undoneTaskList = new ArrayList<>();
+    private final List<JsonAdaptedComment> commentList = new ArrayList<>();
 
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedProject} with the given project details.
      */
     @JsonCreator
     public JsonAdaptedProject(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
-            @JsonProperty("category") String category, @JsonProperty("projectStatus") String projectStatus,
-            @JsonProperty("team") List<JsonAdaptedMember> team,
-            @JsonProperty("doneTaskList") List<JsonAdaptedTask> doneTaskList,
-            @JsonProperty("undoneTaskList") List<JsonAdaptedTask> undoneTaskList) {
+                              @JsonProperty("category") String category,
+                              @JsonProperty("projectStatus") String projectStatus,
+                              @JsonProperty("team") List<JsonAdaptedMember> team,
+                              @JsonProperty("doneTaskList") List<JsonAdaptedTask> doneTaskList,
+                              @JsonProperty("undoneTaskList") List<JsonAdaptedTask> undoneTaskList,
+                              @JsonProperty("commentList") List<JsonAdaptedComment> commentList) {
         this.name = name;
         this.deadline = deadline;
         this.category = category;
@@ -54,6 +58,11 @@ class JsonAdaptedProject {
         if (undoneTaskList != null) {
             this.undoneTaskList.addAll(undoneTaskList);
         }
+
+        if (commentList != null) {
+            this.commentList.addAll(commentList);
+        }
+
     }
 
     /**
@@ -72,6 +81,10 @@ class JsonAdaptedProject {
                 .collect(Collectors.toList()));
         undoneTaskList.addAll(source.getUndoneTasks().stream()
                 .map(JsonAdaptedTask::new)
+                .collect(Collectors.toList()));
+
+        commentList.addAll(source.getComments().stream()
+                .map(JsonAdaptedComment::new)
                 .collect(Collectors.toList()));
 
     }
@@ -95,6 +108,12 @@ class JsonAdaptedProject {
         }
         for (JsonAdaptedTask task : undoneTaskList) {
             tasks.add(task.toModelType());
+
+        }
+
+        final List<Comment> comments = new ArrayList<>();
+        for (JsonAdaptedComment comment : commentList) {
+            comments.add(comment.toModelType());
         }
 
         if (name == null) {
@@ -121,6 +140,9 @@ class JsonAdaptedProject {
         }
         toReturn.assignTeam(members);
         toReturn.setTaskList(tasks);
+
+        toReturn.setCommentList(comments);
+
 
         return toReturn;
     }
