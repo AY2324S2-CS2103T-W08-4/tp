@@ -48,7 +48,8 @@ public class SetProjectCategoryCommand extends Command {
         }
 
         Project categoryProject = model.findProject(project.getName());
-        Project dupProject = categoryProject.createEditedProject(new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        Project dupProject = categoryProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
         model.setProject(categoryProject, dupProject);
         Project realProject = dupProject.createEditedProject(project.getName());
         realProject.setCategory(category);

@@ -60,13 +60,13 @@ public class DeletePersonCommand extends Command {
         project.removeMember(toDelete);
 
         // cascading
-        for(Task task : project.getUndoneTasks()) {
-            if(task.getMemberName().equals(toDelete.getName().fullName)) {
+        for (Task task : project.getUndoneTasks()) {
+            if (task.getMemberName().equals(toDelete.getName().fullName)) {
                 task.assignPerson(null);
             }
         }
-        for(Task task : project.getDoneTasks()) {
-            if(task.getMemberName().equals(toDelete.getName().fullName)) {
+        for (Task task : project.getDoneTasks()) {
+            if (task.getMemberName().equals(toDelete.getName().fullName)) {
                 task.assignPerson(null);
             }
         }

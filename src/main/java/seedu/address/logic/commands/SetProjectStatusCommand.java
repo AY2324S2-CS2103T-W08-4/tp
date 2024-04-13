@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -45,7 +45,8 @@ public class SetProjectStatusCommand extends SetStatusCommand {
 
         Project statusProject = model.findProject(project.getName());
 
-        Project dupProject = statusProject.createEditedProject(new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        Project dupProject = statusProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
         model.setProject(statusProject, dupProject);
         Project realProject = dupProject.createEditedProject(project.getName());
         String resultString = "";

@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -56,7 +56,8 @@ public class SetDeadlineProjectCommand extends SetDeadlineCommand {
         }
 
         Project deadlineProject = model.findProject(project.getName());
-        Project dupProject = deadlineProject.createEditedProject(new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        Project dupProject = deadlineProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
         model.setProject(deadlineProject, dupProject);
         Project realProject = dupProject.createEditedProject(project.getName());
         realProject.setDeadline(deadline);
