@@ -32,7 +32,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));
             }
-            String comment = args.split(" /from ")[0];
+            String comment = args.split(" /from ")[0].trim();
             String memberAndProject = args.split(" /from ")[1];
             if (comment.length() == 0) {
                 throw new ParseException("Please enter a comment");

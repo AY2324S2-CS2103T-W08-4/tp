@@ -2,6 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+
 import seedu.address.logic.commands.SetDeadlineCommand;
 import seedu.address.logic.commands.SetDeadlineProjectCommand;
 import seedu.address.logic.commands.SetDeadlineTaskCommand;
@@ -14,6 +19,7 @@ import seedu.address.model.project.Task;
  * Parses input arguments and creates a new SetDeadlineCommand object
  */
 public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d uuuu");
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -28,6 +34,8 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
                         SetDeadlineTaskCommand.MESSAGE_USAGE));
             }
             String deadline = args.split(" /to")[0].trim();
+            formatter.withResolverStyle(ResolverStyle.STRICT);
+            LocalDate.parse(deadline, formatter.withResolverStyle(ResolverStyle.STRICT));
             if (!args.contains(" /in ")) {
                 //SetDeadlineProjectCommand
                 String projectName = args.split("/to ")[1];
@@ -54,6 +62,8 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
                     SetDeadlineTaskCommand.MESSAGE_USAGE));
+        } catch (DateTimeParseException e) {
+            throw new ParseException("Please enter valid date.");
         }
     }
 }

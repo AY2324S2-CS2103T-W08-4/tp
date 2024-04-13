@@ -17,7 +17,7 @@ public class AddPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "add person";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "/to PROJECT_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " /to PROJECT_NAME";
 
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";

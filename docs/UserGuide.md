@@ -200,7 +200,7 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> has been set with the following deadline <DEADLINE>.`
-- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
 ### Set deadline to task : `set deadline`
@@ -222,7 +222,7 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `The deadline %1s has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 - Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
 
@@ -271,9 +271,11 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** The specified project must exist.
 
+🔔 **Warning**: Each person name cannot be empty.
+
 ⚠️ **Warning:** This will override the current member list of the project; if `Joe` and `Linda` were members of project `CS2103` before `assign team Paul /to CS2103` is called, `Joe` and `Linda` will be removed from the project.
 
-⚠️ **Warning:** Duplecate person names are allowed, but not recommended. It can cause confusion for both you and the app.
+⚠️ **Warning:** Duplicate person names are allowed, but not recommended. It can cause confusion for both you and the app.
 
 ⚠️ **Warning:** Person name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
 

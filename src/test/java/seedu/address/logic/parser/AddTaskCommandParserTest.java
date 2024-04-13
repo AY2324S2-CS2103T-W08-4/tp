@@ -31,7 +31,7 @@ class AddTaskCommandParserTest {
 
         // missing project name
         assertParseFailure(parser, "task",
-                expectedMessage);
+                "Names should be alphanumerical and not empty.");
 
         assertParseFailure(parser, "task /to ",
                 expectedMessage);

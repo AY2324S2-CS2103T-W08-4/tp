@@ -27,6 +27,8 @@ public class AddProjectCommandParser implements Parser<AddProjectCommand> {
             Name name = ParserUtil.parseName(projectName);
             Project project = new Project(name);
             return new AddProjectCommand(project);
+        } catch (ParseException e) {
+            throw new ParseException("Project name should be alphanumerical and not empty.");
         } catch (Exception e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
