@@ -14,6 +14,7 @@ import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
+
 /**
  * Jackson-friendly version of {@link Project}.
  */
@@ -31,6 +32,7 @@ class JsonAdaptedProject {
     private final List<JsonAdaptedTask> doneTaskList = new ArrayList<>();
     private final List<JsonAdaptedTask> undoneTaskList = new ArrayList<>();
     private final List<JsonAdaptedComment> commentList = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedProject} with the given project details.
@@ -56,9 +58,11 @@ class JsonAdaptedProject {
         if (undoneTaskList != null) {
             this.undoneTaskList.addAll(undoneTaskList);
         }
+
         if (commentList != null) {
             this.commentList.addAll(commentList);
         }
+
     }
 
     /**
@@ -78,9 +82,11 @@ class JsonAdaptedProject {
         undoneTaskList.addAll(source.getUndoneTasks().stream()
                 .map(JsonAdaptedTask::new)
                 .collect(Collectors.toList()));
+
         commentList.addAll(source.getComments().stream()
                 .map(JsonAdaptedComment::new)
                 .collect(Collectors.toList()));
+
     }
 
     /**
@@ -102,6 +108,7 @@ class JsonAdaptedProject {
         }
         for (JsonAdaptedTask task : undoneTaskList) {
             tasks.add(task.toModelType());
+
         }
 
         final List<Comment> comments = new ArrayList<>();
@@ -133,7 +140,9 @@ class JsonAdaptedProject {
         }
         toReturn.assignTeam(members);
         toReturn.setTaskList(tasks);
+
         toReturn.setCommentList(comments);
+
 
         return toReturn;
     }

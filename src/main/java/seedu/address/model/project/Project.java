@@ -80,9 +80,11 @@ public class Project {
         this.taskList.addAll(taskList);
     }
 
+
     public void setCommentList(List<Comment> commentList) {
         this.comments.addAll(commentList);
     }
+
     /**
      * removes a project in the specified project
      * @param task task to be removed from the project list
@@ -155,6 +157,10 @@ public class Project {
 
     public void assignTeam(List<Member> team) {
         this.team = team;
+    }
+
+    public void setComment(List<Comment> comments) {
+        this.comments = comments;
     }
 
     /**
@@ -298,6 +304,17 @@ public class Project {
     public Project createEditedProject(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         Project newProject = new Project(newName, newTaskList);
+        newProject.setDeadline(this.deadlineDate);
+        newProject.setCategory(this.category);
+        newProject.assignTeam(this.team);
+        newProject.setComment(this.comments);
+
+        if (this.isCompleted()) {
+            newProject.setComplete();
+        } else {
+            newProject.setIncomplete();
+        }
+
         return newProject;
     }
 

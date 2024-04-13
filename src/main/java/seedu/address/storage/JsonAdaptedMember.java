@@ -7,9 +7,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.project.Member;
 
 
+
 /**
  * Jackson-friendly version of {@link Member}.
  */
+
 public class JsonAdaptedMember {
     private final String name;
 
@@ -39,6 +41,7 @@ public class JsonAdaptedMember {
      * @throws IllegalValueException if there were any data constraints violated in the adapted Member.
      */
     public Member toModelType() throws IllegalValueException {
+
         return new Member(name);
     }
 }

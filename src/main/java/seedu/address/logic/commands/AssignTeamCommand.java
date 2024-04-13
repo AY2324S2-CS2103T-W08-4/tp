@@ -9,6 +9,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 
@@ -56,6 +57,10 @@ public class AssignTeamCommand extends Command {
         }
 
         projectAssign.assignTeam(this.team);
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, team, Messages.format(projectAssign)));
     }

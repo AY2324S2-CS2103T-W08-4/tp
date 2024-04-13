@@ -1,11 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.StringUtil.generateRandomDigitString;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PROJECTS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 
 /**
@@ -45,9 +48,13 @@ public class SetProjectCategoryCommand extends Command {
         }
 
         Project categoryProject = model.findProject(project.getName());
-        categoryProject.setCategory(category);
-
-
+        Project dupProject = categoryProject.createEditedProject(
+                new Name(generateRandomDigitString(20).toString())); // duplicate project with dummy name
+        model.setProject(categoryProject, dupProject);
+        Project realProject = dupProject.createEditedProject(project.getName());
+        realProject.setCategory(category);
+        model.setProject(dupProject, realProject);
+        model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
         return new CommandResult(String.format(MESSAGE_SHOW_PROJECT_SUCCESS,
                 Messages.format(categoryProject), category));
     }

@@ -37,7 +37,6 @@ public class JsonAdaptedTask {
     }
 
 
-
     /**
      * Converts this Jackson-friendly adapted Member object into the model's {@code Member} object.
      *
