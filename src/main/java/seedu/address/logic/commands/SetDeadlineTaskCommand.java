@@ -6,6 +6,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
@@ -68,6 +69,10 @@ public class SetDeadlineTaskCommand extends SetDeadlineCommand {
         Task deadlineTask = deadlineProject.findTask(task.getName());
 
         deadlineTask.setDeadline(deadline);
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(deadlineTask), deadline));
     }

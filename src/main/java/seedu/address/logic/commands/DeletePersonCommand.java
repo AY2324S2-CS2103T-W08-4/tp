@@ -6,8 +6,10 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
+import seedu.address.model.project.Task;
 
 /**
  * Deletes a member from a project
@@ -56,6 +58,22 @@ public class DeletePersonCommand extends Command {
         }
 
         project.removeMember(toDelete);
+
+        // cascading
+        for(Task task : project.getUndoneTasks()) {
+            if(task.getMemberName().equals(toDelete.getName().fullName)) {
+                task.assignPerson(null);
+            }
+        }
+        for(Task task : project.getDoneTasks()) {
+            if(task.getMemberName().equals(toDelete.getName().fullName)) {
+                task.assignPerson(null);
+            }
+        }
+
+        model.updateCurrentProject(
+            new NameEqualsPredicate(
+                model.getCurrentProject().get(0).getName().fullName));
 
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
