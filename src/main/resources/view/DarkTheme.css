@@ -373,4 +373,12 @@
   -fx-font-size: 11;
 }
 
+.centeredTextArea {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+}
 
+
+.centeredTextArea .scroll-pane .content .text {
+    -fx-text-alignment: center;
+}
