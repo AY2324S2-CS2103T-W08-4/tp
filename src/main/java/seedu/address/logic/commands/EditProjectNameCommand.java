@@ -22,6 +22,9 @@ public class EditProjectNameCommand extends RenameCommand {
 
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";
+
+    public static final String MESSAGE_RESULTS_IN_DUPLICATE_PROJECT = "Project %1$s already exists: "
+            + "Please set the name of the project to be unique.";
     private final Name changeTo;
     private final Project targetProject;
     /**
@@ -43,9 +46,14 @@ public class EditProjectNameCommand extends RenameCommand {
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(targetProject)));
         }
-        Project personToEdit = model.findProject(targetProject.getName());
-        Project newPerson = personToEdit.createEditedProject(changeTo);
-        model.setProject(personToEdit, newPerson);
+        Project projectToEdit = model.findProject(targetProject.getName());
+        Project newProject = projectToEdit.createEditedProject(changeTo);
+        if (model.hasProject(newProject)) {
+            throw new CommandException(String.format(
+                    MESSAGE_RESULTS_IN_DUPLICATE_PROJECT,
+                    Messages.format(newProject)));
+        }
+        model.setProject(projectToEdit, newProject);
         model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
