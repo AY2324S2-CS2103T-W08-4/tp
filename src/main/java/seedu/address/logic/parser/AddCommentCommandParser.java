@@ -22,7 +22,8 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
      */
     public AddCommentCommand parse(String args) throws ParseException {
         try {
-            if (!args.contains(" /from ") || !args.contains(" /to ")) { // Check if the input correctly uses "/to" or "/from"
+            if (!args.contains(" /from ") || !args.contains(" /to ")) {
+                // Check if the input correctly uses "/to" or "/from"
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));
