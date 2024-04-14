@@ -37,7 +37,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             Project project = new Project(name);
             return new AddTaskCommand(task, project);
         } catch (ParseException e) {
-            throw new ParseException("Names should be alphanumerical and not empty.");
+            throw new ParseException(e.getMessage());
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,

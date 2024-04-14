@@ -7,12 +7,29 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class ParseException extends IllegalValueException {
 
+    private final String message;
+
+    /**
+     * Constructs a new {@code ParseException} with the specified detail message.
+     *
+     * @param message the detail message of the exception
+     */
     public ParseException(String message) {
         super(message);
+        this.message = message;
     }
 
+    /**
+     * Constructs a new {@code ParseException} with the specified detail message and cause.
+     *
+     * @param message the detail message of the exception
+     * @param cause the cause of the exception
+     */
     public ParseException(String message, Throwable cause) {
         super(message, cause);
+        this.message = message;
     }
-
+    public String getMessage() {
+        return message;
+    }
 }
