@@ -11,23 +11,18 @@ import seedu.address.model.project.Project;
 
 
 /**
- * Parses input arguments and creates a new AddProjectCommand object
+ * Parses input arguments and creates a new AddCommentCommand object
  */
 public class AddCommentCommandParser implements Parser<AddCommentCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddProjectCommand
-     * and returns an AddProjectCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddCommentCommand
+     * and returns an AddCommentCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommentCommand parse(String args) throws ParseException {
         try {
-            if (!args.contains(" /from ")) { // Check if the input correctly uses "/to"
-                throw new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddCommentCommand.MESSAGE_USAGE));
-            }
-            if (!args.contains(" /to ")) { // Check if the input correctly uses "/to"
+            if (!args.contains(" /from ") || !args.contains(" /to ")) { // Check if the input correctly uses "/to" or "/from"
                 throw new ParseException(String.format(
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         AddCommentCommand.MESSAGE_USAGE));

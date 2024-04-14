@@ -12,7 +12,7 @@ import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 
 /**
- * Adds a project to the DevPlanPro.
+ * Adds a comment to the DevPlanPro.
  */
 public class AddCommentCommand extends Command {
 
@@ -36,7 +36,7 @@ public class AddCommentCommand extends Command {
     private Comment comment;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommentCommand to add to the specified {@code Project}
      */
     public AddCommentCommand(Project project, Member member, String comment) {
         requireNonNull(project);

@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Adds a status to a task.
+ * Adds a status to a task or project.
  */
 public abstract class SetStatusCommand extends Command {
 
@@ -16,7 +16,7 @@ public abstract class SetStatusCommand extends Command {
     private final String status;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an SetStatusCommand
      */
     public SetStatusCommand(String status) {
         requireNonNull(status);

@@ -13,7 +13,7 @@ import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
@@ -40,7 +40,7 @@ public class TaskListPanel extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TaskListPanel} with the given {@code Project}.
      */
     public TaskListPanel(Project currentProject) {
         super(FXML);

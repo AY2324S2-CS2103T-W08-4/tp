@@ -27,7 +27,7 @@ public class JsonAdaptedComment {
     }
 
     /**
-     * Converts a given {@code Member} into this class for Jackson use.
+     * Converts a given {@code Comment} into this class for Jackson use.
      */
     public JsonAdaptedComment(Comment comment) {
         this.comment = comment.toString();

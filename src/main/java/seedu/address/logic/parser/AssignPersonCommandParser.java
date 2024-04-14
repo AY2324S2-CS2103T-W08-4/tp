@@ -9,13 +9,13 @@ import seedu.address.model.project.Task;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AssignPersonCommand object
  */
 public class AssignPersonCommandParser implements Parser<AssignPersonCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AssignPersonCommand
+     * and returns an AssignPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AssignPersonCommand parse(String args) throws ParseException {

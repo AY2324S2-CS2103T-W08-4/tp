@@ -30,7 +30,7 @@ public class AddTaskCommand extends Command {
     private final Project taskProject;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddTaskCommand to add the specified {@code Project}
      */
     public AddTaskCommand(Task task, Project taskProject) {
         requireNonNull(task);

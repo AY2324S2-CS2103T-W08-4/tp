@@ -14,7 +14,7 @@ import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 
 /**
- * Adds a task to a project.
+ * Assign a team of members to a project.
  */
 public class AssignTeamCommand extends Command {
 
@@ -32,7 +32,7 @@ public class AssignTeamCommand extends Command {
     private final List<Member> team;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AssignTeamCommand to add the specified {@code Project}
      */
     public AssignTeamCommand(List<String> team, Project project) {
         requireNonNull(project);

@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.AddTaskCommand.MESSAGE_DUPLICATE_TASK;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameEqualsPredicate;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
@@ -30,7 +32,7 @@ public class EditTaskNameCommand extends RenameCommand {
     private final Task targetTask;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an EditTaskNameCommand to add the specified {@code Task}
      */
     public EditTaskNameCommand(Name newName, Project currentProject, Task currentTask) {
         requireNonNull(newName);
@@ -57,8 +59,18 @@ public class EditTaskNameCommand extends RenameCommand {
                     Messages.format(targetTask),
                     Messages.format(targetPerson)));
         }
+        Task duplicateTask = new Task(changeTo.fullName);
+        if (targetPerson.hasTask(duplicateTask)) {
+            throw new CommandException(String.format(
+                    MESSAGE_DUPLICATE_TASK,
+                    Messages.format(duplicateTask),
+                    Messages.format(targetPerson)));
+        }
         Task toBeChanged = targetPerson.findTask(targetTask.getName());
         toBeChanged.setName(changeTo);
+        model.updateCurrentProject(
+                new NameEqualsPredicate(
+                        model.getCurrentProject().get(0).getName().fullName));
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
                 Messages.format(targetTask),

@@ -5,7 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.model.person.Name;
 
 /**
- * Represents a Task of Project
+ * Represents a Member of Project
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Member {
@@ -14,8 +14,8 @@ public class Member {
     private final Name memberName;
 
     /**
-     * Constructs a new task object
-     * @param name the task name
+     * Constructs a new member object
+     * @param name the member's name
      */
     public Member(String name) {
         requireAllNonNull(name);
@@ -23,7 +23,7 @@ public class Member {
     }
 
     /**
-     * Get the name of the task
+     * Get the name of the member
      * @return
      */
     public Name getName() {
@@ -31,8 +31,8 @@ public class Member {
     }
 
     /**
-     * Returns true if both tasks have the same identity and data fields.
-     * This defines a stronger notion of equality between two tasks.
+     * Returns true if both members have the same name.
+     * This defines a stronger notion of equality between two members.
      */
     @Override
     public boolean equals(Object obj) {

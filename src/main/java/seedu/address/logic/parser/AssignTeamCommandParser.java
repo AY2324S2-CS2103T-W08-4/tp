@@ -12,13 +12,13 @@ import seedu.address.model.project.Project;
 
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AssignTeamCommand object
  */
 public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AssignTeamCommand
+     * and returns an AssignTeamCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AssignTeamCommand parse(String args) throws ParseException {

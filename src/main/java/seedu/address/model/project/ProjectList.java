@@ -13,11 +13,11 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * A list of projects that enforces uniqueness between its elements and does not allow nulls.
+ * A project is considered unique by comparing using {@code Project#isSameProject(Project)}. As such, adding and updating of
+ * projects uses Project#isSameProject(Project) for equality so as to ensure that the project being added or updated is
+ * unique in terms of identity in the UniqueProjectList. However, the removal of a project uses Project#equals(Object) so
+ * as to ensure that the project with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -30,7 +30,7 @@ public class ProjectList implements Iterable<Project> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent project as the given argument.
      */
     public boolean contains(Project toCheck) {
         requireNonNull(toCheck);
@@ -38,7 +38,7 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Returns the person object with the matching name in the addressbook
+     * Returns the project object with the matching name in the DevPlanPro
      */
     public Project findProject(Name name) {
         requireNonNull(name);
@@ -49,8 +49,8 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a project to the list.
+     * The project must not already exist in the list.
      */
     public void add(Project toAdd) {
         requireNonNull(toAdd);
@@ -61,9 +61,9 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the project {@code target} in the list with {@code editedProject}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The project identity of {@code editedProject} must not be the same as another existing project in the list.
      */
     public void setProject(Project target, Project editedProject) {
         requireAllNonNull(target, editedProject);
@@ -81,8 +81,8 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent project from the list.
+     * The project must exist in the list.
      */
     public void remove(Project toRemove) {
         requireNonNull(toRemove);
@@ -97,8 +97,8 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code projects}.
+     * {@code projects} must not contain duplicate projects.
      */
     public void setProjects(List<Project> projects) {
         requireAllNonNull(projects);
@@ -147,7 +147,7 @@ public class ProjectList implements Iterable<Project> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code projects} contains only unique projects.
      */
     private boolean projectsAreUnique(List<Project> projects) {
         for (int i = 0; i < projects.size() - 1; i++) {
