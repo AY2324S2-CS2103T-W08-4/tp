@@ -18,7 +18,7 @@ Welcome to the user guide for our CLI-based project management application! This
   - [Add task : `add task`](#add-task--add-task)
   - [Delete task : `delete task`](#delete-task--delete-task)
   - [Show Project : `show project`](#show-project--show-project)
-  - [Set deadline of project : `set deadline`](#set-deadline-to-project--set-deadline)
+  - [Set deadline to project : `set deadline`](#set-deadline-to-project--set-deadline)
   - [Set deadline to task : `set deadline`](#set-deadline-to-task--set-deadline)
   - [Set Project Status : `set status`](#set-project-status--set-status)
   - [Set Task Status : `set status`](#set-task-status--set-status)
@@ -94,6 +94,8 @@ Welcome to the user guide for our CLI-based project management application! This
 
 ⚠️ **Warning:** Project name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
 
+⚠️ **Warning:** A long project name can result in incomplete display of the project name, status, and category. To see more text, you can resize the window horizontally or maximize the window.
+
 **Examples:**
 
 - `add project CS2103T Duke Chatbot Project`
@@ -119,6 +121,26 @@ Welcome to the user guide for our CLI-based project management application! This
 - Success: `<PROJECT_NAME> has been deleted from the project list.`
 - Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
 
+### Show Project : `show project`
+
+Sets the current showing project as the specified project.
+
+⚠️ **Warning:** The specified project must be in the current project list. Try using `list project` before using this command if you couldn't see your project in the current project list.
+
+**Format:** `show project <PROJECT_NAME>`
+
+**Examples:**
+
+- `show project CS2101 Presentation`
+
+**Expected output:**
+
+- Success: The UI now shows the project’s information.
+- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+
+![Show Project Command Result](images/Ui.png)
+Description: An example of the result after executing the "show project" command, displaying project information in the UI.
+
 ### Add task : `add task`
 
 Adds the specified task to a project.
@@ -127,9 +149,11 @@ Adds the specified task to a project.
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The task name has to be unique within the project.
+⚠️ **Warning:** Task name has to be unique within the project.
 
 ⚠️ **Warning:** Task name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
+
+⚠️ **Warning:** Task name should be within 30 characters long. A longer name can result in incomplete display (see [known-issues](#known-issues)).
 
 **Examples:**
 
@@ -162,26 +186,6 @@ Deletes the specified task from a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
-
-### Show Project : `show project`
-
-Sets the current showing project as the specified project.
-
-⚠️ **Warning:** The specified project must be in the current project list. Try using `list project` before using this command if you couldn't see your project in the current project list.
-
-**Format:** `show project <PROJECT_NAME>`
-
-**Examples:**
-
-- `show project CS2101 Presentation`
-
-**Expected output:**
-
-- Success: The UI now shows the project’s information.
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-
-![Show Project Command Result](images/Ui.png)
-Description: An example of the result after executing the "show project" command, displaying project information in the UI.
 
 ### Set deadline to project : `set deadline`
 
@@ -228,11 +232,13 @@ Description: An example of the result after executing the "show project" command
 
 ### Set Project Status : `set status`
 
+Projects set as `complete` will have a green `complete` status text beside its name. New projects are initially set as `incomplete`.
+
 **Format:** `set status <STATUS> /of <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The status should only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the project might be considered as `incomplete`.
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Examples:**
 
@@ -246,11 +252,13 @@ Description: An example of the result after executing the "show project" command
 
 ### Set Task Status : `set status`
 
+Tasks set as `complete` will me moved to the `Done` column on the right side of the ui. New tasks are initially set as `incomplete`.
+
 ⚠️ **Warning:** The specified project must exist.
 
 ⚠️ **Warning:** The specified task must exist.
 
-⚠️ **Warning:** The status can only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the task might be considered as `incomplete`.
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Format:** `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>`
 
@@ -395,6 +403,8 @@ Similar to adding a tag to the project
 **Format:** `set category <CATEGORY> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
+
+⚠️ **Warning:** A long category can result in incomplete display of the project name, status, and category. To see more text, you can resize the window horizontally or maximize the window.
 
 **Examples:**
 
