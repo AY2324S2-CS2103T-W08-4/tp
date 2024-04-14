@@ -1,72 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox id="taskPane" fx:id="taskPane" minHeight="540" prefHeight="540"
-        xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-    <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border"
-            minWidth="280" prefWidth="280" minHeight="64" prefHeight="64">
+<VBox id="taskPane" fx:id="taskPane" minHeight="540" prefHeight="540" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <StackPane minHeight="64" minWidth="280" prefHeight="64" prefWidth="280" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets top="20" right="8" bottom="20" left="8" />
+            <Insets bottom="20" left="8" right="8" top="20" />
         </padding>
         <Label fx:id="showingProjectName" styleClass="cell_big_label" />
     </StackPane>
-    <StackPane VBox.vgrow="NEVER" styleClass="pane-with-border"
-               minWidth="280" prefWidth="280" minHeight="54" prefHeight="54">
+    <StackPane minHeight="54" minWidth="280" prefHeight="54" prefWidth="280" styleClass="pane-with-border" VBox.vgrow="NEVER">
         <padding>
-            <Insets top="120" right="8" bottom="120" left="8" />
+            <Insets bottom="120" left="8" right="8" top="120" />
         </padding>
-        <Label fx:id="team" styleClass="cell_big_label" />
-
+        <TextArea fx:id="team"   editable="false" styleClass = "centeredTextArea"/>
     </StackPane>
-    <HBox fx:id="taskList" styleClass="pane-with-border"
-            minHeight="540" prefHeight="540">
+    <HBox fx:id="taskList" minHeight="540" prefHeight="540" styleClass="pane-with-border">
         <padding>
-            <Insets top="20" right="8" bottom="20" left="8" />
+            <Insets bottom="20" left="8" right="8" top="20" />
         </padding>
         <VBox styleClass="pane-with-border">
-            <Label text="Not Done" styleClass="cell_big_label">
+            <Label styleClass="cell_big_label" text="Not Done">
                 <padding>
-                    <Insets top="12" left="12" />
+                    <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="undoneTaskList"
-                    minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="undoneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
                 <padding>
-                    <Insets top="8" right="8" bottom="8" left="8" />
+                    <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
                 <ListView fx:id="undoneTaskListView" VBox.vgrow="ALWAYS" />
             </VBox>
         </VBox>
         <VBox styleClass="pane-with-border">
-            <Label text="Done" styleClass="cell_big_label">
+            <Label styleClass="cell_big_label" text="Done">
                 <padding>
-                    <Insets top="12" left="12" />
+                    <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="doneTaskList"
-                    minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="doneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
                 <padding>
-                    <Insets top="8" right="8" bottom="8" left="8" />
+                    <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
                 <ListView fx:id="doneTaskListView" VBox.vgrow="ALWAYS" />
             </VBox>
         </VBox>
         <VBox styleClass="pane-with-border">
-            <Label text="Comments" styleClass="cell_big_label">
+            <Label styleClass="cell_big_label" text="Comments">
                 <padding>
-                    <Insets top="12" left="12" />
+                    <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="Comments"
-                  minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="Comments" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
                 <padding>
-                    <Insets top="8" right="8" bottom="8" left="8" />
+                    <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
                 <ListView fx:id="comments" VBox.vgrow="ALWAYS" />
             </VBox>
