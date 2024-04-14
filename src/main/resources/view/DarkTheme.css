@@ -134,19 +134,17 @@
 }
 
 .scroll-pane {
-  -fx-background-color:  transparent;
+  -fx-background-color: transparent;
 }
 
 .scroll-pane > .viewport {
-  -fx-background-color:  transparent;
+  -fx-background-color: transparent;
 }
 .pane-with-border {
   -fx-background-color: derive(#1d1d1d, 20%);
   -fx-border-color: derive(#1d1d1d, 10%);
   -fx-border-top-width: 1px;
 }
-
-
 
 .status-bar {
   -fx-background-color: derive(#1d1d1d, 30%);
@@ -298,6 +296,14 @@
   -fx-background-insets: 3;
 }
 
+.scroll-bar .corner {
+  -fx-background-color: transparent;
+}
+
+.scroll-bar .filler {
+  -fx-background-color: transparent;
+}
+
 .scroll-bar .increment-button,
 .scroll-bar .decrement-button {
   -fx-background-color: transparent;
@@ -311,12 +317,12 @@
 
 .scroll-bar:vertical .increment-arrow,
 .scroll-bar:vertical .decrement-arrow {
-  -fx-padding: 1 8 1 8;
+  -fx-padding: 1 4 1 4;
 }
 
 .scroll-bar:horizontal .increment-arrow,
 .scroll-bar:horizontal .decrement-arrow {
-  -fx-padding: 8 1 8 1;
+  -fx-padding: 4 1 4 1;
 }
 
 #cardPane {
@@ -374,11 +380,10 @@
 }
 
 .centeredTextArea {
-    -fx-background-color: transparent;
-    -fx-control-inner-background: transparent;
+  -fx-background-color: transparent;
+  -fx-control-inner-background: transparent;
 }
 
-
 .centeredTextArea .scroll-pane .content .text {
-    -fx-text-alignment: center;
+  -fx-text-alignment: center;
 }
