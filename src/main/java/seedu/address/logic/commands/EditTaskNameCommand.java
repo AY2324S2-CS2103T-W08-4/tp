@@ -25,6 +25,10 @@ public class EditTaskNameCommand extends RenameCommand {
             + "Please make sure the project exists.";
     public static final String MESSAGE_TASK_NOT_FOUND = "Task %1$s not found: "
             + "Please make sure the task exists in project %2$s";
+
+    public static final String MESSAGE_RESULTS_IN_DUPLICATE_TASK = "Task %1$s already exists. "
+            + "Please set the name of the task in project %2$s to be unique.";
+
     private final Name changeTo;
     private final Project targetProject;
     private final Task targetTask;
@@ -50,14 +54,22 @@ public class EditTaskNameCommand extends RenameCommand {
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(targetProject)));
         }
-        Project targetPerson = model.findProject(targetProject.getName());
-        if (!targetPerson.hasTask(targetTask)) {
+        Project target = model.findProject(targetProject.getName());
+        if (!target.hasTask(targetTask)) {
             throw new CommandException(String.format(
                     MESSAGE_TASK_NOT_FOUND,
                     Messages.format(targetTask),
-                    Messages.format(targetPerson)));
+                    Messages.format(target)));
         }
-        Task toBeChanged = targetPerson.findTask(targetTask.getName());
+        Task checkDuplicate = new Task(changeTo.fullName);
+        if (target.hasTask(checkDuplicate)) {
+            throw new CommandException(String.format(
+                    MESSAGE_RESULTS_IN_DUPLICATE_TASK,
+                    Messages.format(checkDuplicate),
+                    Messages.format(target)));
+        }
+
+        Task toBeChanged = target.findTask(targetTask.getName());
         toBeChanged.setName(changeTo);
         return new CommandResult(String.format(
                 MESSAGE_SUCCESS,
