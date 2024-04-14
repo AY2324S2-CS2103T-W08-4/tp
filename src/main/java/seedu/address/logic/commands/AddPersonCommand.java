@@ -11,7 +11,7 @@ import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 
 /**
- * Adds a task to a project.
+ * Adds a person to a project.
  */
 public class AddPersonCommand extends Command {
 
@@ -28,7 +28,7 @@ public class AddPersonCommand extends Command {
     private final Member member;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddPersonCommand to add the specified {@code Project}
      */
     public AddPersonCommand(Member member, Project project) {
         requireNonNull(project);

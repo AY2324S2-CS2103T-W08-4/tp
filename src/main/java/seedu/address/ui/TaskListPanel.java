@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.project.Comment;
@@ -13,7 +14,7 @@ import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of tasks.
  */
 public class TaskListPanel extends UiPart<Region> {
     private static final String FXML = "TaskListPanel.fxml";
@@ -32,7 +33,7 @@ public class TaskListPanel extends UiPart<Region> {
     private ListView<Task> doneTaskListView;
 
     @FXML
-    private Label team;
+    private TextArea team;
 
     @FXML
     private ListView<Comment> comments;
@@ -40,7 +41,7 @@ public class TaskListPanel extends UiPart<Region> {
 
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code TaskListPanel} with the given {@code Project}.
      */
     public TaskListPanel(Project currentProject) {
         super(FXML);

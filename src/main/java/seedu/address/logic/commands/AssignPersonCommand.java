@@ -39,7 +39,7 @@ public class AssignPersonCommand extends Command {
     private final Member member;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AssignPersonCommand to add the specified {@code Task}
      */
     public AssignPersonCommand(String member, Task task, Project project) {
         requireNonNull(task);

@@ -10,7 +10,7 @@ import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
 /**
- * Adds a task to a project.
+ * Set a status to a task in a project.
  */
 public class SetTaskStatusCommand extends SetStatusCommand {
 
@@ -28,7 +28,7 @@ public class SetTaskStatusCommand extends SetStatusCommand {
     private final Project project;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an SetTaskStatusCommand to add the specified {@code Task}
      */
     public SetTaskStatusCommand(String status, Task task, Project project) {
         super(status);
@@ -41,36 +41,29 @@ public class SetTaskStatusCommand extends SetStatusCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (!model.hasProject(project)) {
             throw new CommandException(String.format(
                     MESSAGE_PROJECT_NOT_FOUND,
                     Messages.format(project)));
         }
-
         Project statusProject = model.findProject(project.getName());
-
         if (!statusProject.hasTask(task)) {
             throw new CommandException(String.format(
                     MESSAGE_TASK_NOT_FOUND,
                     Messages.format(task),
                     Messages.format(project)));
         }
-
         Task statusTask = statusProject.findTask(task.getName());
         String resultString = "";
-
         if (isCompleted()) {
             statusTask.setComplete();
             resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "complete");
-
         } else if (isIncompleted()) {
             statusTask.setIncomplete();
             resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "incomplete");
         } else {
             throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
-
         model.updateCurrentProject(
             new NameEqualsPredicate(
                 model.getCurrentProject().get(0).getName().fullName));

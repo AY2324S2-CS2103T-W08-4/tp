@@ -22,8 +22,8 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d uuuu");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SetDeadlineCommand
+     * and returns an SetDeadlineCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public SetDeadlineCommand parse(String args) throws ParseException {
@@ -45,19 +45,8 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
                 Project project = new Project(ParserUtil.parseName(projectName));
                 return new SetDeadlineProjectCommand(deadline, project);
             } else {
-                //SetDeadlineTaskCommand
-                String taskAndProject = args.split(" /to")[1].trim();
-                String taskName = taskAndProject.split("/in ")[0].trim();
-                String projectName = taskAndProject.split("/in ")[1];
-                if ((projectName.length() == 0) || (taskName.length() == 0)) {
-                    throw new ParseException("Please enter the project and task fields");
-                }
-                Project project = new Project(ParserUtil.parseName(projectName));
-                Task newTask = new Task(taskName);
-                return new SetDeadlineTaskCommand(deadline, newTask, project);
+                return parseSetDeadlineTaskCommand(args);
             }
-
-
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
@@ -65,5 +54,18 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
         } catch (DateTimeParseException e) {
             throw new ParseException("Please enter valid date.");
         }
+    }
+
+    private SetDeadlineTaskCommand parseSetDeadlineTaskCommand(String args) throws ParseException {
+        String deadline = args.split(" /to")[0].trim();
+        String taskAndProject = args.split(" /to")[1].trim();
+        String taskName = taskAndProject.split("/in ")[0].trim();
+        String projectName = taskAndProject.split("/in ")[1];
+        if ((projectName.length() == 0) || (taskName.length() == 0)) {
+            throw new ParseException("Please enter the project and task fields");
+        }
+        Project project = new Project(ParserUtil.parseName(projectName));
+        Task newTask = new Task(taskName);
+        return new SetDeadlineTaskCommand(deadline, newTask, project);
     }
 }

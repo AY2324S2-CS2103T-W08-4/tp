@@ -38,9 +38,9 @@ public class JsonAdaptedTask {
 
 
     /**
-     * Converts this Jackson-friendly adapted Member object into the model's {@code Member} object.
+     * Converts this Jackson-friendly adapted Task object into the model's {@code Task} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted Member.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted Task.
      */
     public Task toModelType() throws IllegalValueException {
         Task current = new Task(name);

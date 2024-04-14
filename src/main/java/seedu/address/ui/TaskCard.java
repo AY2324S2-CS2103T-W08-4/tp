@@ -7,7 +7,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.project.Task;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Task}.
  */
 public class TaskCard extends UiPart<Region> {
 
@@ -33,7 +33,7 @@ public class TaskCard extends UiPart<Region> {
     private Label deadlineDate;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code TaskCard} with the given {@code Task}.
      */
     public TaskCard(Task task) {
         super(FXML);

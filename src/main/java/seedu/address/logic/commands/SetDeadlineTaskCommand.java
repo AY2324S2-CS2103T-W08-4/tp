@@ -36,7 +36,7 @@ public class SetDeadlineTaskCommand extends SetDeadlineCommand {
     private final String datePattern = "\\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\\b \\d{1,2} \\d{4}\\b";
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an SetDeadlineTaskCommand to add the specified {@code Task}
      */
     public SetDeadlineTaskCommand(String deadline, Task task, Project project) {
         requireNonNull(task);

@@ -14,7 +14,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Name;
 
 /**
- * Represents a Task of Project
+ * Represents a Project
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Project {
@@ -165,14 +165,14 @@ public class Project {
     }
 
     /**
-     * Sets the task status as complete
+     * Sets the project status as complete
      */
     public void setComplete() {
         this.status = "complete";
     }
 
     /**
-     * Sets the task status as incomplete
+     * Sets the project status as incomplete
      */
     public void setIncomplete() {
         this.status = "incomplete";
@@ -209,8 +209,8 @@ public class Project {
     }
 
     /**
-     * Gets the status of the task as a string
-     * @return the string represeting the status of the task
+     * Gets the status of the project as a string
+     * @return the string representing the status of the project
      */
     public String getStatus() {
         return status == null
@@ -227,7 +227,7 @@ public class Project {
     }
 
     /**
-     * Get the name of the task
+     * Get the name of the project
      * @return
      */
     public Name getName() {
@@ -235,8 +235,8 @@ public class Project {
     }
 
     /**
-     * Returns true if both tasks have the same identity and data fields.
-     * This defines a stronger notion of equality between two tasks.
+     * Returns true if both projects have the same identity and data fields.
+     * This defines a stronger notion of equality between two projects.
      */
     @Override
     public boolean equals(Object obj) {
@@ -300,12 +300,14 @@ public class Project {
     }
 
     /**
-     * Returns a new person with new name but the same task (for edit person command)
+     * Returns a new project with new name but the same task (for edit project command)
      */
     public Project createEditedProject(Name newName) {
         List<Task> newTaskList = new ArrayList<>(this.taskList);
         Project newProject = new Project(newName, newTaskList);
-        newProject.setDeadline(this.deadlineDate.format(formatter));
+        if (deadlineDate != null) {
+            newProject.setDeadline(this.deadlineDate.format(formatter));
+        }
         newProject.setCategory(this.category);
         newProject.assignTeam(this.team);
         newProject.setComment(this.comments);

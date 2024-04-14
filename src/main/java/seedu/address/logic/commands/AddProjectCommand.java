@@ -23,7 +23,7 @@ public class AddProjectCommand extends Command {
     private final Project toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddProjectCommand to add the specified {@code Project}
      */
     public AddProjectCommand(Project project) {
         requireNonNull(project);

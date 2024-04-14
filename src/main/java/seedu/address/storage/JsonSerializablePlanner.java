@@ -14,7 +14,7 @@ import seedu.address.model.ReadOnlyPlanner;
 import seedu.address.model.project.Project;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable DevPlanPro that is serializable to JSON format.
  */
 @JsonRootName(value = "planner")
 class JsonSerializablePlanner {
@@ -24,7 +24,7 @@ class JsonSerializablePlanner {
     private final List<JsonAdaptedProject> projects = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given projects.
      */
     @JsonCreator
     public JsonSerializablePlanner(@JsonProperty("projects") List<JsonAdaptedProject> projects) {

@@ -1,17 +1,18 @@
 package seedu.address.model.project;
 
 /**
- * Comments within projects
- * comments have a string field and a member field
+ * Represents a comment made by a member within a project.
+ * Each comment consists of a textual content and the member who made the comment.
  */
 public class Comment {
     private String comment;
     private Member member;
 
     /**
-     * constructor for comment object
-     * @param comment comment in string format
-     * @param member person who made the comment
+     * Constructs a new Comment object.
+     *
+     * @param comment the content of the comment in string format
+     * @param member the member who made the comment
      */
     public Comment(String comment, Member member) {
         this.comment = comment;
@@ -19,14 +20,20 @@ public class Comment {
     }
 
     /**
-     * @return project member who made the comment
+     * Retrieves the member who made this comment.
+     *
+     * @return the member who made the comment
      */
     public Member getMember() {
         return member;
     }
 
     /**
-     * Returns true if both comments have the same content and author.
+     * Checks if this comment is equal to another object.
+     * Two comments are considered equal if they have the same content.
+     *
+     * @param obj the object to compare with this comment
+     * @return true if the comments have the same content, false otherwise
      */
     @Override
     public boolean equals(Object obj) {
@@ -39,8 +46,11 @@ public class Comment {
         Comment other = (Comment) obj;
         return comment.equals(other.comment);
     }
+
     /**
-     * @return comment in string format
+     * Returns the textual content of the comment.
+     *
+     * @return the comment content in string format
      */
     @Override
     public String toString() {

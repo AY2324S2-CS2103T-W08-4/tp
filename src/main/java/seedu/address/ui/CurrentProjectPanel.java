@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.project.Project;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of projects.
  */
 public class CurrentProjectPanel extends UiPart<Region> {
     private static final String FXML = "CurrentProjectPanel.fxml";
@@ -21,7 +21,7 @@ public class CurrentProjectPanel extends UiPart<Region> {
     private ListView<Project> currentProjectView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ProjectListPanel} with the given {@code ObservableList}.
      */
     public CurrentProjectPanel(ObservableList<Project> currentProject) {
         super(FXML);
@@ -30,7 +30,7 @@ public class CurrentProjectPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Project} using a {@code ProjectCard}.
      */
     class ProjectListViewCell extends ListCell<Project> {
         @Override
