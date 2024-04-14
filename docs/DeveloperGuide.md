@@ -214,7 +214,7 @@ This section describes some noteworthy details on how certain features are imple
      - As the projects in the list have unique name, we don't need to worry about returning the wrong project
    - Else the project is successfully deleted
 
-![Interactions Inside the Logic Component for the `delete task ui /in Duke` Command](images/DeleteProjectSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteProjectSequenceDiagram.png)
 
 ### Deleting a task
 
@@ -231,7 +231,38 @@ This section describes some noteworthy details on how certain features are imple
      - The check is done by using `Person::hasTask`
    - Else the task is successfully deleted
 
-![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteTaskSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete task ui /in Duke` Command](images/DeleteTaskSequenceDiagram.png)
+
+### Setting deadline for both tasks and projects
+
+#### Implementation
+
+1. The AddressBookParser parses the command string given by the user, and looks for the command word "set deadline". Then `SetDeadlineCommandParser` parse function is called.
+2. The function checks if the command string includes '/in'. 
+   1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskDeadlineCommand` execution function is called.
+   2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectDeadlineCommand` execution function is called.
+3. The `SetTaskDeadlineCommand` and `SetProjectDeadlineCommand` class is responsible for setting a deadline to the task or project.
+    - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String. 
+    - The constructor of the `SetProjectDeadlineCommand` class takes in a project of type Project and a deadline of type String.
+    - If the project doesn't exist, then an exception is thrown.
+    - If the task doesn't exist within the project, then an exception is thrown.
+    - If the deadline is not a valid date or is in the wrong format, an exception is thrown as well.
+    - Else the deadline is successfully set.
+
+
+### Setting category to a project
+
+#### Implementation
+
+1. The AddressBookParser parses the command string given by the user, and looks for the command word "set category". Then `SetProjectCategoryCommandParser` parse function is called.
+2. The function checks if the command string includes '/to'. If not, an exception is thrown to inform users on the correct command format.
+3. If PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown.
+4. The `SetProjectCategoryCommand` class is responsible for setting a project category.
+    - The constructor of the `SetProjectCategoryCommand` class takes in a project of type Project and a category of type String.
+    - If the project doesn't exist, then an exception is thrown.
+    - Else the category is successfully set.
+
+![Interactions Inside the Logic Component for the `set category urgent /to Duke` Command](images/SetProjectCategorySequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
