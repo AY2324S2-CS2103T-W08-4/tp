@@ -31,7 +31,7 @@ public class DeletePersonCommand extends Command {
     private final Project memberProject;
 
     /**
-     * Creates a DeleteTaskCommand to delete the specified task in a project
+     * Creates a DeletePersonCommand to delete the specified task in a Project
      */
     public DeletePersonCommand(Member member, Project memberProject) {
         requireNonNull(member);

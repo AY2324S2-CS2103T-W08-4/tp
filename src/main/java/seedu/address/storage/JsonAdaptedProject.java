@@ -66,7 +66,7 @@ class JsonAdaptedProject {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Project} into this class for Jackson use.
      */
     public JsonAdaptedProject(Project source) {
         name = source.getName().fullName;
@@ -90,17 +90,37 @@ class JsonAdaptedProject {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted project object into the model's {@code Project} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted project.
      */
     public Project toModelType() throws IllegalValueException {
-        final List<Member> members = new ArrayList<>();
+        List<Member> members = parseMembers();
+        List<Task> tasks = parseTasks();
+        List<Comment> comments = parseComments();
+        if (name == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        if (!Name.isValidName(name)) {
+            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        }
+        Project toReturn = createProjectInstance();
+        toReturn.assignTeam(members);
+        toReturn.setTaskList(tasks);
+        toReturn.setCommentList(comments);
+        return toReturn;
+    }
+
+    private List<Member> parseMembers() throws IllegalValueException {
+        List<Member> members = new ArrayList<>();
         for (JsonAdaptedMember member : team) {
             members.add(member.toModelType());
         }
+        return members;
+    }
 
-        final List<Task> tasks = new ArrayList<>();
+    private List<Task> parseTasks() throws IllegalValueException {
+        List<Task> tasks = new ArrayList<>();
         for (JsonAdaptedTask task : doneTaskList) {
             Task current = task.toModelType();
             current.setComplete();
@@ -108,22 +128,20 @@ class JsonAdaptedProject {
         }
         for (JsonAdaptedTask task : undoneTaskList) {
             tasks.add(task.toModelType());
-
         }
+        return tasks;
+    }
 
-        final List<Comment> comments = new ArrayList<>();
+    private List<Comment> parseComments() throws IllegalValueException {
+        List<Comment> comments = new ArrayList<>();
         for (JsonAdaptedComment comment : commentList) {
             comments.add(comment.toModelType());
         }
+        return comments;
+    }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
-        }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
-        }
-        final Name modelName = new Name(name);
-
+    private Project createProjectInstance() throws IllegalValueException {
+        Name modelName = new Name(name);
         Project toReturn = new Project(modelName);
         if (deadline != null && deadline.length() != 0) {
             toReturn.setDeadline(deadline);
@@ -138,13 +156,6 @@ class JsonAdaptedProject {
                 toReturn.setIncomplete();
             }
         }
-        toReturn.assignTeam(members);
-        toReturn.setTaskList(tasks);
-
-        toReturn.setCommentList(comments);
-
-
         return toReturn;
     }
-
 }

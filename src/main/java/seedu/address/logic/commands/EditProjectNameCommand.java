@@ -12,7 +12,7 @@ import seedu.address.model.project.Project;
 
 
 /**
- * Edits the name of an existing project in the address book.
+ * Edits the name of an existing project in the DevPlanPro.
  */
 public class EditProjectNameCommand extends RenameCommand {
 

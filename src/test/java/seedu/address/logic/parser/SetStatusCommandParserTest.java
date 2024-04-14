@@ -34,14 +34,14 @@ class SetStatusCommandParserTest {
         String expectedMessageTask = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetTaskStatusCommand.MESSAGE_USAGE);
 
         // missing project name
-        assertParseFailure(parser, "A /of ",
+        assertParseFailure(parser, "complete /of ",
                 "Please enter the status and project fields");
 
-        assertParseFailure(parser, "A /of task /in ",
+        assertParseFailure(parser, "complete /of task /in ",
                 expectedMessageTask);
 
         // missing task name
-        assertParseFailure(parser, "A /of /in proj",
+        assertParseFailure(parser, "complete /of /in proj",
                 "Please enter the status, project and task fields");
     }
 

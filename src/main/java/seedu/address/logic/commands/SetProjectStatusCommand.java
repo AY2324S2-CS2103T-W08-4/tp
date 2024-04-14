@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 
 /**
- * Adds a task to a project.
+ * Set a status to a project.
  */
 public class SetProjectStatusCommand extends SetStatusCommand {
 
@@ -25,7 +25,7 @@ public class SetProjectStatusCommand extends SetStatusCommand {
     private final Project project;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an SetProjectStatusCommand to add the specified {@code Project}
      */
     public SetProjectStatusCommand(String status, Project project) {
         super(status);

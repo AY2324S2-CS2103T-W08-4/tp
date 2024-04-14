@@ -28,7 +28,7 @@ public class SetProjectCategoryCommand extends Command {
     private final String category;
 
     /**
-     * Creates an SetProjectCategoryCommand to add the specified {@code project}
+     * Creates an SetProjectCategoryCommand to add the specified {@code Project}
      */
 
     public SetProjectCategoryCommand(String categoryName, Project project) {

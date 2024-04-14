@@ -32,7 +32,7 @@ public class CommentCard extends UiPart<Region> {
     private Label comment;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code CommentCard} with the given {@code Comment}.
      */
     public CommentCard(Comment commentAdd) {
         super(FXML);
