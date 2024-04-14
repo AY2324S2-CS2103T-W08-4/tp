@@ -29,7 +29,5 @@ public class ParseException extends IllegalValueException {
         super(message, cause);
         this.message = message;
     }
-    public String getMessage() {
-        return message;
-    }
+
 }

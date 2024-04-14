@@ -37,7 +37,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             Project project = new Project(name);
             return new AddTaskCommand(task, project);
         } catch (ParseException e) {
-            throw new ParseException(e.getMessage());
+            throw e;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,
