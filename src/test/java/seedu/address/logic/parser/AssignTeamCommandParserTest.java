@@ -32,11 +32,11 @@ class AssignTeamCommandParserTest {
         assertParseFailure(
                 parser,
                 " /to Code",
-                "Please enter valid names");
+                "Please enter valid names.");
 
         assertParseFailure(
                 parser,
                 "James /to ",
-                "Please enter the project and team fields");
+                "Please enter the project and team fields.");
     }
 }

@@ -32,7 +32,7 @@ class AssignPersonCommandParserTest {
         assertParseFailure(
                 parser,
                 " /to testing /in Code",
-                "Please enter the task, project and member fields");
+                "Please enter the task, project and member fields.");
 
         assertParseFailure(
                 parser,
@@ -42,6 +42,6 @@ class AssignPersonCommandParserTest {
         assertParseFailure(
                 parser,
                 "James /to /in Code",
-                "Please enter the task, project and member fields");
+                "Please enter the task, project and member fields.");
     }
 }
