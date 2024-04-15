@@ -11,13 +11,14 @@ Welcome to the user guide for our CLI-based project management application! This
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
+- [Tips on using this User Guide](#tips-on-using-this-user-guide)
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Adding a project: `add project`](#adding-a-project-add-project)
   - [Deleting a project : `delete project`](#deleting-a-project--delete-project)
+  - [Show Project : `show project`](#show-project--show-project)
   - [Add task : `add task`](#add-task--add-task)
   - [Delete task : `delete task`](#delete-task--delete-task)
-  - [Show Project : `show project`](#show-project--show-project)
   - [Set deadline to project : `set deadline`](#set-deadline-to-project--set-deadline)
   - [Set deadline to task : `set deadline`](#set-deadline-to-task--set-deadline)
   - [Set Project Status : `set status`](#set-project-status--set-status)
@@ -41,6 +42,13 @@ Welcome to the user guide for our CLI-based project management application! This
 - [Command summary](#command-summary)
 
 <!-- TOC end -->
+
+## Tips on using this User Guide
+
+- Follow the [Quick start](#quick-start) to get DevPlan Pro set up on your device.
+- Check out the detailed command list from the [Features](#features) section.
+- For get to a more specific command or section quickly, click the corresponding section in the [Table of Contents](#table-of-contents)
+- If you are finding unexpected behaviors in the UI or the app itself, try checking out the [FAQ](#faq) or the [Known issues](#known-issues) section.
 
 ## Quick start
 
