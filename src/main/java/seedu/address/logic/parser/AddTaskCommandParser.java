@@ -29,7 +29,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             String taskName = args.split(" /to")[0];
             String projectName = args.split("/to ")[1];
             if ((taskName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the task and project fields");
+                throw new ParseException("Please enter the task and project fields.");
             }
             ParserUtil.parseName(taskName);
             Task task = new Task(taskName);
