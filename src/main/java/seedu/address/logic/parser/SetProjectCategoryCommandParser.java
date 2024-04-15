@@ -26,7 +26,7 @@ public class SetProjectCategoryCommandParser implements Parser<SetProjectCategor
             String category = args.split(" /to")[0].trim();
             String projectName = args.split("/to ")[1];
             if ((projectName.length() == 0) || category.length() == 0) {
-                throw new ParseException("Please enter the project field");
+                throw new ParseException("Please enter the project field.");
             }
             Project project = new Project(ParserUtil.parseName(projectName));
             return new SetProjectCategoryCommand(category, project);

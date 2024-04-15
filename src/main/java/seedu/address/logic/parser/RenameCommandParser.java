@@ -30,7 +30,7 @@ public class RenameCommandParser implements Parser<RenameCommand> {
             String possibleTargetName = args.split(" /of ")[1];
             if ((newName.length() == 0) || (possibleTargetName.length() == 0)) {
                 throw new ParseException("Please enter both the target and new project name or both target task and "
-                        + "the project it belongs to if you want to rename a specific task");
+                        + "the project it belongs to if you want to rename a specific task.");
             }
             Name changedTo = ParserUtil.parseName(newName);
             if (args.contains(" /in ")) {
@@ -56,7 +56,7 @@ public class RenameCommandParser implements Parser<RenameCommand> {
         String taskName = possibleTargetName.split(" /in ")[0];
         String projectName = possibleTargetName.split(" /in ")[1];
         if ((taskName.length() == 0) || (projectName.length() == 0)) {
-            throw new ParseException("Please enter both the target task name and the project it belongs to");
+            throw new ParseException("Please enter both the target task name and the project it belongs to.");
         }
         Name targetProjectName = ParserUtil.parseName(projectName);
         Project targetProject = new Project(targetProjectName);

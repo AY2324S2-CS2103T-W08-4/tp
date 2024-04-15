@@ -21,8 +21,6 @@ public class DeleteProjectCommandParser implements Parser<DeleteProjectCommand> 
             if (args.length() == 0) {
                 throw new ParseException("Please enter the project field.");
             }
-
-            System.out.println(args);
             return new DeleteProjectCommand(args);
         } catch (Exception e) {
             throw new ParseException(String.format(

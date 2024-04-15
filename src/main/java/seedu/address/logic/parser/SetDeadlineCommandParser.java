@@ -40,7 +40,7 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
                 //SetDeadlineProjectCommand
                 String projectName = args.split("/to ")[1];
                 if ((projectName.length() == 0)) {
-                    throw new ParseException("Please enter the project field");
+                    throw new ParseException("Please enter the project field.");
                 }
                 Project project = new Project(ParserUtil.parseName(projectName));
                 return new SetDeadlineProjectCommand(deadline, project);
@@ -62,7 +62,7 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
         String taskName = taskAndProject.split("/in ")[0].trim();
         String projectName = taskAndProject.split("/in ")[1];
         if ((projectName.length() == 0) || (taskName.length() == 0)) {
-            throw new ParseException("Please enter the project and task fields");
+            throw new ParseException("Please enter the project and task fields.");
         }
         Project project = new Project(ParserUtil.parseName(projectName));
         Task newTask = new Task(taskName);

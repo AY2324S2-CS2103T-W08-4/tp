@@ -30,7 +30,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
             memberName = memberName.trim();
             projectName = projectName.trim();
             if ((memberName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the member and project fields");
+                throw new ParseException("Please enter the member and project fields.");
             }
             Member member = new Member(memberName);
             Name name = ParserUtil.parseName(projectName);

@@ -29,7 +29,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             String projectName = args.split("/in ")[1];
 
             if ((memberName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the member and the project field");
+                throw new ParseException("Please enter the member and the project field.");
             }
             return new DeletePersonCommand(new Member(memberName), new Project(new Name(projectName)));
         } catch (Exception e) {

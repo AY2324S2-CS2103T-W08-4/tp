@@ -31,7 +31,7 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             String comment = args.split(" /from ")[0].trim();
             String memberAndProject = args.split(" /from ")[1];
             if (comment.length() == 0) {
-                throw new ParseException("Please enter a comment");
+                throw new ParseException("Please enter a comment.");
             }
             String memberName = memberAndProject.split(" /to ")[0];
             String projectName = memberAndProject.split(" /to ")[1];

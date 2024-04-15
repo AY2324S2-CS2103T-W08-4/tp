@@ -25,7 +25,7 @@ public class SetDeadlineProjectCommand extends SetDeadlineCommand {
 
 
     public static final String MESSAGE_WRONG_FORMAT_DEADLINE = "The deadline %1s has been entered in the wrong format. "
-            + "An example of the correct format is Mar 15 2024";
+            + "An example of the correct format is Mar 15 2024.";
 
     private final String deadline;
     private final Project project;

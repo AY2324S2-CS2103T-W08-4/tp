@@ -34,7 +34,7 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
             String taskAndProject = args.split(" /of")[1].trim();
             if (!args.contains(" /in ")) {
                 if ((taskAndProject.length() == 0) || (status.length() == 0)) {
-                    throw new ParseException("Please enter the status and project fields");
+                    throw new ParseException("Please enter the status and project fields.");
                 }
                 Project project = new Project(ParserUtil.parseName(taskAndProject));
                 return new SetProjectStatusCommand(status, project);
@@ -54,12 +54,12 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
 
     private SetTaskStatusCommand parseSetTaskStatusCommand(String taskAndProject, String status) throws ParseException {
         if ((taskAndProject.length() == 0) || (status.length() == 0)) {
-            throw new ParseException("Please enter the status, project and task fields");
+            throw new ParseException("Please enter the status, project and task fields.");
         }
         String taskName = taskAndProject.split("/in ")[0].trim();
         String projectName = taskAndProject.split("/in ")[1];
         if ((projectName.length() == 0) || (taskName.length() == 0) || (status.length() == 0)) {
-            throw new ParseException("Please enter the status, project and task fields");
+            throw new ParseException("Please enter the status, project and task fields.");
         }
         Project project = new Project(ParserUtil.parseName(projectName));
         Task newTask = new Task(taskName);

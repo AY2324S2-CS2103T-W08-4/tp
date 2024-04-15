@@ -113,7 +113,9 @@ The added projects will appear on the project list on the left.
 **Expected output:**
 
 - Success: `<PROJECT_NAME> has been added to the project list.`
-- Failure: `Project <PROJECT_NAME> already exists.`
+- Failure:
+  - `Project <PROJECT_NAME> already exists.`
+  - `Project name should be alphanumerical and not empty.`
 
 ![AddProjectCommandResult](images/AddProjectCommandResult.png)
 Description: An example of the result after executing the "add project" command.
@@ -148,7 +150,9 @@ Sets the current showing project as the specified project.
 **Expected output:**
 
 - Success: The UI now shows the project’s information.
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter the project field.`
 
 ![Show Project Command Result](images/Ui.png)
 Description: An example of the result after executing the "show project" command, displaying project information in the UI.
@@ -177,6 +181,8 @@ Adds the specified task to a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> already exists in <PROJECT_NAME>.`
+  - `Please enter the task and project fields.`
+  - `Names should be alphanumerical and not empty.`
 
 ![AddTaskCommandResult](images/AddTaskCommandResult.png)
 
@@ -200,6 +206,7 @@ Deletes the specified task from a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
+  - `Please enter the project and the task field`
 
 ### Set deadline to project : `set deadline`
 
@@ -218,8 +225,11 @@ Deletes the specified task from a project.
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> has been set with the following deadline <DEADLINE>.`
-- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024.`
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter the project field.`
+  - `Please enter valid date.`
 
 ### Set deadline to task : `set deadline`
 
@@ -240,9 +250,11 @@ Deletes the specified task from a project.
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-- Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
+- Failure:
+  - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Task <TASK_NAME> not found: Please make sure the task exists.`
+  - `Please enter the project and task fields.`
 
 ### Set Project Status : `set status`
 
@@ -263,6 +275,9 @@ Projects set as `complete` will have a green `complete` status text beside its n
 - Success: `Project <PROJECT_NAME> is set as <STATUS>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `The status has been entered in the wrong format.`
+  - `Please enter a valid status: complete/incomplete.`
+  - `Please enter the status and project fields.`
 
 ![SetProjectStatusCommandResult](images/SetProjectStatusCommandResult.png)
 
@@ -288,6 +303,9 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `The status has been entered in the wrong format.`
+  - `Please enter a valid status: complete/incomplete.`
+  - `Please enter the status, project and task fields.`
 
 ![SetTaskStatusCommandResult](images/SetTaskStatusCommandResult.png)
 
@@ -316,7 +334,11 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 **Expected output:**
 
 - Success: `The team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] has been added to <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Whoops! When referring to another field like a project always remember to put /to instead of just to.`
+  - `Please enter valid names.`
+  - `Please enter the project and team fields.`
 
 ### Add member to project : `add person`
 
@@ -337,7 +359,9 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 **Expected output:**
 
 - Success: `The person <PERSON_NAME> has been assigned to the following project <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter the member and project fields.`
 
 ### Remove member from project : `delete person`
 
@@ -359,6 +383,7 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Member <PERSON_NAME> not found: Please make sure the person exists in project <PROJECT_NAME>.`
+  - `Please enter the member and the project field.`
 
 ### Assign member to task : `assign person`
 
@@ -383,6 +408,8 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists`
   - `Member <PERSON_NAME> not found: Please make sure the person exists.`
+  - `Whoops! When referring to another field like a task, always remember to put /to instead of just to. When referring to a project, use /in instead of just in.`
+  - `Please enter the task, project and member fields.`
 
 ### Rename a project: `set name`
 
@@ -397,7 +424,11 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 **Expected output:**
 
 - Success: `Project <PROJECT_NAME> has been renamed to <NEW_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Project <PROJECT_NAME> already exists: Please set the name of the project to be unique.`
+  - `Whoops! When referring to another field like a project or task, always remember to put /of instead of just of.`
+  - `Please enter both the target and new project name or both target task and the project it belongs to if you want to rename a specific task.`
 
 ### Rename a task: `set name`
 
@@ -417,6 +448,10 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists in project <PROJECT_NAME>`
+  - `Task <TASK_NAME> already exists. Please set the name of the task in project %2$s to be unique.`
+  - `Whoops! When referring to another field like a project or task, always remember to put /of instead of just of.`
+  - `Please enter both the target and new project name or both target task and the project it belongs to if you want to rename a specific task.`
+  - `Please enter both the target task name and the project it belongs to.`
 
 ### Set project category: `set category`
 
@@ -437,7 +472,9 @@ Similar to adding a tag to the project. The category will be shown as the orange
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> category is set as <CATEGORY>.`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter the project field.`
 
 ![SetProjectCategoryCommandResult](images/SetProjectCategoryCommandResult.png)
 
@@ -475,6 +512,7 @@ The project list will list the projects with the specified category.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Team member <MEMBER_NAME> not found: Please make sure the person exists.`
+  - `Please enter a comment.`
 
 ### Locating projects by name: `find project`
 
