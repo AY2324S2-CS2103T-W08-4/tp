@@ -44,7 +44,7 @@ class RenameCommandParserTest {
 
         // missing task name
         assertParseFailure(parser, "A /of  /in proj",
-                "Please enter both the target task name and the project it belongs to.");
+                expectedMessageTask);
     }
 
 }

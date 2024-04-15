@@ -489,6 +489,7 @@ Similar to adding a tag to the project. The category will be shown as the orange
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Names should be alphanumerical and not empty.`
+  - `Please enter the category.`
   - `Invalid command format! set category CATEGORY /to PROJECT_NAME`
 
 ![SetProjectCategoryCommandResult](images/SetProjectCategoryCommandResult.png)

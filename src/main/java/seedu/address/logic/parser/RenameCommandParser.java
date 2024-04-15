@@ -27,8 +27,8 @@ public class RenameCommandParser implements Parser<RenameCommand> {
                         MESSAGE_INVALID_COMMAND_FORMAT,
                         EditTaskNameCommand.MESSAGE_USAGE));
             }
-            String newName = args.split(" /of ")[0];
-            String possibleTargetName = args.split(" /of ")[1];
+            String newName = args.split(" /of ")[0].trim();
+            String possibleTargetName = args.split(" /of ")[1].trim();
             Name changedTo = ParserUtil.parseName(newName);
             if (args.contains(" /in ")) {
                 return parseEditTaskNameCommand(possibleTargetName, changedTo);
@@ -52,6 +52,9 @@ public class RenameCommandParser implements Parser<RenameCommand> {
                                                          Name changedTo) throws ParseException {
         String taskName = possibleTargetName.split(" /in ")[0];
         String projectName = possibleTargetName.split(" /in ")[1];
+        if (!Name.isValidName(taskName)) {
+            throw new ParseException("Names should be alphanumerical and not empty.");
+        }
         Name targetProjectName = ParserUtil.parseName(projectName);
         Project targetProject = new Project(targetProjectName);
         Task targetTask = new Task(taskName);
