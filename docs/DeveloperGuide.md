@@ -11,6 +11,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 - This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
+
 ---
 
 ## **Setting up, getting started**
@@ -222,13 +223,13 @@ This section describes some noteworthy details on how certain features are imple
 1. The PlannerParser parses the command string given by the user, and looks for the command word "delete task". Then AddTaskCommandParser parse function is called.
 2. If the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown, else the AddTaskCommand execution function is called.
 3. The `AddTaskCommand` class is responsible for adding a task within a project.
-    - The constructor of the class takes in a project of type Project and a task of type Task.
-    - If the project doesn't exist within the project list, then an exception is thrown.
-        - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
-        - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names.
-    - If the task already exist within the project, then an exception is thrown.
-        - The check is done by using `Project::hasTask`
-    - Else the task is successfully added.
+   - The constructor of the class takes in a project of type Project and a task of type Task.
+   - If the project doesn't exist within the project list, then an exception is thrown.
+     - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
+     - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names.
+   - If the task already exist within the project, then an exception is thrown.
+     - The check is done by using `Project::hasTask`
+   - Else the task is successfully added.
 
 ### Deleting a task
 
@@ -256,13 +257,12 @@ This section describes some noteworthy details on how certain features are imple
    1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskDeadlineCommand` execution function is called.
    2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectDeadlineCommand` execution function is called.
 3. The `SetTaskDeadlineCommand` and `SetProjectDeadlineCommand` class is responsible for setting a deadline to the task or project.
-    - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String.
-    - The constructor of the `SetProjectDeadlineCommand` class takes in a project of type Project and a deadline of type String.
-    - If the project doesn't exist, then an exception is thrown.
-    - If the task doesn't exist within the project, then an exception is thrown.
-    - If the deadline is not a valid date or is in the wrong format, an exception is thrown as well.
-    - Else the deadline is successfully set.
-
+   - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String.
+   - The constructor of the `SetProjectDeadlineCommand` class takes in a project of type Project and a deadline of type String.
+   - If the project doesn't exist, then an exception is thrown.
+   - If the task doesn't exist within the project, then an exception is thrown.
+   - If the deadline is not a valid date or is in the wrong format, an exception is thrown as well.
+   - Else the deadline is successfully set.
 
 ### Setting category to a project
 
@@ -272,9 +272,9 @@ This section describes some noteworthy details on how certain features are imple
 2. The function checks if the command string includes '/to'. If not, an exception is thrown to inform users on the correct command format.
 3. If PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown.
 4. The `SetProjectCategoryCommand` class is responsible for setting a project category.
-    - The constructor of the `SetProjectCategoryCommand` class takes in a project of type Project and a category of type String.
-    - If the project doesn't exist, then an exception is thrown.
-    - Else the category is successfully set.
+   - The constructor of the `SetProjectCategoryCommand` class takes in a project of type Project and a category of type String.
+   - If the project doesn't exist, then an exception is thrown.
+   - Else the category is successfully set.
 
 ![Interactions Inside the Logic Component for the `set category urgent /to Duke` Command](images/SetProjectCategorySequenceDiagram.png)
 
@@ -284,14 +284,14 @@ This section describes some noteworthy details on how certain features are imple
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "set status". Then `SetStatusCommandParser` parse function is called.
 2. The function checks if the command string includes '/in'. Additionally, if the status is not equals to either 'complete' or 'incomplete', an exception is thrown.
-    1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskStatusCommand` execution function is called.
-    2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectstatusCommand` execution function is called.
+   1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskStatusCommand` execution function is called.
+   2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectstatusCommand` execution function is called.
 3. The `SetTaskStatusCommand` and `SetProjectstatusCommand` class is responsible for setting a status to the task or project.
-    - The constructor of the `SetTaskStatusCommand` class takes in a project of type Project and a task of type Task as well as a status of type String.
-    - The constructor of the `SetProjectstatusCommand` class takes in a project of type Project and a status of type String.
-    - If the project doesn't exist, then an exception is thrown.
-    - If the task doesn't exist within the project, then an exception is thrown.
-    - Else the status is successfully set.
+   - The constructor of the `SetTaskStatusCommand` class takes in a project of type Project and a task of type Task as well as a status of type String.
+   - The constructor of the `SetProjectstatusCommand` class takes in a project of type Project and a status of type String.
+   - If the project doesn't exist, then an exception is thrown.
+   - If the task doesn't exist within the project, then an exception is thrown.
+   - Else the status is successfully set.
 
 ### Assigning a team to a project
 
@@ -300,9 +300,9 @@ This section describes some noteworthy details on how certain features are imple
 1. The PlannerParser parses the command string given by the user, and looks for the command word "assign team". Then AssignTeamCommandParser parse function is called.
 2. If the PROJECT_NAME is an empty string or the user input 0 or invalid PERSON_NAME, an exception is thrown, else the AssignTeamCommand execution function is called.
 3. The AssignTeamCommand class is responsible for assigning a team to a project.
-    - The constructor of the class takes in a project of type Project and a team which is a list of String.
-    - If the project doesn't exist within the project list, then an exception is thrown.
-    - Else the team is successfully assigned to the project.
+   - The constructor of the class takes in a project of type Project and a team which is a list of String.
+   - If the project doesn't exist within the project list, then an exception is thrown.
+   - Else the team is successfully assigned to the project.
 
 ### Adding a member to a project
 
@@ -311,9 +311,9 @@ This section describes some noteworthy details on how certain features are imple
 1. The PlannerParser parses the command string given by the user, and looks for the command word "add person". Then AddPersonCommandParser parse function is called.
 2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AddPersonCommand execution function is called.
 3. The `AddPersonCommand` class is responsible for adding a member to a project.
-    - The constructor of the class takes in a project of type Project and a member of type Member.
-    - If the project doesn't exist within the project list, then an exception is thrown.
-    - Else the member is successfully added to the project.
+   - The constructor of the class takes in a project of type Project and a member of type Member.
+   - If the project doesn't exist within the project list, then an exception is thrown.
+   - Else the member is successfully added to the project.
 
 ### Assigning a member to a task
 
@@ -322,44 +322,47 @@ This section describes some noteworthy details on how certain features are imple
 1. The PlannerParser parses the command string given by the user, and looks for the command word "assign person". Then AssignPersonCommandParser parse function is called.
 2. If the PROJECT_NAME, TASK_NAME, or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AssignPersonCommand execution function is called.
 3. The `AssignPersonCommand` class is responsible for assigning a member to a task.
-    - The constructor of the class takes in a project of type Project and a member of type Member.
-    - If the project doesn't exist within the project list, then an exception is thrown.
-    - If the task doesn't exist within the project, then an exception is thrown.
-    - If the member isn't a member of the project, then an exception is thrown.
-    - Else the member is successfully assigned to the task.
+   - The constructor of the class takes in a project of type Project and a member of type Member.
+   - If the project doesn't exist within the project list, then an exception is thrown.
+   - If the task doesn't exist within the project, then an exception is thrown.
+   - If the member isn't a member of the project, then an exception is thrown.
+   - Else the member is successfully assigned to the task.
 
 ### Removing a member from a project
 
 #### Implementation
+
 1. The PlannerParser parses the command string given by the user, and looks for the command word "delete person". Then DeletePersonCommandParser parse function is called.
 2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the DeletePersonCommand execution function is called.
 3. The `DeletePersonCommand` class is responsible for removing a member from a project.
-    - The constructor of the class takes in a project of type Project and a member of type Member.
-    - If the project doesn't exist within the project list, then an exception is thrown.
-    - If the member isn't a member of the project, then an exception is thrown.
-    - Else the member is successfully removed from the project, and all the tasks the member is responsible for will have their member fields set as NULL.
+   - The constructor of the class takes in a project of type Project and a member of type Member.
+   - If the project doesn't exist within the project list, then an exception is thrown.
+   - If the member isn't a member of the project, then an exception is thrown.
+   - Else the member is successfully removed from the project, and all the tasks the member is responsible for will have their member fields set as NULL.
 
 #### Design Considerations
 
 Aspect of creating 2 different commands to add member to a project
 
 - Alternative 1 Only use add person but allow multiple person to be added in one command.
-    - Pros: No additional commands to do the same action for one person or multiple people. Easier for user to get used to the command list.
-    - Cons: Since there is no clear person command, it is inconvenient when trying to reassign a smaller team to the project
+
+  - Pros: No additional commands to do the same action for one person or multiple people. Easier for user to get used to the command list.
+  - Cons: Since there is no clear person command, it is inconvenient when trying to reassign a smaller team to the project
 
 - Alternative 2 (current choice) Have an assign team command and an add person command.
-    - Pros: Convenient to reassign a smaller team to a project. Add person also makes more sense as we would always be adding one person instead of multiple persons(people?).
-    - Cons: An additional command that might be confusing to the users and can cause data loss (user trying to add multiple people to a project only to find the original members gone after the command).
+  - Pros: Convenient to reassign a smaller team to a project. Add person also makes more sense as we would always be adding one person instead of multiple persons(people?).
+  - Cons: An additional command that might be confusing to the users and can cause data loss (user trying to add multiple people to a project only to find the original members gone after the command).
 
 Aspect of creating a command to unassign the task
 
 - Alternative 1 Create a command unassign person to allow user to unassign a person from a task.
-    - Pros: More freedom to the user. More convenient to remove a person from one task.
-    - Cons: An additional command for the user to remember which might be prone to empty input bugs. User can also simply assign a task to a different person.
+
+  - Pros: More freedom to the user. More convenient to remove a person from one task.
+  - Cons: An additional command for the user to remember which might be prone to empty input bugs. User can also simply assign a task to a different person.
 
 - Alternative 2 (current choice) Only have an assign person command that doesn't allow empty inputs.
-    - Pros: Less prone to bugs involving empty inputs. Also one less command for the user to remember. User can also remove the member from the project before adding the member back to remove them from all tasks.
-    - Cons: Less freedom for the user and less convenient when trying to unassign everyone from one specific task.
+  - Pros: Less prone to bugs involving empty inputs. Also one less command for the user to remember. User can also remove the member from the project before adding the member back to remove them from all tasks.
+  - Cons: Less freedom for the user and less convenient when trying to unassign everyone from one specific task.
 
 ### Renaming a project
 
@@ -368,9 +371,9 @@ Aspect of creating a command to unassign the task
 1. The PlannerParser parses the command string given by the user, and looks for the command word "set name". Then RenameCommandParser parse function is called.
 2. If the PROJECT_NAME is an empty string or the command is incomplete or wrong, an exception is thrown, else the addProjectCommand execution function is called.
 3. The `EditProjectNameCommand` class is responsible for editing a project's name to the specified name.
-    - The constructor of the class takes in a project of type Project and the new name of type Name.
-    - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the new name is a duplicate.
-    - Else the project's name is successfully updated.
+   - The constructor of the class takes in a project of type Project and the new name of type Name.
+   - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the new name is a duplicate.
+   - Else the project's name is successfully updated.
 
 ![Interactions Inside the Logic Component for the `renaming nn /of Duke` Command](images/EditProjectNameDiagram.png)
 
@@ -380,26 +383,23 @@ Aspect of creating a command to unassign the task
 
 - **Alternative 1:** Command word is `rename`
 
-    - Pros: More intuitive and straightforward than set name
-    - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
+  - Pros: More intuitive and straightforward than set name
+  - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
 
 - **Alternative 2 (current choice):** Command word is `set name`.
-    - Pros: align with other commands and less keywords to remember for users.
-    - Cons: More words to type for users.
-
-
+  - Pros: align with other commands and less keywords to remember for users.
+  - Cons: More words to type for users.
 
 ### Renaming a task
 
 #### Implementation
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "set name". Then RenameCommandParser parse function is called.
-2. If the PROJECT_NAME or / and TASK_NAME  is an empty string or the command is incomplete or wrong, an exception is thrown, else the addProjectCommand execution function is called.
+2. If the PROJECT_NAME or / and TASK_NAME is an empty string or the command is incomplete or wrong, an exception is thrown, else the addProjectCommand execution function is called.
 3. The `EditTaskNameCommand` class is responsible for editing a task's name within the specified project to the specified name.
-    - The constructor of the class takes in a project of type Project,target task of type Task, and the new name of type Name.
-    - If the target name is the same as the any tasks in project that already exists within the project, then an exception is thrown to alert users that the new name is a duplicate.
-    - Else the task's name is successfully updated.
-
+   - The constructor of the class takes in a project of type Project,target task of type Task, and the new name of type Name.
+   - If the target name is the same as the any tasks in project that already exists within the project, then an exception is thrown to alert users that the new name is a duplicate.
+   - Else the task's name is successfully updated.
 
 #### Design considerations:
 
@@ -407,14 +407,12 @@ Aspect of creating a command to unassign the task
 
 - **Alternative 1:** Command word is `rename`
 
-    - Pros: More intuitive and straightforward than set name
-    - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
+  - Pros: More intuitive and straightforward than set name
+  - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
 
 - **Alternative 2 (current choice):** Command word is `set name`.
-    - Pros: align with other commands and less keywords to remember for users.
-    - Cons: More words to type for users.
-
-
+  - Pros: align with other commands and less keywords to remember for users.
+  - Cons: More words to type for users.
 
 ### Adding a Comment
 
@@ -423,9 +421,9 @@ Aspect of creating a command to unassign the task
 1. The PlannerParser parses the command string given by the user, and looks for the command word "add comment". Then AddCommentCommandParser parse function is called.
 2. If the PROJECT_NAME or / and the member is not added to the team, an error will be thrown to reflect the error.
 3. The `AddCommentCommand` class is responsible for adding specific comment by specific team member to the project.
-    - The constructor of the class takes in a project of type Project, commentator of type Member, and comment of type String.
-    - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the target name is a duplicate.
-    - Else the project's name is successfully updated.
+   - The constructor of the class takes in a project of type Project, commentator of type Member, and comment of type String.
+   - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the target name is a duplicate.
+   - Else the project's name is successfully updated.
 
 ![Interactions Inside the Logic Component for the `add comment c1 /from p2 /to Duke` Command](images/AddCommentDiagram.png)
 
@@ -458,7 +456,7 @@ Aspect of creating a command to unassign the task
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​              | I want to …​                                                                                     | So that I can…​                                                           |
-|----------|----------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| -------- | -------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
 | `* * *`  | software developer   | keep track of all my projects’ tasks in the app                                                  | meet all my deadlines on time                                             |
 | `* *`    | user                 | sort my tasks by their deadlines                                                                 | see what is the next pending task to complete                             |
 | `* *`    | user                 | see what my tasks are due next week                                                              | schedule my timetable accordingly                                         |
@@ -827,10 +825,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on;
-testers are expected to do more *exploratory* testing.
-
+testers are expected to do more _exploratory_ testing.
 
 ### Launch
+
     1. Initial launch
         1.1 Download the jar file and copy into an empty folder
         1.2 Double-click the jar file Expected: Shows the GUI with a set of sample projects.
@@ -839,7 +837,8 @@ testers are expected to do more *exploratory* testing.
         2.1 Double-click the jar file Expected: Shows the GUI with last session files saved.
 
 ### Add project
-    To get started lets add some projects for testing:
+
+    To get started, if you don't see these projects, add them for testing:
         add project CS2101 Presentation
         add project IS1128 project
         add project Duke chatbot
@@ -853,6 +852,7 @@ testers are expected to do more *exploratory* testing.
     Expected: Error result. Project cannot be empty.
 
 ### Show project
+
     Test case: show project Coding Project
     Expected: Successful result shown in the command result box. Details about Coding Project being shown
 
@@ -860,6 +860,7 @@ testers are expected to do more *exploratory* testing.
     Expected: Error result. Project name is case sensitive.
 
 ### Find project and list project
+
     Test case: find project Duke
     Expected result: Duke chatbot shown. Use list project to reset the filter
 
@@ -870,6 +871,7 @@ testers are expected to do more *exploratory* testing.
     Expected result: IS2218 project and Coding Project is shown. Find project is case insensitive. Projects that contain Project or C or Project and C as a word (case insensitive) will be shown.
 
 ### Add task
+
     Test case: add task dummy to CS2103T Ab3
     Expected: Error result. Users  need to use /to to indicate that users are adding something to the project name after /to
 
@@ -888,6 +890,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Successful result command shown. Using the show project command (how project CS2103T Ab3) will show 2 tasks called dummy and Dummy under the Not Done Section since the task name is also case sensitive.
 
 ### Deleting a project
+
     Test case: delete project Duke chatbot
     Expected: Duke chatbot project deleted. Numbers in front of the other tasks are reordered.
 
@@ -895,6 +898,7 @@ testers are expected to do more *exploratory* testing.
     Expected: Error result. No project was deleted since the project name is case sensitive.
 
 ### Deleting a task in a project
+
     Starting with add task A /to IS1128 project, users could try the following test case:
 
         Test case: delete task A in  IS1128 project
@@ -904,6 +908,7 @@ testers are expected to do more *exploratory* testing.
         Expected:  Successful command. With show project command of IS1128 project, the task A should not be present.
 
 ### Add person to a project
+
     Test case: add person A /to CS2103T Ab3
     Expected: Successful result. Showing project CS2103T Ab3, would show A under team member section.
 
@@ -912,23 +917,26 @@ testers are expected to do more *exploratory* testing.
         Expected: Successful result. Showing project CS2103T Ab3, would show 2 persons with name A under team member section.
 
 ### Assign a person in current team to a project
+
     Assuming add person A /to CS2103T Ab3 was used and no member were added to CS2103T Ab3, users could try:
         Test case: assign person A /to <existing task> /in  CS2103T Ab3
         Expected: Successful result. Showing project CS2103T Ab3, would show A under team member below the task Name.
-    
+
         Test case: assign person B /to <existing task> /in  CS2103T Ab3
         Expected: Error result. The person must be added to the project first before assigning to a task.
-    
+
         Test case: assign person A /to <non-existing task> /in  CS2103T Ab3
         Expected: Error result. The task must exist in the project.
 
 ### Delete person from a project
+
     Assuming users already added 2 member of the same name “A” into CS2103T Ab3,
 
         Test case: delete person A /in  CS2103T Ab3
         Expected: Successful result. The first (leftmost) A in the list is deleted.
 
 ### Setting a status of a task in a project
+
     Test case: set status incomplete /of <existing task> /in <existing project>
     Expected: Successful result. Showing the corresponding project, ui would show the task under Not Done Section if the task is marked as completed or else nothing changes.
 
@@ -936,6 +944,7 @@ testers are expected to do more *exploratory* testing.
     Expected: Successful result. Showing the corresponding project, ui would show the task under Done Section if it was not marked as completed before else nothing changes.
 
 ### Setting a status of a project
+
     Test case: set status complete /of <existing project>
     Expected: Successful result. Showing the completed tag besides the project name.
 
@@ -943,15 +952,18 @@ testers are expected to do more *exploratory* testing.
     Expected: Successful result. Showing nothing if the task is not completed else delete the completed tag
 
 ### Setting a project category
-	Test case: set category f /to <existing project>
+
+    Test case: set category f /to <existing project>
     Expected: Successful result. Showing f tag beside the project name overriding the old tag if any.
 
 ### Filter category
-	Test case: filter category <category tag>
+
+    Test case: filter category <category tag>
     Expected: Successful result. Showing project with EXACT tag name.
     Use list project to reset the filter and show all the project
 
 ### Add comment
+
     Assuming a is the only team member of project Coding Project
 
         Test case: add comment dummy /from a /to Coding Project
@@ -961,22 +973,25 @@ testers are expected to do more *exploratory* testing.
         Expected: Error result. Showing project, nothing shown on comment part. The commentator must be a member of the project.
 
 ### Set deadline of a project
-	Test case: set deadline Apr 01 2030 /to IS1128 project
+
+    Test case: set deadline Apr 01 2030 /to IS1128 project
     Expected: Successful result. Ui updates the due date under the IS1128 project to  Apr 01 2030.
 
-	Test case: set deadline Apr 1 2030 /to IS1128 project
+    Test case: set deadline Apr 1 2030 /to IS1128 project
     Expected: Successful result. Ui updates the due date under the IS1128 project to  Apr 1 2030.
 
-	Test case: set deadline Apr012030 /to IS1128 project
+    Test case: set deadline Apr012030 /to IS1128 project
     Expected: Error result. The Date must be in the MMM dd YYYY or MMM d YYYY (for single digit day date) format separated by spaces.
 
 ### Set deadline of a task
+
     Assuming a is the one of the tasks in IS1128 project,
 
         Test case: set deadline Apr 01 2030 /of a /in IS1128 project
         Expected: Successful result. Showing the project, Ui updates the due date under the task a to Apr 01 2030 overriding the prior date if any.
 
 ### Setting name of a task
+
     Assuming IS1128 project have only three tasks called: dummy, Dummy, dummy3,
 
         Test case: set name dummy2 /of dummy /in IS1128 project
@@ -986,6 +1001,7 @@ testers are expected to do more *exploratory* testing.
         Expected: Error result. The new name dummy3 already exists.
 
 ### Setting name of a project
+
     Assuming IS1128 project and Coding Project coexist
 
         Test case: set name Coding project /of IS1128 project
@@ -1004,9 +1020,10 @@ Our attempt to integrate a feature allowing users to add multiple category tags 
 Efforts to include the changing of project names or categories didn't update immediately in the UI.
 Addressing a reported bug related to truncated display of team members' information and comment boxes (as highlighted by the PED) involved experimenting with different UI structures, such as choosing between Vbox and Hbox, or deciding on the placement of scroll panes whether within the box or placing the box within the pane. Once the structure was finalized, we encountered issues with scroll pane visibility due to background color, prompting research into CSS syntax for achieving a transparent scroll pane that behaved as expected.
 
-Ultimately, through collective team and individual efforts involving extensive learning, research, flexibility, and comprehension of underlying systems, we overcome these challenges. We are eventually able to  come up with a design that closely mirrors our initial plans, both in functionality and interactivity.
+Ultimately, through collective team and individual efforts involving extensive learning, research, flexibility, and comprehension of underlying systems, we overcome these challenges. We are eventually able to come up with a design that closely mirrors our initial plans, both in functionality and interactivity.
 
 ## **Appendix: Planned Enhancements**
+
 Team size: 4
 
 1. **Allow more than 1 category to be set for each project**:Currently,
@@ -1021,4 +1038,3 @@ Team size: 4
 3. **Allow more than 1 person to be assigned to each task**: Currently,
    only 1 person can be responsible for each task, but this is not ideal
    because some tasks may require collaboration between members.
-
