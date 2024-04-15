@@ -10,8 +10,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 ---
 
 ## **Setting up, getting started**
@@ -54,7 +53,7 @@ The bulk of the app's work is done by the following four components:
 
 **How the architecture components interact with each other**
 
-The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete project Duke`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -75,7 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ProjectListPanel`, `StatusBarFooter`, `CurrentProjectPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,7 +83,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Project` object residing in the `Model`.
 
 ### Logic component
 
@@ -94,18 +93,18 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete project Duke")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteProjectSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteProjectCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. When `Logic` is called upon to execute a command, it is passed to an `PlannerParser` object which in turn creates a parser that matches the command (e.g., `DeleteProjectCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteProjectCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a project).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -115,8 +114,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+- When called upon to parse a user command, the `PlannerParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddProjectCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddProjectCommand`) which the `PlannerParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddProjectCommandParser`, `DeleteProjectCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 
@@ -126,12 +125,12 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores the DevPlanPro data i.e., all `Project` objects (which are contained in a `ProjectList` object).
+- stores the currently 'selected' `Project` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Project>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -145,8 +144,8 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save both DevPlanPro data and user preference data in JSON format, and read them back into corresponding objects.
+- inherits from both `PlannerStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -163,7 +162,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-1. The AddressBookParser parses the command string given by the user, and looks for the command word "add project". Then AddProjectCommandParser parse function is called.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "add project". Then AddProjectCommandParser parse function is called.
 2. If the PROJECT_NAME is an empty string, an exception is thrown, else the addProjectCommand execution function is called.
 3. The `AddProjectCommand` class is responsible for adding a project to the project list.
    - The constructor of the class takes in a project of type Project.
@@ -203,126 +202,232 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-1. The AddressBookParser parses the command string given by the user, and looks for the command word "delete project". Then DeleteProjectCommandParser parse function is called.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "delete project". Then DeleteProjectCommandParser parse function is called.
 2. If the PROJECT_NAME is an empty string, an exception is thrown, else the deleteProjectCommand execution function is called.
 3. The `DeleteProjectCommand` class is responsible for adding a project to the project list.
    - The constructor of the class takes in a project of type Project.
      - The project used to construct the command is a new project created using the argument string as the name
    - If the same project doesn't exist within the project list, then an exception is thrown
-     - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Person> predicate)`
-     - The predicate used is implemented at `seedu.address.model.person.Person.isSamePerson(Person otherProject)` which checks if the two projects are the same using their names
+     - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
+     - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names
      - As the projects in the list have unique name, we don't need to worry about returning the wrong project
    - Else the project is successfully deleted
 
-![Interactions Inside the Logic Component for the `delete task ui /in Duke` Command](images/DeleteProjectSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteProjectSequenceDiagram.png)
+
+### Adding a task
+
+#### Implementation
+
+1. The PlannerParser parses the command string given by the user, and looks for the command word "delete task". Then AddTaskCommandParser parse function is called.
+2. If the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown, else the AddTaskCommand execution function is called.
+3. The `AddTaskCommand` class is responsible for adding a task within a project.
+    - The constructor of the class takes in a project of type Project and a task of type Task.
+    - If the project doesn't exist within the project list, then an exception is thrown.
+        - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
+        - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names.
+    - If the task already exist within the project, then an exception is thrown.
+        - The check is done by using `Project::hasTask`
+    - Else the task is successfully added.
 
 ### Deleting a task
 
 #### Implementation
 
-1. The AddressBookParser parses the command string given by the user, and looks for the command word "delete task". Then DeleteTaskCommandParser parse function is called.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "delete task". Then DeleteTaskCommandParser parse function is called.
 2. If the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown, else the deleteTaskCommand execution function is called.
 3. The `DeleteTaskCommand` class is responsible for deleting a task within a project.
    - The constructor of the class takes in a project of type Project and a task of type Task.
    - If the project doesn't exist within the project list, then an exception is thrown
-     - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Person> predicate)`
-     - The predicate used is implemented at `seedu.address.model.person.Person.isSamePerson(Person otherProject)` which checks if the two projects are the same using their names
+     - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
+     - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names
    - If the task doesn't exist within the project, then an exception is thrown
-     - The check is done by using `Person::hasTask`
+     - The check is done by using `Project::hasTask`
    - Else the task is successfully deleted
 
-![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteTaskSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete task ui /in Duke` Command](images/DeleteTaskSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+### Setting deadline for both tasks and projects
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+1. The PlannerParser parses the command string given by the user, and looks for the command word "set deadline". Then `SetDeadlineCommandParser` parse function is called.
+2. The function checks if the command string includes '/in'.
+   1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskDeadlineCommand` execution function is called.
+   2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectDeadlineCommand` execution function is called.
+3. The `SetTaskDeadlineCommand` and `SetProjectDeadlineCommand` class is responsible for setting a deadline to the task or project.
+    - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String.
+    - The constructor of the `SetProjectDeadlineCommand` class takes in a project of type Project and a deadline of type String.
+    - If the project doesn't exist, then an exception is thrown.
+    - If the task doesn't exist within the project, then an exception is thrown.
+    - If the deadline is not a valid date or is in the wrong format, an exception is thrown as well.
+    - Else the deadline is successfully set.
 
-- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+### Setting category to a project
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+#### Implementation
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "set category". Then `SetProjectCategoryCommandParser` parse function is called.
+2. The function checks if the command string includes '/to'. If not, an exception is thrown to inform users on the correct command format.
+3. If PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown.
+4. The `SetProjectCategoryCommand` class is responsible for setting a project category.
+    - The constructor of the `SetProjectCategoryCommand` class takes in a project of type Project and a category of type String.
+    - If the project doesn't exist, then an exception is thrown.
+    - Else the category is successfully set.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![Interactions Inside the Logic Component for the `set category urgent /to Duke` Command](images/SetProjectCategorySequenceDiagram.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+### Setting status to a project and task
 
-![UndoRedoState1](images/UndoRedoState1.png)
+#### Implementation
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "set status". Then `SetStatusCommandParser` parse function is called.
+2. The function checks if the command string includes '/in'. Additionally, if the status is not equals to either 'complete' or 'incomplete', an exception is thrown.
+    1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskStatusCommand` execution function is called.
+    2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectstatusCommand` execution function is called.
+3. The `SetTaskStatusCommand` and `SetProjectstatusCommand` class is responsible for setting a status to the task or project.
+    - The constructor of the `SetTaskStatusCommand` class takes in a project of type Project and a task of type Task as well as a status of type String.
+    - The constructor of the `SetProjectstatusCommand` class takes in a project of type Project and a status of type String.
+    - If the project doesn't exist, then an exception is thrown.
+    - If the task doesn't exist within the project, then an exception is thrown.
+    - Else the status is successfully set.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+### Assigning a team to a project
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+#### Implementation
 
-</div>
+1. The PlannerParser parses the command string given by the user, and looks for the command word "assign team". Then AssignTeamCommandParser parse function is called.
+2. If the PROJECT_NAME is an empty string or the user input 0 or invalid PERSON_NAME, an exception is thrown, else the AssignTeamCommand execution function is called.
+3. The AssignTeamCommand class is responsible for assigning a team to a project.
+    - The constructor of the class takes in a project of type Project and a team which is a list of String.
+    - If the project doesn't exist within the project list, then an exception is thrown.
+    - Else the team is successfully assigned to the project.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+### Adding a member to a project
 
-![UndoRedoState3](images/UndoRedoState3.png)
+#### Implementation
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+1. The PlannerParser parses the command string given by the user, and looks for the command word "add person". Then AddPersonCommandParser parse function is called.
+2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AddPersonCommand execution function is called.
+3. The `AddPersonCommand` class is responsible for adding a member to a project.
+    - The constructor of the class takes in a project of type Project and a member of type Member.
+    - If the project doesn't exist within the project list, then an exception is thrown.
+    - Else the member is successfully added to the project.
 
-</div>
+### Assigning a member to a task
 
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
+#### Implementation
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
+1. The PlannerParser parses the command string given by the user, and looks for the command word "assign person". Then AssignPersonCommandParser parse function is called.
+2. If the PROJECT_NAME, TASK_NAME, or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AssignPersonCommand execution function is called.
+3. The `AssignPersonCommand` class is responsible for assigning a member to a task.
+    - The constructor of the class takes in a project of type Project and a member of type Member.
+    - If the project doesn't exist within the project list, then an exception is thrown.
+    - If the task doesn't exist within the project, then an exception is thrown.
+    - If the member isn't a member of the project, then an exception is thrown.
+    - Else the member is successfully assigned to the task.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+### Removing a member from a project
 
-</div>
+#### Implementation
+1. The PlannerParser parses the command string given by the user, and looks for the command word "delete person". Then DeletePersonCommandParser parse function is called.
+2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the DeletePersonCommand execution function is called.
+3. The `DeletePersonCommand` class is responsible for removing a member from a project.
+    - The constructor of the class takes in a project of type Project and a member of type Member.
+    - If the project doesn't exist within the project list, then an exception is thrown.
+    - If the member isn't a member of the project, then an exception is thrown.
+    - Else the member is successfully removed from the project, and all the tasks the member is responsible for will have their member fields set as NULL.
 
-Similarly, how an undo operation goes through the `Model` component is shown below:
+#### Design Considerations
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram-Model.png)
+Aspect of creating 2 different commands to add member to a project
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+- Alternative 1 Only use add person but allow multiple person to be added in one command.
+    - Pros: No additional commands to do the same action for one person or multiple people. Easier for user to get used to the command list.
+    - Cons: Since there is no clear person command, it is inconvenient when trying to reassign a smaller team to the project
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+- Alternative 2 (current choice) Have an assign team command and an add person command.
+    - Pros: Convenient to reassign a smaller team to a project. Add person also makes more sense as we would always be adding one person instead of multiple persons(people?).
+    - Cons: An additional command that might be confusing to the users and can cause data loss (user trying to add multiple people to a project only to find the original members gone after the command).
 
-</div>
+Aspect of creating a command to unassign the task
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+- Alternative 1 Create a command unassign person to allow user to unassign a person from a task.
+    - Pros: More freedom to the user. More convenient to remove a person from one task.
+    - Cons: An additional command for the user to remember which might be prone to empty input bugs. User can also simply assign a task to a different person.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+- Alternative 2 (current choice) Only have an assign person command that doesn't allow empty inputs.
+    - Pros: Less prone to bugs involving empty inputs. Also one less command for the user to remember. User can also remove the member from the project before adding the member back to remove them from all tasks.
+    - Cons: Less freedom for the user and less convenient when trying to unassign everyone from one specific task.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+### Renaming a project
 
-![UndoRedoState5](images/UndoRedoState5.png)
+#### Implementation
 
-The following activity diagram summarizes what happens when a user executes a new command:
+1. The PlannerParser parses the command string given by the user, and looks for the command word "set name". Then RenameCommandParser parse function is called.
+2. If the PROJECT_NAME is an empty string or the command is incomplete or wrong, an exception is thrown, else the addProjectCommand execution function is called.
+3. The `EditProjectNameCommand` class is responsible for editing a project's name to the specified name.
+    - The constructor of the class takes in a project of type Project and the new name of type Name.
+    - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the new name is a duplicate.
+    - Else the project's name is successfully updated.
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+![Interactions Inside the Logic Component for the `renaming nn /of Duke` Command](images/EditProjectNameDiagram.png)
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect of command word**
 
-- **Alternative 1 (current choice):** Saves the entire address book.
+- **Alternative 1:** Command word is `rename`
 
-  - Pros: Easy to implement.
-  - Cons: May have performance issues in terms of memory usage.
+    - Pros: More intuitive and straightforward than set name
+    - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
 
-- **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  - Cons: We must ensure that the implementation of each individual command are correct.
+- **Alternative 2 (current choice):** Command word is `set name`.
+    - Pros: align with other commands and less keywords to remember for users.
+    - Cons: More words to type for users.
 
-_{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
+### Renaming a task
 
----
+#### Implementation
+
+1. The PlannerParser parses the command string given by the user, and looks for the command word "set name". Then RenameCommandParser parse function is called.
+2. If the PROJECT_NAME or / and TASK_NAME  is an empty string or the command is incomplete or wrong, an exception is thrown, else the addProjectCommand execution function is called.
+3. The `EditTaskNameCommand` class is responsible for editing a task's name within the specified project to the specified name.
+    - The constructor of the class takes in a project of type Project,target task of type Task, and the new name of type Name.
+    - If the target name is the same as the any tasks in project that already exists within the project, then an exception is thrown to alert users that the new name is a duplicate.
+    - Else the task's name is successfully updated.
+
+
+#### Design considerations:
+
+**Aspect of command word**
+
+- **Alternative 1:** Command word is `rename`
+
+    - Pros: More intuitive and straightforward than set name
+    - Cons: Users have to remember new prefix since we planned to use other features with set (category/status) prefix
+
+- **Alternative 2 (current choice):** Command word is `set name`.
+    - Pros: align with other commands and less keywords to remember for users.
+    - Cons: More words to type for users.
+
+
+
+### Adding a Comment
+
+#### Implementation
+
+1. The PlannerParser parses the command string given by the user, and looks for the command word "add comment". Then AddCommentCommandParser parse function is called.
+2. If the PROJECT_NAME or / and the member is not added to the team, an error will be thrown to reflect the error.
+3. The `AddCommentCommand` class is responsible for adding specific comment by specific team member to the project.
+    - The constructor of the class takes in a project of type Project, commentator of type Member, and comment of type String.
+    - If the target name is the same as the project that already exists within the project list, then an exception is thrown to alert users that the target name is a duplicate.
+    - Else the project's name is successfully updated.
+
+![Interactions Inside the Logic Component for the `add comment c1 /from p2 /to Duke` Command](images/AddCommentDiagram.png)
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -353,7 +458,7 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​              | I want to …​                                                                                     | So that I can…​                                                           |
-| -------- | -------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+|----------|----------------------|--------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | `* * *`  | software developer   | keep track of all my projects’ tasks in the app                                                  | meet all my deadlines on time                                             |
 | `* *`    | user                 | sort my tasks by their deadlines                                                                 | see what is the next pending task to complete                             |
 | `* *`    | user                 | see what my tasks are due next week                                                              | schedule my timetable accordingly                                         |
@@ -721,49 +826,199 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+**Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
-</div>
 
-### Launch and shutdown
+### Launch
+    1. Initial launch
+        1.1 Download the jar file and copy into an empty folder
+        1.2 Double-click the jar file Expected: Shows the GUI with a set of sample projects.
 
-1. Initial launch
+    2. Non-Initial launch:
+        2.1 Double-click the jar file Expected: Shows the GUI with last session files saved.
 
-   1. Download the jar file and copy into an empty folder
+### Add project
+    To get started lets add some projects for testing:
+        add project CS2101 Presentation
+        add project IS1128 project
+        add project Duke chatbot
+        add project CS2103T Ab3
+        add project Coding Project
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+    Test case: add project A
+    Expected: Successful result shown. Ui is updated with project A at the bottom of the list.
 
-1. Saving window preferences
+    Test case: add project
+    Expected: Error result. Project cannot be empty.
 
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+### Show project
+    Test case: show project Coding Project
+    Expected: Successful result shown in the command result box. Details about Coding Project being shown
 
-   1. Re-launch the app by double-clicking the jar file.<br>
-      Expected: The most recent window size and location is retained.
+    Test case: show project CODING PROJECT
+    Expected: Error result. Project name is case sensitive.
 
-1. _{ more test cases …​ }_
+### Find project and list project
+    Test case: find project Duke
+    Expected result: Duke chatbot shown. Use list project to reset the filter
 
-### Deleting a person
+    Test case: find project C
+    Expected result: Nothing shown. Only projects with C AS A WORD, not a character, are shown.
 
-1. Deleting a person while all persons are being shown
+    Test case: find project Project C
+    Expected result: IS2218 project and Coding Project is shown. Find project is case insensitive. Projects that contain Project or C or Project and C as a word (case insensitive) will be shown.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+### Add task
+    Test case: add task dummy to CS2103T Ab3
+    Expected: Error result. Users  need to use /to to indicate that users are adding something to the project name after /to
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    Test case: add task /to CS2103T Ab3
+    Expected: Error result. User need to include the name of the task.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+    Test case: add task dummy /to CS2103T Ab3
+    Expected: Successful result. Using the show project command (how project CS2103T Ab3) will show a task called dummy under the Not Done Section.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+    Given that users already added “dummy” task into CS2103T Ab3, users could try:
 
-1. _{ more test cases …​ }_
+        Test case: add task dummy /to CS2103T Ab3
+        Expected: Error result. Duplicate task within a project is not allowed.
 
-### Saving data
+        Test case: add task Dummy /to CS2103T Ab3
+        Expected: Successful result command shown. Using the show project command (how project CS2103T Ab3) will show 2 tasks called dummy and Dummy under the Not Done Section since the task name is also case sensitive.
 
-1. Dealing with missing/corrupted data files
+### Deleting a project
+    Test case: delete project Duke chatbot
+    Expected: Duke chatbot project deleted. Numbers in front of the other tasks are reordered.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    Test case: delete project CS2103T AB3
+    Expected: Error result. No project was deleted since the project name is case sensitive.
 
-1. _{ more test cases …​ }_
+### Deleting a task in a project
+    Starting with add task A /to IS1128 project, users could try the following test case:
+
+        Test case: delete task A in  IS1128 project
+        Expected: Error shown since users are required to include / in front of “to” ("/to") to indicate that users are referring to existing project / task name.
+
+        Test case: delete task A /in IS1128 project
+        Expected:  Successful command. With show project command of IS1128 project, the task A should not be present.
+
+### Add person to a project
+    Test case: add person A /to CS2103T Ab3
+    Expected: Successful result. Showing project CS2103T Ab3, would show A under team member section.
+
+    Adding another person with same name
+        Test case: add person A /to CS2103T Ab3
+        Expected: Successful result. Showing project CS2103T Ab3, would show 2 persons with name A under team member section.
+
+### Assign a person in current team to a project
+    Assuming add person A /to CS2103T Ab3 was used and no member were added to CS2103T Ab3, users could try:
+        Test case: assign person A /to <existing task> /in  CS2103T Ab3
+        Expected: Successful result. Showing project CS2103T Ab3, would show A under team member below the task Name.
+    
+        Test case: assign person B /to <existing task> /in  CS2103T Ab3
+        Expected: Error result. The person must be added to the project first before assigning to a task.
+    
+        Test case: assign person A /to <non-existing task> /in  CS2103T Ab3
+        Expected: Error result. The task must exist in the project.
+
+### Delete person from a project
+    Assuming users already added 2 member of the same name “A” into CS2103T Ab3,
+
+        Test case: delete person A /in  CS2103T Ab3
+        Expected: Successful result. The first (leftmost) A in the list is deleted.
+
+### Setting a status of a task in a project
+    Test case: set status incomplete /of <existing task> /in <existing project>
+    Expected: Successful result. Showing the corresponding project, ui would show the task under Not Done Section if the task is marked as completed or else nothing changes.
+
+    Test case: set status complete /of <existing task> /in <existing project>
+    Expected: Successful result. Showing the corresponding project, ui would show the task under Done Section if it was not marked as completed before else nothing changes.
+
+### Setting a status of a project
+    Test case: set status complete /of <existing project>
+    Expected: Successful result. Showing the completed tag besides the project name.
+
+    Test case: set status incomplete /of <existing project>
+    Expected: Successful result. Showing nothing if the task is not completed else delete the completed tag
+
+### Setting a project category
+	Test case: set category f /to <existing project>
+    Expected: Successful result. Showing f tag beside the project name overriding the old tag if any.
+
+### Filter category
+	Test case: filter category <category tag>
+    Expected: Successful result. Showing project with EXACT tag name.
+    Use list project to reset the filter and show all the project
+
+### Add comment
+    Assuming a is the only team member of project Coding Project
+
+        Test case: add comment dummy /from a /to Coding Project
+        Expected: Successful result. Showing project, comment section will be added with name and the comment content (dummy).
+
+        Test case: add comment dummy /from b /to Coding project
+        Expected: Error result. Showing project, nothing shown on comment part. The commentator must be a member of the project.
+
+### Set deadline of a project
+	Test case: set deadline Apr 01 2030 /to IS1128 project
+    Expected: Successful result. Ui updates the due date under the IS1128 project to  Apr 01 2030.
+
+	Test case: set deadline Apr 1 2030 /to IS1128 project
+    Expected: Successful result. Ui updates the due date under the IS1128 project to  Apr 1 2030.
+
+	Test case: set deadline Apr012030 /to IS1128 project
+    Expected: Error result. The Date must be in the MMM dd YYYY or MMM d YYYY (for single digit day date) format separated by spaces.
+
+### Set deadline of a task
+    Assuming a is the one of the tasks in IS1128 project,
+
+        Test case: set deadline Apr 01 2030 /of a /in IS1128 project
+        Expected: Successful result. Showing the project, Ui updates the due date under the task a to Apr 01 2030 overriding the prior date if any.
+
+### Setting name of a task
+    Assuming IS1128 project have only three tasks called: dummy, Dummy, dummy3,
+
+        Test case: set name dummy2 /of dummy /in IS1128 project
+        Expected: Successful result. Showing the project, Ui updates the name of dummy to dummy2 while Dummy still stays the same.
+
+        Test case: set name dummy3 /of Dummy /in IS1128 project
+        Expected: Error result. The new name dummy3 already exists.
+
+### Setting name of a project
+    Assuming IS1128 project and Coding Project coexist
+
+        Test case: set name Coding project /of IS1128 project
+        Expected: Successful result. Ui updates the name of IS1128 project to Coding Project (Project name is case sensitive)
+
+        Test case: set name Coding Project /of IS1128 project
+        Expected: Error result. The new name Coding project is a duplicate of the existing project name.
+
+## Appendix: Effort
+
+Since this project is brownfield, we streamlined our efforts by leveraging the AB3 Design as a reference point, incorporating additional classes or structures where needed. For instance, we expanded functionalities within AB3’s Person class to align with our Project Class requirements. Referring to AB3's original structure provided a clear framework for any new features. When adding a new feature, we found that the core components required were often new Command and CommandParser classes, whose internal flow we could refer to AB3's. Without this reference, we would have grappled with structuring and possibly switching between different designs, causing delays if our initial plans fell short.
+
+The most challenging part would be the user interface (UI). Understanding the linkage between front-end and back-end, as laid out in AB3's source code, demanded significant time and effort. Particularly when introducing new interfaces for additional functionalities beyond AB3's scope, we encountered several bugs. While the back-end functionality usually functioned as expected, the UI occasionally failed to display or behaved unexpectedly.
+Certain instances of UI-related problems we faced:
+Our attempt to integrate a feature allowing users to add multiple category tags to a task led to UI malfunctions, causing the app to display a black screen. Thus, we discussed and designed to only allow one tag per task and spent our time and effort more on developing new features.
+Efforts to include the changing of project names or categories didn't update immediately in the UI.
+Addressing a reported bug related to truncated display of team members' information and comment boxes (as highlighted by the PED) involved experimenting with different UI structures, such as choosing between Vbox and Hbox, or deciding on the placement of scroll panes whether within the box or placing the box within the pane. Once the structure was finalized, we encountered issues with scroll pane visibility due to background color, prompting research into CSS syntax for achieving a transparent scroll pane that behaved as expected.
+
+Ultimately, through collective team and individual efforts involving extensive learning, research, flexibility, and comprehension of underlying systems, we overcome these challenges. We are eventually able to  come up with a design that closely mirrors our initial plans, both in functionality and interactivity.
+
+## **Appendix: Planned Enhancements**
+Team size: 4
+
+1. **Allow more than 1 category to be set for each project**:Currently,
+   only 1 category can be set to each project. However, this is not ideal
+   as projects can be categorised in many ways
+   such as scope and urgency, or type or purpose etc.
+2. **Prevent duplicate names from added to each project**: Currently,
+   we allow duplicate names to be added to each project, but this is not
+   ideal because when the user assign 1 of the duplicate name to do a task,
+   there will be confusion on which team member is being referred to. We plan
+   to have an error message when the user assigns a duplicate name to a project.
+3. **Allow more than 1 person to be assigned to each task**: Currently,
+   only 1 person can be responsible for each task, but this is not ideal
+   because some tasks may require collaboration between members.
+

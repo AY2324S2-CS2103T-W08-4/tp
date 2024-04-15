@@ -1,0 +1,83 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerParser" as PlannerParser LOGIC_COLOR
+participant ":SetProjectCategoryCommandParser" as SetProjectCategoryCommandParser LOGIC_COLOR
+participant "d:SetProjectCategoryCommand" as SetProjectCategoryCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Project" as Project MODEL_COLOR
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("set category urgent /to Duke")
+activate LogicManager
+
+LogicManager -> PlannerParser : parseCommand("set category urgent /to Duke")
+activate PlannerParser
+
+create SetProjectCategoryCommandParser
+PlannerParser -> SetProjectCategoryCommandParser
+activate SetProjectCategoryCommandParser
+
+SetProjectCategoryCommandParser --> PlannerParser
+deactivate SetProjectCategoryCommandParser
+
+PlannerParser -> SetProjectCategoryCommandParser : parse("urgent /to Duke")
+activate SetProjectCategoryCommandParser
+
+create SetProjectCategoryCommand
+SetProjectCategoryCommandParser -> SetProjectCategoryCommand
+activate SetProjectCategoryCommand
+
+SetProjectCategoryCommand --> SetProjectCategoryCommandParser :
+deactivate SetProjectCategoryCommand
+
+SetProjectCategoryCommandParser --> PlannerParser : d
+deactivate SetProjectCategoryCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+SetProjectCategoryCommandParser -[hidden]-> PlannerParser
+destroy SetProjectCategoryCommandParser
+
+PlannerParser --> LogicManager : d
+deactivate PlannerParser
+
+LogicManager -> SetProjectCategoryCommand : execute(m)
+activate SetProjectCategoryCommand
+
+SetProjectCategoryCommand -> Model : findProject("Duke")
+activate Model
+
+Model --> SetProjectCategoryCommand : oldDuke
+deactivate Model
+
+SetProjectCategoryCommand -> Project : createEditedProject()
+activate Project
+
+Project -> SetProjectCategoryCommand : newDukeWithCategory
+deactivate Project
+
+SetProjectCategoryCommand -> Model : setProject(oldDuke, newDukeWithCategory)
+activate Model
+
+Model --> SetProjectCategoryCommand
+deactivate Model
+
+create CommandResult
+SetProjectCategoryCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> SetProjectCategoryCommand
+deactivate CommandResult
+
+SetProjectCategoryCommand --> LogicManager : r
+deactivate SetProjectCategoryCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
