@@ -443,8 +443,7 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Project <PROJECT_NAME> already exists: Please set the name of the project to be unique.`
-  - `Whoops! When referring to another field like a project or task, always remember to put /of instead of just of.`
-  - `Please enter both the target and new project name or both target task and the project it belongs to if you want to rename a specific task.`
+  - `Names should be alphanumerical and not empty.`
 
 ### Rename a task: `set name`
 
@@ -465,9 +464,8 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists in project <PROJECT_NAME>`
   - `Task <TASK_NAME> already exists. Please set the name of the task in project %2$s to be unique.`
-  - `Whoops! When referring to another field like a project or task, always remember to put /of instead of just of.`
-  - `Please enter both the target and new project name or both target task and the project it belongs to if you want to rename a specific task.`
-  - `Please enter both the target task name and the project it belongs to.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set name NEW_TASK_NAME /of TARGET_TASK_NAME /in PROJECT_NAME`
 
 ### Set project category: `set category`
 
@@ -490,7 +488,8 @@ Similar to adding a tag to the project. The category will be shown as the orange
 - Success: `The project <PROJECT_NAME> category is set as <CATEGORY>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Please enter the project field.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set category CATEGORY /to PROJECT_NAME`
 
 ![SetProjectCategoryCommandResult](images/SetProjectCategoryCommandResult.png)
 
@@ -529,6 +528,8 @@ The project list will list the projects with the specified category.
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Team member <MEMBER_NAME> not found: Please make sure the person exists.`
   - `Please enter a comment.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add comment /from PERSON_NAME /to PROJECT_NAME`
 
 ### Locating projects by name: `find project`
 

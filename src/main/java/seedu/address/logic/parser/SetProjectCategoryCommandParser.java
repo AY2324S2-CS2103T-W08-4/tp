@@ -25,16 +25,11 @@ public class SetProjectCategoryCommandParser implements Parser<SetProjectCategor
             }
             String category = args.split(" /to")[0].trim();
             String projectName = args.split("/to ")[1];
-            if ((projectName.length() == 0) || category.length() == 0) {
-                throw new ParseException("Please enter the project field.");
-            }
             Project project = new Project(ParserUtil.parseName(projectName));
             return new SetProjectCategoryCommand(category, project);
 
-        } catch (Exception e) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetProjectCategoryCommand.MESSAGE_USAGE));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
     }
 
