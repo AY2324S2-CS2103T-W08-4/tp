@@ -253,11 +253,11 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "set deadline". Then `SetDeadlineCommandParser` parse function is called.
-2. The function checks if the command string includes '/in'. 
+2. The function checks if the command string includes '/in'.
    1. If it does, and if the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown. Else, the `SetTaskDeadlineCommand` execution function is called.
    2. If the string does not include '/in', and if the PROJECT_NAME is an empty string or if the project cannot be found, an exception is thrown. Else, the `SetProjectDeadlineCommand` execution function is called.
 3. The `SetTaskDeadlineCommand` and `SetProjectDeadlineCommand` class is responsible for setting a deadline to the task or project.
-    - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String. 
+    - The constructor of the `SetTaskDeadlineCommand` class takes in a project of type Project and a task of type Task as well as a deadline of type String.
     - The constructor of the `SetProjectDeadlineCommand` class takes in a project of type Project and a deadline of type String.
     - If the project doesn't exist, then an exception is thrown.
     - If the task doesn't exist within the project, then an exception is thrown.
@@ -293,7 +293,7 @@ This section describes some noteworthy details on how certain features are imple
     - If the project doesn't exist, then an exception is thrown.
     - If the task doesn't exist within the project, then an exception is thrown.
     - Else the status is successfully set.
-   
+
 ### Assigning a team to a project
 
 #### Implementation
@@ -841,7 +841,7 @@ testers are expected to do more *exploratory* testing.
     Test case: add project A
     Expected: Successful result shown. Ui is updated with project A at the bottom of the list.
 
-    Test case: add project 
+    Test case: add project
     Expected: Error result. Project cannot be empty.
 
 ### Add task
@@ -858,14 +858,14 @@ testers are expected to do more *exploratory* testing.
 
         Test case: add task dummy /to CS2103T Ab3
         Expected: Error result. Duplicate task within a project is not allowed.
-        
+
         Test case: add task Dummy /to CS2103T Ab3
         Expected: Successful result command shown. Using the show project command (how project CS2103T Ab3) will show 2 tasks called dummy and Dummy under the Not Done Section since the task name is also case sensitive.
 
 
 ### Deleting a project
 
-    Test case: delete project Duke chatbot 
+    Test case: delete project Duke chatbot
     Expected: Duke chatbot project deleted. Numbers in front of the other tasks are reordered.
 
     Test case: delete project CS2103T AB3
@@ -978,16 +978,16 @@ Expected: Successful result. Showing tag beside the project name overriding the 
 
         Test case: set name dummy2 /of dummy /in IS1128 project
         Expected: Successful result. Showing the project, Ui updates the name of dummy to dummy2 while Dummy still stays the same.
-        
+
         Test case: set name dummy3 /of Dummy /in IS1128 project
         Expected: Error result. The new name dummy3 already exists.
 
 ### setting name of a project
     Assuming IS1128 project and Coding project coexist
-       
+
         Test case: set name Coding Project /of IS1128 project
         Expected: Successful result. Ui updates the name of IS1128 project to Coding Project (Project name is case sensitive)
-        
+
         Test case: set name Coding project /of IS1128 project
         Expected: Error result. The new name Coding project is a duplicate of the existing project name.
 
@@ -997,7 +997,7 @@ Since this project is brownfield, we streamlined our efforts by leveraging the A
 
 The most challenging part would be the user interface (UI). Understanding the linkage between front-end and back-end, as laid out in AB3's source code, demanded significant time and effort. Particularly when introducing new interfaces for additional functionalities beyond AB3's scope, we encountered several bugs. While the back-end functionality usually functioned as expected, the UI occasionally failed to display or behaved unexpectedly.
 Certain instances of UI-related problems we faced:
-Our attempt to integrate a feature allowing users to add multiple category tags to a task led to UI malfunctions, causing the app to display a black screen. Thus, we discussed and designed to only allow one tag per task and spent our time and effort more on developing new features.  
+Our attempt to integrate a feature allowing users to add multiple category tags to a task led to UI malfunctions, causing the app to display a black screen. Thus, we discussed and designed to only allow one tag per task and spent our time and effort more on developing new features.
 Efforts to include the changing of project names or categories didn't update immediately in the UI.
 Addressing a reported bug related to truncated display of team members' information and comment boxes (as highlighted by the PED) involved experimenting with different UI structures, such as choosing between Vbox and Hbox, or deciding on the placement of scroll panes whether within the box or placing the box within the pane. Once the structure was finalized, we encountered issues with scroll pane visibility due to background color, prompting research into CSS syntax for achieving a transparent scroll pane that behaved as expected.
 
