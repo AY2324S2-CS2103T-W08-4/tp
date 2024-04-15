@@ -4,31 +4,31 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PlannerParser" as PlannerParser LOGIC_COLOR
 participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
 participant "d:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant "p:Person" as Person LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant ":Project" as Project MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete task ui /in project Duke")
+[-> LogicManager : execute("delete task ui /in Duke")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete task ui /in project Duke")
-activate AddressBookParser
+LogicManager -> PlannerParser : parseCommand("delete task ui /in Duke")
+activate PlannerParser
 
 create DeleteTaskCommandParser
-AddressBookParser -> DeleteTaskCommandParser
+PlannerParser -> DeleteTaskCommandParser
 activate DeleteTaskCommandParser
 
-DeleteTaskCommandParser --> AddressBookParser
+DeleteTaskCommandParser --> PlannerParser
 deactivate DeleteTaskCommandParser
 
-AddressBookParser -> DeleteTaskCommandParser : parse("ui /in Duke")
+PlannerParser -> DeleteTaskCommandParser : parse("ui /in Duke")
 activate DeleteTaskCommandParser
 
 create DeleteTaskCommand
@@ -38,14 +38,14 @@ activate DeleteTaskCommand
 DeleteTaskCommand --> DeleteTaskCommandParser :
 deactivate DeleteTaskCommand
 
-DeleteTaskCommandParser --> AddressBookParser : d
+DeleteTaskCommandParser --> PlannerParser : d
 deactivate DeleteTaskCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-DeleteTaskCommandParser -[hidden]-> AddressBookParser
+DeleteTaskCommandParser -[hidden]-> PlannerParser
 destroy DeleteTaskCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+PlannerParser --> LogicManager : d
+deactivate PlannerParser
 
 LogicManager -> DeleteTaskCommand : execute(m)
 activate DeleteTaskCommand
@@ -56,10 +56,10 @@ activate Model
 Model --> DeleteTaskCommand: p
 deactivate Model
 
-DeleteTaskCommand -> Person : removeTask(ui)
-activate Person
-Person --> DeleteTaskCommand
-deactivate Person
+DeleteTaskCommand -> Project : removeTask(ui)
+activate Project
+Project --> DeleteTaskCommand
+deactivate Project
 
 create CommandResult
 DeleteTaskCommand -> CommandResult

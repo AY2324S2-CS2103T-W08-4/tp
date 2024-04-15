@@ -14,12 +14,14 @@ Class JsonUserPrefsStorage
 Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
-package "AddressBook Storage" #F4F6F6{
-Class "<<interface>>\nAddressBookStorage" as AddressBookStorage
-Class JsonAddressBookStorage
-Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
-Class JsonAdaptedTag
+package "Planner Storage" #F4F6F6{
+Class "<<interface>>\nPlannerStorage" as PlannerStorage
+Class JsonPlannerStorage
+Class JsonSerializablePlanner
+Class JsonAdaptedProject
+Class JsonAdaptedTask
+Class JsonAdaptedComment
+Class JsonAdaptedMember
 }
 
 }
@@ -29,15 +31,17 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" AddressBookStorage
+StorageManager -up-> "1" PlannerStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> AddressBookStorage
+Storage -right-|> PlannerStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonAddressBookStorage .up.|> AddressBookStorage
-JsonAddressBookStorage ..> JsonSerializableAddressBook
-JsonSerializableAddressBook --> "*" JsonAdaptedPerson
-JsonAdaptedPerson --> "*" JsonAdaptedTag
+JsonPlannerStorage .up.|> PlannerStorage
+JsonPlannerStorage ..> JsonSerializablePlanner
+JsonSerializablePlanner --> "*" JsonAdaptedProject
+JsonAdaptedProject --> "*" JsonAdaptedTask
+JsonAdaptedProject --> "*" JsonAdaptedComment
+JsonAdaptedProject --> "*" JsonAdaptedMember
 
 @enduml
