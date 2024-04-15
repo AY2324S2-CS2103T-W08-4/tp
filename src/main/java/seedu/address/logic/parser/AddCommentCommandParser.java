@@ -34,7 +34,8 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             }
             String memberName = memberAndProject.split(" /to ")[0];
             String projectName = memberAndProject.split(" /to ")[1];
-            if (memberName.length() == 0 || projectName.length() == 0 || !Name.isValidName(projectName) || !Name.isValidName(memberName)) {
+            if (memberName.length() == 0 || projectName.length() == 0
+                || !Name.isValidName(projectName) || !Name.isValidName(memberName)) {
                 throw new ParseException("Names should be alphanumerical and not empty.");
             }
             Member member = new Member(memberName);

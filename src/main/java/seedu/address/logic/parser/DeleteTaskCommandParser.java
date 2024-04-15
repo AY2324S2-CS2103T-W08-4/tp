@@ -28,7 +28,8 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
             }
             String taskName = args.split(" /in")[0];
             String projectName = args.split("/in ")[1];
-            if ((taskName.length() == 0) || (projectName.length() == 0 || (!Name.isValidName(projectName) || (!Name.isValidName(taskName))))) {
+            if ((taskName.length() == 0) || (projectName.length() == 0
+                || (!Name.isValidName(projectName) || (!Name.isValidName(taskName))))) {
                 throw new ParseException("Names should be alphanumerical and not empty.");
             }
             Task task = new Task(taskName);

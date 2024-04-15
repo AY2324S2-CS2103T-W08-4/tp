@@ -53,7 +53,8 @@ public class SetStatusCommandParser implements Parser<SetStatusCommand> {
     private SetTaskStatusCommand parseSetTaskStatusCommand(String taskAndProject, String status) throws ParseException {
         String taskName = taskAndProject.split("/in ")[0].trim();
         String projectName = taskAndProject.split("/in ")[1];
-        if ((projectName.length() == 0) || (taskName.length() == 0) || (!Name.isValidName(projectName)) || (!Name.isValidName(taskName))) {
+        if ((projectName.length() == 0) || (taskName.length() == 0)
+            || (!Name.isValidName(projectName)) || (!Name.isValidName(taskName))) {
             throw new ParseException("Names should be alphanumerical and not empty.");
         }
         Project project = new Project(ParserUtil.parseName(projectName));
