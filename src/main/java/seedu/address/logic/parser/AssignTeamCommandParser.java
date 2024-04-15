@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 
 
@@ -32,7 +33,7 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
             List<String> team = Arrays.stream(members.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
-            if (team.stream().anyMatch(member -> member.length() == 0)) {
+            if (team.stream().anyMatch(member -> (member.length() == 0 || !Name.isValidName(member)))) {
                 throw new ParseException("Please enter valid names.");
             }
             if ((team.size() == 0) || (projectName.length() == 0)) {
