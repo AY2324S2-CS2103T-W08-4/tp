@@ -817,6 +817,20 @@ testers are expected to do more *exploratory* testing.
     2. Non-Initial launch:
         2.1 Double-click the jar file Expected: Shows the GUI with last session files saved.
 
+### Add project
+    To get started lets add some projects for testing:
+        add project CS2101 Presentation
+        add project IS1128 project
+        add project Duke chatbot
+        add project CS2103T Ab3
+        add project Coding project
+
+    Test case: add project A
+    Expected: Successful result shown. Ui is updated with project A at the bottom of the list.
+
+    Test case: add project
+    Expected: Error result. Project cannot be empty.
+
 ### Show project
     Test case: show project Coding Project
     Expected: Successful result shown in the command result box. Details about Coding Project being shown
@@ -833,13 +847,6 @@ testers are expected to do more *exploratory* testing.
 
     Test case: find project Project C
     Expected result: IS2218 project and Coding project is shown. Find project is case insensitive. Projects that contain Project or C or Project and C as a word (case insensitive) will be shown.
-
-### Add project
-    Test case: add project A
-    Expected: Successful result shown. Ui is updated with project A at the bottom of the list.
-
-    Test case: add project
-    Expected: Error result. Project cannot be empty.
 
 ### Add task
     Test case: add task dummy to CS2103T Ab3
