@@ -1,0 +1,94 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PlannerParser" as PlannerParser LOGIC_COLOR
+participant ":RenameCommandParser" as RenameCommandParser LOGIC_COLOR
+participant "d:EditProjectNameCommand" as EditProjectNameCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+participant "Duke:Project" as Project1 MODEL_COLOR
+participant "p2:Project" as Project2 MODEL_COLOR
+end box
+
+[-> LogicManager : execute("set name nn /of Duke")
+activate LogicManager
+
+LogicManager -> PlannerParser : parseCommand("set name nn /of Duke")
+activate PlannerParser
+
+create RenameCommandParser
+PlannerParser -> RenameCommandParser
+activate RenameCommandParser
+
+RenameCommandParser --> PlannerParser
+deactivate RenameCommandParser
+
+PlannerParser -> RenameCommandParser : parse("nn /of Duke")
+activate RenameCommandParser
+
+create EditProjectNameCommand
+RenameCommandParser -> EditProjectNameCommand
+activate EditProjectNameCommand
+
+EditProjectNameCommand --> RenameCommandParser :
+deactivate EditProjectNameCommand
+
+RenameCommandParser --> PlannerParser : d
+deactivate RenameCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+RenameCommandParser -[hidden]-> PlannerParser
+destroy RenameCommandParser
+
+PlannerParser --> LogicManager : d
+deactivate PlannerParser
+
+LogicManager -> EditProjectNameCommand : execute(m)
+activate EditProjectNameCommand
+
+EditProjectNameCommand -> Model : findProject(Duke)
+activate Model
+
+Model --> EditProjectNameCommand: Duke
+deactivate Model
+
+EditProjectNameCommand -> Project1: createEditedProject(nn)
+
+activate  Project1
+create Project2
+Project1 -> Project2
+activate  Project2
+
+
+Project2 --> Project1:
+Project1 --> EditProjectNameCommand:
+deactivate Project1
+
+deactivate Project2
+
+
+EditProjectNameCommand -> Model : setProject(Duke,p2)
+activate Model
+Model --> EditProjectNameCommand
+deactivate Model
+
+create CommandResult
+EditProjectNameCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> EditProjectNameCommand
+deactivate CommandResult
+
+
+
+EditProjectNameCommand --> LogicManager : r
+deactivate EditProjectNameCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

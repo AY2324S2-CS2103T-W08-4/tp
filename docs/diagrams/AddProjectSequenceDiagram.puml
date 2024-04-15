@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PlannerParser" as PlannerParser LOGIC_COLOR
 participant ":AddProjectCommandParser" as AddProjectCommandParser LOGIC_COLOR
 participant "d:AddProjectCommand" as AddProjectCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -17,17 +17,17 @@ end box
 [-> LogicManager : execute("add project Duke")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add project Duke")
-activate AddressBookParser
+LogicManager -> PlannerParser : parseCommand("add project Duke")
+activate PlannerParser
 
 create AddProjectCommandParser
-AddressBookParser -> AddProjectCommandParser
+PlannerParser -> AddProjectCommandParser
 activate AddProjectCommandParser
 
-AddProjectCommandParser --> AddressBookParser
+AddProjectCommandParser --> PlannerParser
 deactivate AddProjectCommandParser
 
-AddressBookParser -> AddProjectCommandParser : parse("Duke")
+PlannerParser -> AddProjectCommandParser : parse("Duke")
 activate AddProjectCommandParser
 
 create AddProjectCommand
@@ -37,14 +37,14 @@ activate AddProjectCommand
 AddProjectCommand --> AddProjectCommandParser :
 deactivate AddProjectCommand
 
-AddProjectCommandParser --> AddressBookParser : d
+AddProjectCommandParser --> PlannerParser : d
 deactivate AddProjectCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-AddProjectCommandParser -[hidden]-> AddressBookParser
+AddProjectCommandParser -[hidden]-> PlannerParser
 destroy AddProjectCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+PlannerParser --> LogicManager : d
+deactivate PlannerParser
 
 LogicManager -> AddProjectCommand : execute(m)
 activate AddProjectCommand
