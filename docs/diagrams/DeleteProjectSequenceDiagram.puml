@@ -49,6 +49,12 @@ deactivate AddressBookParser
 LogicManager -> DeleteProjectCommand : execute(m)
 activate DeleteProjectCommand
 
+DeleteProjectCommand -> Model : findProject(Duke)
+activate Model
+
+Model --> DeleteProjectCommand
+deactivate Model
+
 DeleteProjectCommand -> Model : deleteProject(Duke)
 activate Model
 

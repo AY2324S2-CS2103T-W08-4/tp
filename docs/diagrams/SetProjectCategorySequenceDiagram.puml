@@ -11,6 +11,7 @@ participant "r:CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant ":Project" as Project MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
@@ -48,6 +49,18 @@ deactivate AddressBookParser
 
 LogicManager -> SetProjectCategoryCommand : execute(m)
 activate SetProjectCategoryCommand
+
+SetProjectCategoryCommand -> Model : findProject("Duke")
+activate Model
+
+Model --> SetProjectCategoryCommand : oldDuke
+deactivate Model
+
+SetProjectCategoryCommand -> Project : createEditedProject()
+activate Project
+
+Project -> SetProjectCategoryCommand : newDukeWithCategory
+deactivate Project
 
 SetProjectCategoryCommand -> Model : setProject(oldDuke, newDukeWithCategory)
 activate Model

@@ -11,7 +11,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 - {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+- This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org/).
 ---
 
 ## **Setting up, getting started**
@@ -94,9 +94,9 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <img src="images/LogicClassDiagram.png" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete project Duke")` API call as an example.
 
-![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete project Duke` Command](images/DeleteProjectSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>

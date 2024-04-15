@@ -8,10 +8,10 @@ participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteTaskCommandParser" as DeleteTaskCommandParser LOGIC_COLOR
 participant "d:DeleteTaskCommand" as DeleteTaskCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
-participant "p:Person" as Person LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
+participant ":Project" as Project MODEL_COLOR
 participant "m:Model" as Model MODEL_COLOR
 end box
 
@@ -56,10 +56,10 @@ activate Model
 Model --> DeleteTaskCommand: p
 deactivate Model
 
-DeleteTaskCommand -> Person : removeTask(ui)
-activate Person
-Person --> DeleteTaskCommand
-deactivate Person
+DeleteTaskCommand -> Project : removeTask(ui)
+activate Project
+Project --> DeleteTaskCommand
+deactivate Project
 
 create CommandResult
 DeleteTaskCommand -> CommandResult
