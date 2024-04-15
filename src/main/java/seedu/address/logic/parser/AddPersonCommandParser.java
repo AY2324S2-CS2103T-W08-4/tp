@@ -40,6 +40,8 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPersonCommand.MESSAGE_USAGE));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Please enter valid names.");
         }
     }
 }
