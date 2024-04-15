@@ -28,16 +28,14 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             }
             String taskName = args.split(" /to")[0];
             String projectName = args.split("/to ")[1];
-            if ((taskName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the task and project fields");
+            if (!Name.isValidName(projectName) || !Name.isValidName(taskName)) {
+                throw new ParseException("Names should be alphanumerical and not empty.");
             }
             ParserUtil.parseName(taskName);
             Task task = new Task(taskName);
             Name name = ParserUtil.parseName(projectName);
             Project project = new Project(name);
             return new AddTaskCommand(task, project);
-        } catch (ParseException e) {
-            throw e;
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
                 MESSAGE_INVALID_COMMAND_FORMAT,

@@ -11,14 +11,15 @@ Welcome to the user guide for our CLI-based project management application! This
 
 <!-- TOC start (generated with https://github.com/derlin/bitdowntoc) -->
 
+- [Tips on using this User Guide](#tips-on-using-this-user-guide)
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Adding a project: `add project`](#adding-a-project-add-project)
   - [Deleting a project : `delete project`](#deleting-a-project--delete-project)
+  - [Show Project : `show project`](#show-project--show-project)
   - [Add task : `add task`](#add-task--add-task)
   - [Delete task : `delete task`](#delete-task--delete-task)
-  - [Show Project : `show project`](#show-project--show-project)
-  - [Set deadline of project : `set deadline`](#set-deadline-to-project--set-deadline)
+  - [Set deadline to project : `set deadline`](#set-deadline-to-project--set-deadline)
   - [Set deadline to task : `set deadline`](#set-deadline-to-task--set-deadline)
   - [Set Project Status : `set status`](#set-project-status--set-status)
   - [Set Task Status : `set status`](#set-task-status--set-status)
@@ -42,30 +43,46 @@ Welcome to the user guide for our CLI-based project management application! This
 
 <!-- TOC end -->
 
+## Tips on using this User Guide
+
+- Follow the [Quick start](#quick-start) to get DevPlan Pro set up on your device.
+- Check out the detailed command list from the [Features](#features) section.
+- For get to a more specific command or section quickly, click the corresponding section in the [Table of Contents](#table-of-contents)
+- If you are finding unexpected behaviors in the UI or the app itself, try checking out the [FAQ](#faq) or the [Known issues](#known-issues) section.
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `tp_new.jar` from [here](https://github.com/AY2324S2-CS2103T-W08-4/tp/releases/tag/v1.2).
+2. Download the latest `[CS2103T-W08-4][DevPlanPro].jar` from [here](https://github.com/AY2324S2-CS2103T-W08-4/tp/releases/tag/v1.4).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your app.
+3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp_new.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W08-4][DevPlanPro].jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
+   Some notes about the UI:
 
-1. Type the command in the command box and press Enter to execute it.
+   - On the top left is the menu bar. There are 2 buttons: File and Help. File can be used as an alternative way to exit the app, and Help is used to open up the help window.
+   - Below the menu bar is the command box. This is where you will be typing the commands to use the app. See 5. for more details.
+   - Below the command box is the result box. In the [Features](#features) section the "expected result" of each commands will be stated. Those results are expected to be displayed here in this result box.
+   - Below the result box is the project list. This is where your projects will appear after you've added them.
+   - Now on the right side is the details of the project. To choose which project you would like to see the details, use the [show project](#show-project--show-project) command.
+
+   ⚠️ If you are finding unexpected behaviors in the UI or the app itself, try checking out the [FAQ](#faq) or the [Known issues](#known-issues) sections of this User Guide.
+
+5. Type the command in the command box and press Enter to execute it.
    Some example commands you can try:
 
    - `add project Duke` : Adds a project named `Duke` to the project list.
 
    - `delete project Duke` : Deletes the Duke project from the project list.
 
-   - `clear` : Deletes all projects and tasks.
+   - `clear project` : Deletes all projects and tasks.
 
-   - `exit` : Exits the app.
+   - `exit program` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section below for details of each command.
 
 ---
 
@@ -75,24 +92,26 @@ Welcome to the user guide for our CLI-based project management application! This
 
 **:information_source: Notes about the commands:**<br>
 
-- Words in `<UPPER_CASE>` are the parameters to be supplied by the user.<br>
+- Words in `<UPPER_CASE>` are the parameters to be supplied by you, the user.<br>
   e.g. in `add project <PROJECT_NAME>`, `<PROJECT_NAME>` is a parameter which can be used as `add project CS2103`.
 
 - Extraneous parameters for commands that do not take in parameters (namely `list project`) will be ignored.<br>
   e.g. if the command specifies `list project 123`, it will be interpreted as `list project`.
 
 - If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-
-- 🚨 Some commands that interact with the UI are laggy in V1.3. If you use a command and doesn't notice a change in the UI then try to **click on the project cards and tasks** and it should update to it's current data.
 </div>
 
 ### Adding a project: `add project`
+
+The added projects will appear on the project list on the left.
 
 **Format:** `add project <PROJECT_NAME>`
 
 ⚠️ **Warning:** Project name needs to be unique.
 
 ⚠️ **Warning:** Project name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
+
+⚠️ **Warning:** A long project name can result in incomplete display of the project name, status, and category. To see more text, you can resize the window horizontally or maximize the window.
 
 **Examples:**
 
@@ -102,7 +121,12 @@ Welcome to the user guide for our CLI-based project management application! This
 **Expected output:**
 
 - Success: `<PROJECT_NAME> has been added to the project list.`
-- Failure: `Project <PROJECT_NAME> already exists.`
+- Failure:
+  - `Project <PROJECT_NAME> already exists.`
+  - `Project name should be alphanumerical and not empty.`
+
+![AddProjectCommandResult](images/AddProjectCommandResult.png)
+Description: An example of the result after executing the "add project" command.
 
 ### Deleting a project : `delete project`
 
@@ -117,7 +141,31 @@ Welcome to the user guide for our CLI-based project management application! This
 **Expected output:**
 
 - Success: `<PROJECT_NAME> has been deleted from the project list.`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Project name should be alphanumerical and not empty.`
+
+### Show Project : `show project`
+
+Sets the current showing project as the specified project.
+
+⚠️ **Warning:** The specified project must be in the current project list. Try using `list project` before using this command if you couldn't see your project in the current project list.
+
+**Format:** `show project <PROJECT_NAME>`
+
+**Examples:**
+
+- `show project CS2101 Presentation`
+
+**Expected output:**
+
+- Success: The UI now shows the project’s information.
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Project name should be alphanumerical and not empty.`
+
+![Show Project Command Result](images/Ui.png)
+Description: An example of the result after executing the "show project" command, displaying project information in the UI.
 
 ### Add task : `add task`
 
@@ -127,9 +175,11 @@ Adds the specified task to a project.
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The task name has to be unique within the project.
+⚠️ **Warning:** Task name has to be unique within the project.
 
 ⚠️ **Warning:** Task name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
+
+⚠️ **Warning:** Task name should be within 30 characters long. A longer name can result in incomplete display (see [known-issues](#known-issues)).
 
 **Examples:**
 
@@ -141,6 +191,10 @@ Adds the specified task to a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> already exists in <PROJECT_NAME>.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add task TASK_NAME /to PROJECT_NAME`
+
+![AddTaskCommandResult](images/AddTaskCommandResult.png)
 
 ### Delete task : `delete task`
 
@@ -162,26 +216,8 @@ Deletes the specified task from a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
-
-### Show Project : `show project`
-
-Sets the current showing project as the specified project.
-
-⚠️ **Warning:** The specified project must be in the current project list. Try using `list project` before using this command if you couldn't see your project in the current project list.
-
-**Format:** `show project <PROJECT_NAME>`
-
-**Examples:**
-
-- `show project CS2101 Presentation`
-
-**Expected output:**
-
-- Success: The UI now shows the project’s information.
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-
-![Show Project Command Result](images/Ui.png)
-Description: An example of the result after executing the "show project" command, displaying project information in the UI.
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! delete task TASK_NAME /in PROJECT_NAME`
 
 ### Set deadline to project : `set deadline`
 
@@ -200,8 +236,11 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> has been set with the following deadline <DEADLINE>.`
-- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024.`
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter valid date.`
+  - `Names should be alphanumerical and not empty.`
 
 ### Set deadline to task : `set deadline`
 
@@ -222,17 +261,23 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Deadline <DEADLINE> has been assigned to <PROJECT_NAME>:<TASK_NAME>.`
-- Failure: `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-- Failure: `Task <TASK_NAME> not found: Please make sure the task exists.`
+- Failure:
+  - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Task <TASK_NAME> not found: Please make sure the task exists.`
+  - `Please enter valid date.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set deadline DEADLINE /to TASK_NAME /in PROJECT_NAME`
 
 ### Set Project Status : `set status`
+
+Projects set as `complete` will have a green `complete` status text beside its name. New projects are initially set as `incomplete`.
 
 **Format:** `set status <STATUS> /of <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
-⚠️ **Warning:** The status should only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the project might be considered as `incomplete`.
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Examples:**
 
@@ -243,20 +288,26 @@ Description: An example of the result after executing the "show project" command
 - Success: `Project <PROJECT_NAME> is set as <STATUS>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter a valid status: complete/incomplete.`
+  - `Names should be alphanumerical and not empty.`
+
+![SetProjectStatusCommandResult](images/SetProjectStatusCommandResult.png)
 
 ### Set Task Status : `set status`
+
+Tasks set as `complete` will me moved to the `Done` column on the right side of the ui. New tasks are initially set as `incomplete`.
 
 ⚠️ **Warning:** The specified project must exist.
 
 ⚠️ **Warning:** The specified task must exist.
 
-⚠️ **Warning:** The status can only be `complete` or `incomplete`. Typing something else as a status might not prompt an error, but the task might be considered as `incomplete`.
+⚠️ **Warning:** The status can only be `complete` or `incomplete`.
 
 **Format:** `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>`
 
 **Examples:**
 
-- `set status complete /of unit test /in CS2103T Duke Chatbot Project`
+- `set status complete /of Prepare slides for presentation /in CS2101 Presentation`
 
 **Expected output:**
 
@@ -264,6 +315,11 @@ Description: An example of the result after executing the "show project" command
 - Failure:
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter a valid status: complete/incomplete.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set status [complete/incomplete] /of TASK_NAME /in PROJECT_NAME`
+
+![SetTaskStatusCommandResult](images/SetTaskStatusCommandResult.png)
 
 ### Assign team to project: `assign team`
 
@@ -277,9 +333,11 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** Duplicate person names are allowed, but not recommended. It can cause confusion for both you and the app.
 
-⚠️ **Warning:** Person name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
+⚠️ **Warning:** Each person name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
 
 🔔 **Note**: The part of the format in `[ ]` is optional
+
+⚠️ **Warning:** Each person name should be within 25 characters long. A longer name can result in incomplete display (see [known-issues](#known-issues)).
 
 **Examples:**
 
@@ -288,7 +346,11 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `The team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] has been added to <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Names should be alphanumerical and not empty.`
+  - `Please enter the project and team fields.`
+  - `Invalid command format! assign team PERSON_NAME, PERSON_NAME, PERSON_NAME /to PROJECT_NAME`
 
 ### Add member to project : `add person`
 
@@ -300,6 +362,8 @@ Description: An example of the result after executing the "show project" command
 
 ⚠️ **Warning:** Person name is alphanumeric: slashes, commas, or any other punctuation mark aren't accepted.
 
+⚠️ **Warning:** Person name should be within 25 characters long. A longer name can result in incomplete display (see [known-issues](#known-issues)).
+
 **Examples:**
 
 - `add person Joe /to CS2103_TP`
@@ -307,7 +371,11 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `The person <PERSON_NAME> has been assigned to the following project <PROJECT_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Please enter the member and project fields.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add person /to PROJECT_NAME`
 
 ### Remove member from project : `delete person`
 
@@ -329,6 +397,8 @@ Description: An example of the result after executing the "show project" command
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Member <PERSON_NAME> not found: Please make sure the person exists in project <PROJECT_NAME>.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! delete person PERSON_NAME /in PROJECT_NAME`
 
 ### Assign member to task : `assign person`
 
@@ -353,6 +423,9 @@ Description: An example of the result after executing the "show project" command
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists`
   - `Member <PERSON_NAME> not found: Please make sure the person exists.`
+  - `Please enter the task, project and member fields.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! assign person PERSON_NAME /to TASK_NAME/ in PROJECT_NAME`
 
 ### Rename a project: `set name`
 
@@ -367,7 +440,10 @@ Description: An example of the result after executing the "show project" command
 **Expected output:**
 
 - Success: `Project <PROJECT_NAME> has been renamed to <NEW_NAME>`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Project <PROJECT_NAME> already exists: Please set the name of the project to be unique.`
+  - `Names should be alphanumerical and not empty.`
 
 ### Rename a task: `set name`
 
@@ -387,23 +463,36 @@ Description: An example of the result after executing the "show project" command
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists in project <PROJECT_NAME>`
+  - `Task <TASK_NAME> already exists. Please set the name of the task in project %2$s to be unique.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set name NEW_TASK_NAME /of TARGET_TASK_NAME /in PROJECT_NAME`
 
 ### Set project category: `set category`
 
-Similar to adding a tag to the project
+Similar to adding a tag to the project. The category will be shown as the orange text beside the project's name (it comes after the project status).
 
 **Format:** `set category <CATEGORY> /to <PROJECT_NAME>`
 
 ⚠️ **Warning:** The specified project must exist.
 
+⚠️ **Warning:** Each project is limited to one category. Setting a new category overrides the old one.
+
+⚠️ **Warning:** A long category can result in incomplete display of the project name, status, and category. To see more text, you can resize the window horizontally or maximize the window.
+
 **Examples:**
 
-- `set category urgent /to 2103`
+- `set category urgent /to 2103 TP`
 
 **Expected output:**
 
 - Success: `The project <PROJECT_NAME> category is set as <CATEGORY>.`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Names should be alphanumerical and not empty.`
+  - `Please enter the category.`
+  - `Invalid command format! set category CATEGORY /to PROJECT_NAME`
+
+![SetProjectCategoryCommandResult](images/SetProjectCategoryCommandResult.png)
 
 ### Filter projects by category: `filter category`
 
@@ -415,7 +504,9 @@ Similar to adding a tag to the project
 
 **Expected output:**
 
-The project list will only show projects with the specified category.
+The project list will list the projects with the specified category.
+
+![FilterCategoryCommandResult](images/FilterCategoryCommandResult.png)
 
 ### Add comments to project: `add comment`
 
@@ -424,6 +515,8 @@ The project list will only show projects with the specified category.
 ⚠️ **Warning:** The specified project must exist.
 
 ⚠️ **Warning:** The specified member must exist in the project.
+
+⚠️ **Warning:** The comments will not be deleted even if the person who made the comment is removed from the project.
 
 **Examples:**
 
@@ -435,6 +528,9 @@ The project list will only show projects with the specified category.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Team member <MEMBER_NAME> not found: Please make sure the person exists.`
+  - `Please enter a comment.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add comment /from PERSON_NAME /to PROJECT_NAME`
 
 ### Locating projects by name: `find project`
 
@@ -448,7 +544,7 @@ Finds projects whose names contain any of the given keywords. The updated projec
 
 **Expected output:**
 
-- Returns projects containing the specified keyword(s).
+- The project list will list the projects containing the specified keyword(s).
 
 ### Listing all projects: `list project`
 
@@ -468,6 +564,8 @@ Opens a help window containing the url to this user guide.
 
 **Format:** `show help`
 
+![ShowHelpCommandResult](images/ShowHelpCommandResult.png)
+
 ### Exit DevPlan Pro: `exit program`
 
 **Format:** `exit program`
@@ -485,7 +583,7 @@ Opens a help window containing the url to this user guide.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-2. **When using v1.3 features**, sometimes the UI doesn't update once the commands are executed. The remedy is to click on the project cards and task cards to update the UI so that it shows the latest data.
+2. **When viewing tasks in the UI**, if the name of the task is longer than 30 characters, the UI will not be able to display the full name of the task. A similar limit of 25 characters is applied to the name of the member set to the task.
 
 ---
 
@@ -498,7 +596,7 @@ Opens a help window containing the url to this user guide.
 | **Add task**                    | `add task <TASK_NAME> /to <PROJECT_NAME>` <br> Example: `add task Prepare slides for presentation /to CS2101 Presentation`                                                   |
 | **Delete task**                 | `delete task <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `delete task Prepare slides for presentation /in CS2101 Presentation`                                             |
 | **Show Project**                | `show project <PROJECT_NAME>` <br> Example: `show project CS2101 Presentation`                                                                                               |
-| **Set deadline of project**     | `set deadline <DEADLINE> /to <PROJECT_NAME>` <br> Example: `set deadline Feb 25 2024 /to CS2103_TP`                                                                          |
+| **Set deadline to project**     | `set deadline <DEADLINE> /to <PROJECT_NAME>` <br> Example: `set deadline Feb 25 2024 /to CS2103_TP`                                                                          |
 | **Set deadline to task**        | `set deadline <DEADLINE> /to <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `Set deadline Feb 25 2024 /to submit feature list /in CS2103_TP`                                  |
 | **Set Project Status**          | `set status <STATUS> /of <PROJECT_NAME>` <br> Example: `set status complete /of CS2103T Duke Chatbot Project`                                                                |
 | **Set Task Status**             | `set status <STATUS> /of <TASK_NAME> /in <PROJECT_NAME>` <br> Example: `set status complete /of unit test /in CS2103T Duke Chatbot Project`                                  |

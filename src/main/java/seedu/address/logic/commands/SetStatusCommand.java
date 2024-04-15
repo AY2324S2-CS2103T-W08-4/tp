@@ -11,8 +11,6 @@ public abstract class SetStatusCommand extends Command {
 
     public static final String COMMAND_WORD = "set status";
 
-    public static final String MESSAGE_WRONG_FORMAT_STATUS = "The status has been entered in the wrong format.";
-
     private final String status;
 
     /**

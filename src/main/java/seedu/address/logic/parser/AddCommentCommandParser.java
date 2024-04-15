@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.logic.commands.AddCommentCommand;
-import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.project.Member;
@@ -31,14 +30,13 @@ public class AddCommentCommandParser implements Parser<AddCommentCommand> {
             String comment = args.split(" /from ")[0].trim();
             String memberAndProject = args.split(" /from ")[1];
             if (comment.length() == 0) {
-                throw new ParseException("Please enter a comment");
+                throw new ParseException("Please enter a comment.");
             }
             String memberName = memberAndProject.split(" /to ")[0];
             String projectName = memberAndProject.split(" /to ")[1];
-            if (memberName.length() == 0 || projectName.length() == 0) {
-                throw new ParseException(String.format(
-                        MESSAGE_INVALID_COMMAND_FORMAT,
-                        AddTaskCommand.MESSAGE_USAGE));
+            if (memberName.length() == 0 || projectName.length() == 0
+                || !Name.isValidName(projectName) || !Name.isValidName(memberName)) {
+                throw new ParseException("Names should be alphanumerical and not empty.");
             }
             Member member = new Member(memberName);
             Name name = ParserUtil.parseName(projectName);

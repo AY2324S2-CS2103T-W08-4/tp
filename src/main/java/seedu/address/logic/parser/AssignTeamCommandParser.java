@@ -25,8 +25,8 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
     public AssignTeamCommand parse(String args) throws ParseException {
         try {
             if (!args.contains(" /to ")) {
-                throw new ParseException("Whoops! When referring to another field like a project,"
-                        + " always remember to put /to instead of just to.");
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignTeamCommand.MESSAGE_USAGE));
             }
             String members = args.split(" /to")[0].trim();
             String projectName = args.split(" /to")[1].trim();
@@ -34,10 +34,10 @@ public class AssignTeamCommandParser implements Parser<AssignTeamCommand> {
                     .map(String::trim)
                     .collect(Collectors.toList());
             if (team.stream().anyMatch(member -> (member.length() == 0 || !Name.isValidName(member)))) {
-                throw new ParseException("Please enter valid names");
+                throw new ParseException("Names should be alphanumerical and not empty.");
             }
             if ((team.size() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the project and team fields");
+                throw new ParseException("Please enter the project and team fields.");
             }
             Project project = new Project(ParserUtil.parseName(projectName));
             return new AssignTeamCommand(team, project);

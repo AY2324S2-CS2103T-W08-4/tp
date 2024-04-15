@@ -9,9 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.SetProjectCategoryCommand;
 import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
-import seedu.address.model.project.Task;
-
-
 
 class SetProjectCategoryCommandParserTest {
     private SetProjectCategoryCommandParser parser = new SetProjectCategoryCommandParser();
@@ -19,7 +16,6 @@ class SetProjectCategoryCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Project project = new Project(new Name("project"));
-        Task task = new Task("task");
 
         assertParseSuccess(parser, "A /to project",
                 new SetProjectCategoryCommand("A", project));
@@ -39,6 +35,6 @@ class SetProjectCategoryCommandParserTest {
 
         // missing category name
         assertParseFailure(parser, " /to project",
-                expectedMessage);
+                "Please enter the category.");
     }
 }

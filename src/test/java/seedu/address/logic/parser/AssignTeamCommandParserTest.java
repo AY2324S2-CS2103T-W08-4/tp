@@ -10,12 +10,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AssignTeamCommand;
 import seedu.address.model.person.Name;
-import seedu.address.model.project.Member;
 import seedu.address.model.project.Project;
 
 class AssignTeamCommandParserTest {
     private Project taskProject = new Project(new Name("Code"));
-    private Member member = new Member("James");
     private List<String> team = new ArrayList<>();
     private AssignTeamCommandParser parser = new AssignTeamCommandParser();
 
@@ -32,11 +30,11 @@ class AssignTeamCommandParserTest {
         assertParseFailure(
                 parser,
                 " /to Code",
-                "Please enter valid names");
+                "Names should be alphanumerical and not empty.");
 
         assertParseFailure(
                 parser,
                 "James /to ",
-                "Please enter the project and team fields");
+                "Please enter the project and team fields.");
     }
 }

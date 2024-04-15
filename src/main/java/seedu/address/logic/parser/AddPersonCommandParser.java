@@ -30,7 +30,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
             memberName = memberName.trim();
             projectName = projectName.trim();
             if ((memberName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the member and project fields");
+                throw new ParseException("Please enter the member and project fields.");
             }
             Member member = new Member(memberName);
             Name name = ParserUtil.parseName(projectName);
@@ -41,7 +41,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
                     MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPersonCommand.MESSAGE_USAGE));
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Please enter valid names.");
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
     }
 }

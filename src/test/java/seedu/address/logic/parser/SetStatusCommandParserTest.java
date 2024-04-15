@@ -35,14 +35,14 @@ class SetStatusCommandParserTest {
 
         // missing project name
         assertParseFailure(parser, "complete /of ",
-                "Please enter the status and project fields");
+                "Names should be alphanumerical and not empty.");
 
         assertParseFailure(parser, "complete /of task /in ",
                 expectedMessageTask);
 
         // missing task name
         assertParseFailure(parser, "complete /of /in proj",
-                "Please enter the status, project and task fields");
+                "Names should be alphanumerical and not empty.");
     }
 
 }
