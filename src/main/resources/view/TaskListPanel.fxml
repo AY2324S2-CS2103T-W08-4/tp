@@ -31,7 +31,7 @@
                     <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="undoneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="undoneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS" maxHeight="335">
                 <padding>
                     <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
@@ -44,7 +44,7 @@
                     <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="doneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="doneTaskList" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS" maxHeight="335">
                 <padding>
                     <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
@@ -57,7 +57,7 @@
                     <Insets left="12" top="12" />
                 </padding>
             </Label>
-            <VBox fx:id="Comments" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS">
+            <VBox fx:id="Comments" minWidth="280" prefWidth="280" VBox.vgrow="ALWAYS" maxHeight="335">
                 <padding>
                     <Insets bottom="8" left="8" right="8" top="8" />
                 </padding>
