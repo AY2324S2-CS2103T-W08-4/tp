@@ -38,6 +38,8 @@ public class AssignPersonCommandParser implements Parser<AssignPersonCommand> {
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AssignPersonCommand.MESSAGE_USAGE));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException("Please enter valid names.");
         }
     }
 }
