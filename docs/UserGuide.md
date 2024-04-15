@@ -370,6 +370,7 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Please enter the member and project fields.`
+  - `Please enter valid names.`
 
 ### Remove member from project : `delete person`
 
@@ -392,6 +393,7 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Member <PERSON_NAME> not found: Please make sure the person exists in project <PROJECT_NAME>.`
   - `Please enter the member and the project field.`
+  - `Please enter valid names.`
 
 ### Assign member to task : `assign person`
 
@@ -418,6 +420,7 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
   - `Member <PERSON_NAME> not found: Please make sure the person exists.`
   - `Whoops! When referring to another field like a task, always remember to put /to instead of just to. When referring to a project, use /in instead of just in.`
   - `Please enter the task, project and member fields.`
+  - `Please enter valid names.`
 
 ### Rename a project: `set name`
 
