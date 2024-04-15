@@ -41,7 +41,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
                     MESSAGE_INVALID_COMMAND_FORMAT,
                     AddPersonCommand.MESSAGE_USAGE));
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Please enter valid names.");
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
     }
 }

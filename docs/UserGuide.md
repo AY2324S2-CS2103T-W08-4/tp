@@ -141,7 +141,9 @@ Description: An example of the result after executing the "add project" command.
 **Expected output:**
 
 - Success: `<PROJECT_NAME> has been deleted from the project list.`
-- Failure: `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+- Failure:
+  - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
+  - `Project name should be alphanumerical and not empty.`
 
 ### Show Project : `show project`
 
@@ -160,7 +162,7 @@ Sets the current showing project as the specified project.
 - Success: The UI now shows the project’s information.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Please enter the project field.`
+  - `Project name should be alphanumerical and not empty.`
 
 ![Show Project Command Result](images/Ui.png)
 Description: An example of the result after executing the "show project" command, displaying project information in the UI.
@@ -189,8 +191,8 @@ Adds the specified task to a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> already exists in <PROJECT_NAME>.`
-  - `Please enter the task and project fields.`
   - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add task TASK_NAME /to PROJECT_NAME`
 
 ![AddTaskCommandResult](images/AddTaskCommandResult.png)
 
@@ -214,7 +216,8 @@ Deletes the specified task from a project.
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
-  - `Please enter the project and the task field`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! delete task TASK_NAME /in PROJECT_NAME`
 
 ### Set deadline to project : `set deadline`
 
@@ -236,8 +239,8 @@ Deletes the specified task from a project.
 - Failure:
   - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024.`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Please enter the project field.`
   - `Please enter valid date.`
+  - `Names should be alphanumerical and not empty.`
 
 ### Set deadline to task : `set deadline`
 
@@ -262,7 +265,9 @@ Deletes the specified task from a project.
   - `The deadline <DEADLINE> has been entered in the wrong format. An example of the correct format is Mar 15 2024`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
-  - `Please enter the project and task fields.`
+  - `Please enter valid date.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set deadline DEADLINE /to TASK_NAME /in PROJECT_NAME`
 
 ### Set Project Status : `set status`
 
@@ -283,9 +288,8 @@ Projects set as `complete` will have a green `complete` status text beside its n
 - Success: `Project <PROJECT_NAME> is set as <STATUS>.`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `The status has been entered in the wrong format.`
   - `Please enter a valid status: complete/incomplete.`
-  - `Please enter the status and project fields.`
+  - `Names should be alphanumerical and not empty.`
 
 ![SetProjectStatusCommandResult](images/SetProjectStatusCommandResult.png)
 
@@ -311,9 +315,9 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Task <TASK_NAME> not found: Please make sure the task exists.`
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `The status has been entered in the wrong format.`
   - `Please enter a valid status: complete/incomplete.`
-  - `Please enter the status, project and task fields.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! set status [complete/incomplete] /of TASK_NAME /in PROJECT_NAME`
 
 ![SetTaskStatusCommandResult](images/SetTaskStatusCommandResult.png)
 
@@ -344,9 +348,9 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Success: `The team <PERSON_NAME_1>[, <PERSON_NAME_2>, <PERSON_NAME_3>, ...] has been added to <PROJECT_NAME>`
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
-  - `Whoops! When referring to another field like a project always remember to put /to instead of just to.`
-  - `Please enter valid names.`
+  - `Names should be alphanumerical and not empty.`
   - `Please enter the project and team fields.`
+  - `Invalid command format! assign team PERSON_NAME, PERSON_NAME, PERSON_NAME /to PROJECT_NAME`
 
 ### Add member to project : `add person`
 
@@ -370,7 +374,8 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Please enter the member and project fields.`
-  - `Please enter valid names.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! add person /to PROJECT_NAME`
 
 ### Remove member from project : `delete person`
 
@@ -392,8 +397,8 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
 - Failure:
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Member <PERSON_NAME> not found: Please make sure the person exists in project <PROJECT_NAME>.`
-  - `Please enter the member and the project field.`
-  - `Please enter valid names.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! delete person PERSON_NAME /in PROJECT_NAME`
 
 ### Assign member to task : `assign person`
 
@@ -418,9 +423,9 @@ Tasks set as `complete` will me moved to the `Done` column on the right side of 
   - `Project <PROJECT_NAME> not found: Please make sure the project exists.`
   - `Task <TASK_NAME> not found: Please make sure the task exists`
   - `Member <PERSON_NAME> not found: Please make sure the person exists.`
-  - `Whoops! When referring to another field like a task, always remember to put /to instead of just to. When referring to a project, use /in instead of just in.`
   - `Please enter the task, project and member fields.`
-  - `Please enter valid names.`
+  - `Names should be alphanumerical and not empty.`
+  - `Invalid command format! assign person PERSON_NAME /to TASK_NAME/ in PROJECT_NAME`
 
 ### Rename a project: `set name`
 

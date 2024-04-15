@@ -21,9 +21,8 @@ public class AssignPersonCommandParser implements Parser<AssignPersonCommand> {
     public AssignPersonCommand parse(String args) throws ParseException {
         try {
             if (!args.contains(" /to ") || !args.contains(" /in ")) {
-                throw new ParseException("Whoops! When referring to another field like a task,"
-                        + " always remember to put /to instead of just to."
-                        + " When referring to a project, use /in instead of just in.");
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AssignPersonCommand.MESSAGE_USAGE));
             }
             String member = args.split(" /to")[0].trim();
             String taskAndProject = args.split(" /to")[1].trim();
@@ -39,7 +38,7 @@ public class AssignPersonCommandParser implements Parser<AssignPersonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AssignPersonCommand.MESSAGE_USAGE));
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Please enter valid names.");
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
     }
 }

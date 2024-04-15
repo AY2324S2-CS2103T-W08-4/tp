@@ -11,6 +11,7 @@ import seedu.address.logic.commands.SetDeadlineCommand;
 import seedu.address.logic.commands.SetDeadlineProjectCommand;
 import seedu.address.logic.commands.SetDeadlineTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.project.Project;
 import seedu.address.model.project.Task;
 
@@ -39,9 +40,6 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
             if (!args.contains(" /in ")) {
                 //SetDeadlineProjectCommand
                 String projectName = args.split("/to ")[1];
-                if ((projectName.length() == 0)) {
-                    throw new ParseException("Please enter the project field.");
-                }
                 Project project = new Project(ParserUtil.parseName(projectName));
                 return new SetDeadlineProjectCommand(deadline, project);
             } else {
@@ -61,8 +59,8 @@ public class SetDeadlineCommandParser implements Parser<SetDeadlineCommand> {
         String taskAndProject = args.split(" /to")[1].trim();
         String taskName = taskAndProject.split("/in ")[0].trim();
         String projectName = taskAndProject.split("/in ")[1];
-        if ((projectName.length() == 0) || (taskName.length() == 0)) {
-            throw new ParseException("Please enter the project and task fields.");
+        if (!Name.isValidName(taskName)) {
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
         Project project = new Project(ParserUtil.parseName(projectName));
         Task newTask = new Task(taskName);

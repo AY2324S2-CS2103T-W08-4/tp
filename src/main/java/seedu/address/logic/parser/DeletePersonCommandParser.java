@@ -28,16 +28,9 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             String memberName = args.split(" /in")[0];
             String projectName = args.split("/in ")[1];
 
-            if ((memberName.length() == 0) || (projectName.length() == 0)) {
-                throw new ParseException("Please enter the member and the project field.");
-            }
             return new DeletePersonCommand(new Member(memberName), new Project(new Name(projectName)));
         } catch (IllegalArgumentException e) {
-            throw new ParseException("Please enter valid names.");
-        } catch (Exception e) {
-            throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeletePersonCommand.MESSAGE_USAGE));
+            throw new ParseException("Names should be alphanumerical and not empty.");
         }
     }
 

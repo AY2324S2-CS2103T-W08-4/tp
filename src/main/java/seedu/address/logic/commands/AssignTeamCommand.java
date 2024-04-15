@@ -20,8 +20,8 @@ public class AssignTeamCommand extends Command {
 
     public static final String COMMAND_WORD = "assign team";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "PERSON_NAME, PERSON_NAME, PERSON_NAME"
-            + "/to PROJECT_NAME";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " PERSON_NAME, PERSON_NAME, PERSON_NAME"
+            + " /to PROJECT_NAME";
 
     public static final String MESSAGE_PROJECT_NOT_FOUND = "Project %1$s not found: "
             + "Please make sure the project exists.";

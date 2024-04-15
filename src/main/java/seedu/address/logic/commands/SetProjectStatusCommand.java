@@ -56,9 +56,8 @@ public class SetProjectStatusCommand extends SetStatusCommand {
         } else if (isIncompleted()) {
             realProject.setIncomplete();
             resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusProject), "incomplete");
-        } else {
-            throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
+
         model.setProject(dupProject, realProject);
 
         model.updateFilteredProjectList(PREDICATE_SHOW_ALL_PROJECTS);

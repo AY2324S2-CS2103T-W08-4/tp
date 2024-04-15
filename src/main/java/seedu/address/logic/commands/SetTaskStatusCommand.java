@@ -61,8 +61,6 @@ public class SetTaskStatusCommand extends SetStatusCommand {
         } else if (isIncompleted()) {
             statusTask.setIncomplete();
             resultString = String.format(MESSAGE_SUCCESS, Messages.format(statusTask), "incomplete");
-        } else {
-            throw new CommandException(String.format(MESSAGE_WRONG_FORMAT_STATUS));
         }
         model.updateCurrentProject(
             new NameEqualsPredicate(
