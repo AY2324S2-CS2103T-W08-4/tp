@@ -54,11 +54,11 @@ Welcome to the user guide for our CLI-based project management application! This
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `tp_new.jar` from [here](https://github.com/AY2324S2-CS2103T-W08-4/tp/releases/tag/v1.2).
+2. Download the latest `[CS2103T-W08-4][DevPlanPro].jar` from [here](https://github.com/AY2324S2-CS2103T-W08-4/tp/releases/tag/v1.4).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your app.
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar tp_new.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W08-4][DevPlanPro].jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
    Some notes about the UI:
