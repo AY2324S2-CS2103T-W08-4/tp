@@ -844,7 +844,7 @@ testers are expected to do more *exploratory* testing.
         add project IS1128 project
         add project Duke chatbot
         add project CS2103T Ab3
-        add project Coding project
+        add project Coding Project
 
     Test case: add project A
     Expected: Successful result shown. Ui is updated with project A at the bottom of the list.
@@ -867,7 +867,7 @@ testers are expected to do more *exploratory* testing.
     Expected result: Nothing shown. Only projects with C AS A WORD, not a character, are shown.
 
     Test case: find project Project C
-    Expected result: IS2218 project and Coding project is shown. Find project is case insensitive. Projects that contain Project or C or Project and C as a word (case insensitive) will be shown.
+    Expected result: IS2218 project and Coding Project is shown. Find project is case insensitive. Projects that contain Project or C or Project and C as a word (case insensitive) will be shown.
 
 ### Add task
     Test case: add task dummy to CS2103T Ab3
@@ -986,12 +986,12 @@ testers are expected to do more *exploratory* testing.
         Expected: Error result. The new name dummy3 already exists.
 
 ### Setting name of a project
-    Assuming IS1128 project and Coding project coexist
-
-        Test case: set name Coding Project /of IS1128 project
-        Expected: Successful result. Ui updates the name of IS1128 project to Coding Project (Project name is case sensitive)
+    Assuming IS1128 project and Coding Project coexist
 
         Test case: set name Coding project /of IS1128 project
+        Expected: Successful result. Ui updates the name of IS1128 project to Coding Project (Project name is case sensitive)
+
+        Test case: set name Coding Project /of IS1128 project
         Expected: Error result. The new name Coding project is a duplicate of the existing project name.
 
 ## Appendix: Effort
