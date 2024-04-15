@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PlannerParser" as PlannerParser LOGIC_COLOR
 participant ":SetProjectCategoryCommandParser" as SetProjectCategoryCommandParser LOGIC_COLOR
 participant "d:SetProjectCategoryCommand" as SetProjectCategoryCommand LOGIC_COLOR
 participant "r:CommandResult" as CommandResult LOGIC_COLOR
@@ -18,17 +18,17 @@ end box
 [-> LogicManager : execute("set category urgent /to Duke")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("set category urgent /to Duke")
-activate AddressBookParser
+LogicManager -> PlannerParser : parseCommand("set category urgent /to Duke")
+activate PlannerParser
 
 create SetProjectCategoryCommandParser
-AddressBookParser -> SetProjectCategoryCommandParser
+PlannerParser -> SetProjectCategoryCommandParser
 activate SetProjectCategoryCommandParser
 
-SetProjectCategoryCommandParser --> AddressBookParser
+SetProjectCategoryCommandParser --> PlannerParser
 deactivate SetProjectCategoryCommandParser
 
-AddressBookParser -> SetProjectCategoryCommandParser : parse("urgent /to Duke")
+PlannerParser -> SetProjectCategoryCommandParser : parse("urgent /to Duke")
 activate SetProjectCategoryCommandParser
 
 create SetProjectCategoryCommand
@@ -38,14 +38,14 @@ activate SetProjectCategoryCommand
 SetProjectCategoryCommand --> SetProjectCategoryCommandParser :
 deactivate SetProjectCategoryCommand
 
-SetProjectCategoryCommandParser --> AddressBookParser : d
+SetProjectCategoryCommandParser --> PlannerParser : d
 deactivate SetProjectCategoryCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
-SetProjectCategoryCommandParser -[hidden]-> AddressBookParser
+SetProjectCategoryCommandParser -[hidden]-> PlannerParser
 destroy SetProjectCategoryCommandParser
 
-AddressBookParser --> LogicManager : d
-deactivate AddressBookParser
+PlannerParser --> LogicManager : d
+deactivate PlannerParser
 
 LogicManager -> SetProjectCategoryCommand : execute(m)
 activate SetProjectCategoryCommand

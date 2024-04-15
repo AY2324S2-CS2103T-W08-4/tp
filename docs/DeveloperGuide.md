@@ -105,7 +105,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `PlannerParser` object which in turn creates a parser that matches the command (e.g., `DeleteProjectCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteProjectCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a project).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -222,13 +222,13 @@ This section describes some noteworthy details on how certain features are imple
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "delete task". Then AddTaskCommandParser parse function is called.
 2. If the PROJECT_NAME or TASK_NAME is an empty string, an exception is thrown, else the AddTaskCommand execution function is called.
-3. The AddTaskCommand class is responsible for adding a task within a project.
+3. The `AddTaskCommand` class is responsible for adding a task within a project.
     - The constructor of the class takes in a project of type Project and a task of type Task.
     - If the project doesn't exist within the project list, then an exception is thrown.
-        - The check is done by using java.util.stream.Stream.anyMatch(Predicate<? super Person> predicate).
-        - The predicate used is implemented at seedu.address.model.person.Person.isSamePerson(Person otherProject) which checks if the two projects are the same using their names.
+        - The check is done by using `java.util.stream.Stream.anyMatch(Predicate<? super Project> predicate)`
+        - The predicate used is implemented at `seedu.address.model.project.Project.isSameProject(Project otherProject)` which checks if the two projects are the same using their names.
     - If the task already exist within the project, then an exception is thrown.
-        - The check is done by using Person::hasTask
+        - The check is done by using `Project::hasTask`
     - Else the task is successfully added.
 
 ### Deleting a task
@@ -311,7 +311,7 @@ This section describes some noteworthy details on how certain features are imple
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "add person". Then AddPersonCommandParser parse function is called.
 2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AddPersonCommand execution function is called.
-3. The AddPersonCommand class is responsible for adding a member to a project.
+3. The `AddPersonCommand` class is responsible for adding a member to a project.
     - The constructor of the class takes in a project of type Project and a member of type Member.
     - If the project doesn't exist within the project list, then an exception is thrown.
     - Else the member is successfully added to the project.
@@ -322,7 +322,7 @@ This section describes some noteworthy details on how certain features are imple
 
 1. The PlannerParser parses the command string given by the user, and looks for the command word "assign person". Then AssignPersonCommandParser parse function is called.
 2. If the PROJECT_NAME, TASK_NAME, or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the AssignPersonCommand execution function is called.
-3. The AssignPersonCommand class is responsible for assigning a member to a task.
+3. The `AssignPersonCommand` class is responsible for assigning a member to a task.
     - The constructor of the class takes in a project of type Project and a member of type Member.
     - If the project doesn't exist within the project list, then an exception is thrown.
     - If the task doesn't exist within the project, then an exception is thrown.
@@ -334,7 +334,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 1. The PlannerParser parses the command string given by the user, and looks for the command word "delete person". Then DeletePersonCommandParser parse function is called.
 2. If the PROJECT_NAME or PERSON_NAME is an empty string or an invalid name, an exception is thrown, else the DeletePersonCommand execution function is called.
-3. The DeletePersonCommand class is responsible for removing a member from a project.
+3. The `DeletePersonCommand` class is responsible for removing a member from a project.
     - The constructor of the class takes in a project of type Project and a member of type Member.
     - If the project doesn't exist within the project list, then an exception is thrown.
     - If the member isn't a member of the project, then an exception is thrown.
@@ -894,14 +894,14 @@ testers are expected to do more *exploratory* testing.
 ### Assign a person in current team to a project
 
     Assuming add person A /to CS2103T Ab3 was used and no member were added to CS2103T Ab3, users could try:
-    Test case: assign person A /to <existing task> /in  CS2103T Ab3
-    Expected: Successful result. Showing project CS2103T Ab3, would show A under team member below the task Name.
-
-    Test case: assign person B /to <existing task> /in  CS2103T Ab3
-    Expected: Error result. The person must be added to the project first before assigning to a task.
-
-    Test case: assign person A /to <non-existing task> /in  CS2103T Ab3
-    Expected: Error result. The task must exist in the project.
+        Test case: assign person A /to <existing task> /in  CS2103T Ab3
+        Expected: Successful result. Showing project CS2103T Ab3, would show A under team member below the task Name.
+    
+        Test case: assign person B /to <existing task> /in  CS2103T Ab3
+        Expected: Error result. The person must be added to the project first before assigning to a task.
+    
+        Test case: assign person A /to <non-existing task> /in  CS2103T Ab3
+        Expected: Error result. The task must exist in the project.
 
 
 ### delete person from a project
@@ -1003,4 +1003,19 @@ Addressing a reported bug related to truncated display of team members' informat
 
 Ultimately, through collective team and individual efforts involving extensive learning, research, flexibility, and comprehension of underlying systems, we overcome these challenges. We are eventually able to  come up with a design that closely mirrors our initial plans, both in functionality and interactivity.
 
+## **Appendix: Planned Enhancements**
+Team size: 4
+
+1. **Allow more than 1 category to be set for each project**:Currently,
+   only 1 category can be set to each project. However, this is not ideal
+   as projects can be categorised in many ways
+   such as scope and urgency, or type or purpose etc.
+2. **Prevent duplicate names from added to each project**: Currently,
+   we allow duplicate names to be added to each project, but this is not
+   ideal because when the user assign 1 of the duplicate name to do a task,
+   there will be confusion on which team member is being referred to. We plan
+   to have an error message when the user assigns a duplicate name to a project.
+3. **Allow more than 1 person to be assigned to each task**: Currently,
+   only 1 person can be responsible for each task, but this is not ideal
+   because some tasks may require collaboration between members.
 
