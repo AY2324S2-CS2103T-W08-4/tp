@@ -6,9 +6,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a parse error encountered by a parser.
  */
 public class ParseException extends IllegalValueException {
-
-    private final String message;
-
     /**
      * Constructs a new {@code ParseException} with the specified detail message.
      *
@@ -16,7 +13,6 @@ public class ParseException extends IllegalValueException {
      */
     public ParseException(String message) {
         super(message);
-        this.message = message;
     }
 
     /**
@@ -27,7 +23,6 @@ public class ParseException extends IllegalValueException {
      */
     public ParseException(String message, Throwable cause) {
         super(message, cause);
-        this.message = message;
     }
 
 }
