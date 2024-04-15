@@ -20,7 +20,7 @@ public class SampleDataUtil {
             new Project(new Name("Duke chatbot")),
             new Project(new Name("IS1128 project")),
             new Project(new Name("CS2103T Ab3")),
-            new Project(new Name("Coding project"))
+            new Project(new Name("Coding Project"))
         };
     }
 
